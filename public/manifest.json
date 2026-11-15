@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "Pensonic Night Owl — vintage radio",
-  "short_name": "Night Owl",
+  "name": "Real Radio",
+  "short_name": "Real Radio",
   "description": "A vintage portable radio that plays live Nepali stations. Switch it on and tune across the dial.",
   "start_url": "./",
   "scope": "./",
