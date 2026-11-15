@@ -70,6 +70,12 @@ export function Credits({ stations }: { stations: readonly Station[] }) {
               ? ` ${list} ${simulated.length === 1 ? "doesn't" : "don't"} allow audio analysis in a browser, so for ${simulated.length === 1 ? 'it' : 'them'} the motion is simulated.`
               : ''}
           </p>
+          <p className="credits__note">
+            Installing: on Android use the <strong>Install</strong> button under the radio (or the
+            browser menu → Install app). On iPhone and iPad, Safari has no install button — use
+            Share → Add to Home Screen. Installed, it opens full screen; the radio and its dial work
+            offline, the live streams still need a connection.
+          </p>
           <p className="credits__note">The radio itself, its brand and its look are made up.</p>
         </div>
         <footer className="credits__foot">

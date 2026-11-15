@@ -53,3 +53,19 @@ With `prefers-reduced-motion` the cone and grille stay still and only the lamp c
 Space or P power, B band, ←/→ tune (Shift for a bigger step), `[` / `]` or PageUp/PageDown
 previous/next station on the current band, ↑/↓ volume. The "Stations" button opens a short list
 that sets the dial to a station (it does not switch the radio on).
+
+## Install it as an app (PWA)
+
+The production build is installable: `public/manifest.json` (icons in `public/icons/`), a
+hand-written service worker (`public/sw.js`), and the iOS `apple-touch-icon` / meta tags.
+
+- **Android (Chrome)**: use the **Install** button under the radio, or the browser menu → Install
+  app. `src/ui/InstallButton.tsx` holds the captured `beforeinstallprompt` event.
+- **iPhone / iPad**: Safari has no install prompt — Share → Add to Home Screen.
+- Installed, it opens full screen (`display: standalone`). The shell and its bundles are cached on
+  the first visit, so the radio still runs offline; the live streams obviously need a connection.
+- The service worker is registered in production only (`src/pwa.ts`), and every path is relative,
+  so the same build works from the GitHub Pages sub-path and from a domain root.
+
+The icons in `public/icons/` (any + maskable) and `public/apple-touch-icon.png` are committed as
+PNGs; there is no build step for them.

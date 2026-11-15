@@ -8,6 +8,7 @@ import { RadioBody } from './radio/RadioBody'
 import { Scene } from './radio/Scene'
 import { BAND_RANGE } from './types'
 import { Credits } from './ui/Credits'
+import { InstallButton } from './ui/InstallButton'
 import { StationList } from './ui/StationList'
 import { KeysHint } from './ui/KeysHint'
 import { OnAirCard } from './ui/OnAirCard'
@@ -98,6 +99,7 @@ export default function App() {
             tuning={tuning}
             actions={
               <>
+                <InstallButton />
                 <StationList stations={stations} tuned={tuned} onTune={radio.tuneTo} />
                 <KeysHint />
               </>
