@@ -15,6 +15,11 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' } as const
 
 /** "About / Credits" button plus a dialog that credits the stream sources. */
 export function Credits({ stations }: { stations: readonly Station[] }) {
+  const simulated = stations.filter((s) => !s.analyser).map((s) => s.name)
+  const list =
+    simulated.length <= 2
+      ? simulated.join(' and ')
+      : `${simulated.slice(0, -1).join(', ')} and ${simulated[simulated.length - 1]}`
   return (
     <Dialog>
       <DialogTrigger className="credits-btn">About / Credits</DialogTrigger>
@@ -59,6 +64,12 @@ export function Credits({ stations }: { stations: readonly Station[] }) {
               ))}
             </ul>
           </section>
+          <p className="credits__note">
+            The speaker moves with the real audio for most stations.
+            {simulated.length > 0
+              ? ` ${list} ${simulated.length === 1 ? "doesn't" : "don't"} allow audio analysis in a browser, so for ${simulated.length === 1 ? 'it' : 'them'} the motion is simulated.`
+              : ''}
+          </p>
           <p className="credits__note">The radio itself, its brand and its look are made up.</p>
         </div>
         <footer className="credits__foot">

@@ -1,7 +1,7 @@
 # Vintage Radio — build spec
 
 > **SUPERSEDED (music parts).** The app now plays LIVE Nepali radio streams. Wherever this file
-> mentions bundled music, playlists, tracks, licences, the visualizer or `getLevels`, ignore it.
+> mentions bundled music, playlists, tracks, licences, or `getLevels`, ignore it.
 > `src/types.ts` is the current contract. The look, the controls and the layout below still apply.
 
 A web page showing one old portable transistor radio that really works: power it on, turn the
@@ -49,7 +49,7 @@ Everything is drawn in code (SVG/CSS). No photos, no external images or fonts fr
 - Volume knob: perceptual (squared) curve.
 - Knobs: drag in a circle or drag up/down, mouse wheel, touch, and keyboard (arrows; Shift =
   bigger step). Soft tick sounds while turning. Honour `prefers-reduced-motion` for visual motion.
-- ~~Visualizer.~~ Superseded: none. The dial lamp warms up on power-on and the LED glows a little brighter with signal.
+- Visualizer: the speaker cone scales with bass (and jitters slightly with mids), the grille shimmers with treble/mid, the dial lamp glow follows level, the LED follows signal. Driven by `RadioEngine.readVisual` (real analyser data where the station allows it, a simulated signal otherwise) from a single rAF loop writing transform/opacity on leaf elements. No movement under `prefers-reduced-motion` except a slow lamp change.
 - Under the radio: an "on air" card (station, frequency, city/genre, status Connecting / Live / No signal), a small "Stations" list popover, and an "About / Credits" dialog crediting stream sources. Keys: `[` `]` / PageUp PageDown step stations.
 - State (band, both dial positions, volume) persists in localStorage. Power never persists.
 - Works from 320 px phones to wide desktops, portrait and landscape.

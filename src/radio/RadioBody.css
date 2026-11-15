@@ -76,6 +76,11 @@
     #5f7783 36% 40%, #16202a 42% 62%, #3d505b 64% 70%, #0c1218 72% 100%);
   opacity: .3;
 }
+.grille__cone { will-change: transform; transform-origin: 50% 50%; }
+.grille__shine {
+  position: absolute; inset: 0; opacity: 0; pointer-events: none; will-change: opacity;
+  background: radial-gradient(ellipse 60% 55% at 40% 38%, rgba(150,200,215,.5) 0, rgba(90,140,160,.22) 45%, transparent 75%);
+}
 .grille__mesh { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
 .tweeter {
@@ -171,6 +176,11 @@
     #123;
 }
 .radio[data-power='on'] .dial__lamp { opacity: 1; }
+/* Separate overlay so the breathing does not fight the lamp's 0.6s warm-up transition. */
+.dial__glow {
+  position: absolute; inset: 0; opacity: 0; pointer-events: none; will-change: opacity;
+  background: radial-gradient(ellipse 60% 110% at 50% 50%, rgba(160,235,235,.55) 0, rgba(80,190,200,.2) 55%, transparent 100%);
+}
 .dial__ticks { position: absolute; left: var(--pad); top: 0; width: var(--track); height: 12cqw; display: block; overflow: visible; }
 .ticks { fill: var(--ink-dim); transition: fill .6s ease; }
 .ticks[data-active='true'] { fill: var(--ink); }
@@ -235,4 +245,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .dial__needle { transition-duration: .01s; }
+  .dial__glow { transition: opacity .3s linear; }
 }

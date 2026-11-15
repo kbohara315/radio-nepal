@@ -1,5 +1,6 @@
-import type { Band, PlayState, RadioEngine, SfxName, Station, Tuning } from '../types'
+import type { Band, Levels, PlayState, RadioEngine, SfxName, Station, Tuning, VisualSource } from '../types'
 import { BAND_RANGE } from '../types'
+import { createFallbackSignal, type FallbackSignal, type SignalFrame } from './visualizer'
 import { heterodyneAmount, heterodyneFreq, nearestStation, signalFromDistance, staticAmount, volumeGain } from './tuning'
 
 const UNLOAD_DELAY_MS = 1500
@@ -10,6 +11,14 @@ const CONNECT_TIMEOUT_MS = 12000
 const RETRY_DELAY_MS = 8000
 const FADE_INTERVAL_MS = 50
 const POWER_OFF_MS = 160
+const ZERO_LIMIT_MS = 2000
+const ZERO_CHECK_MS = 250
+const ATTACK_S = 0.03
+const RELEASE_S = 0.2
+const FFT_STREAM = 1024
+const FFT_STATIC = 512
+// byte spectrum is dB-ish (0..255 over -100..-30 dB); subtract a floor and expand what is left
+const SPEC_FLOOR = 0.4
 
 function softClipCurve(drive: number, size = 1024): Float32Array<ArrayBuffer> {
   const curve = new Float32Array(size)
@@ -38,7 +47,13 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
   let lastKey = ''
 
   // stream connection state. `locked` is the station we committed a connection to (src set,
-  // or failed). Only one connection is ever open: the single <audio> element.
+  // or failed). Only one connection is ever open: one of the two <audio> elements:
+  //  - corsEl  (crossOrigin='anonymous', permanently routed through Web Audio, volume fixed at 1,
+  //             loudness via streamGain AFTER the analyser tap) for stations with `analyser: true`;
+  //  - audio   (plain, never routed; loudness via element volume) for everything else.
+  let mode: 'cors' | 'plain' = 'plain' // which element the current connection uses
+  let everPlayed = false // current load reached `playing` (CORS error before that => plain fallback)
+  const noAnalysis = new Set<string>() // session-level: stations that must not be tried in CORS mode
   let locked: Station | null = null
   let hasSrc = false
   let connState: PlayState = 'idle'
@@ -60,6 +75,25 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
   // ---- audio objects, created lazily ----
   let ctx: AudioContext | null = null
   let audio: HTMLAudioElement | null = null
+  let corsEl: HTMLAudioElement | null = null
+  let tapAnalyser: AnalyserNode | null = null
+  let staticAnalyser: AnalyserNode | null = null
+  let streamGain: GainNode | null = null
+  let tapBytes: Uint8Array<ArrayBuffer> = new Uint8Array(0)
+  let tapFloats: Float32Array<ArrayBuffer> = new Float32Array(0)
+  let staticBytes: Uint8Array<ArrayBuffer> = new Uint8Array(0)
+  let zeroTimer: ReturnType<typeof setInterval> | null = null
+  let zeroMs = 0
+  let zeroLastAt = 0
+  let zeroLastCT = 0
+  // visual smoothing state (readVisual fills `out` in place)
+  let vBass = 0
+  let vMid = 0
+  let vTreble = 0
+  let vLastAt = 0
+  let synth: FallbackSignal | null = null
+  let synthKey = ''
+  const synthFrame: SignalFrame = { bass: 0, mid: 0, treble: 0, level: 0 }
   let noiseBuf: AudioBuffer | null = null
   let staticMod: GainNode
   let staticGain: GainNode
@@ -109,26 +143,29 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
   }
 
   // ---------------------------------------------------------------- stream connection
-  function ensureAudio(): HTMLAudioElement {
-    if (audio) return audio
-    // No `crossorigin`: the request must carry no Origin header (some proxies 403 on it), and
-    // the element is NOT routed through Web Audio (a no-CORS source would be silenced).
+  function makeElement(kind: 'cors' | 'plain'): HTMLAudioElement {
+    // The plain element has no `crossorigin`: the request carries no Origin header (some proxies
+    // 403 on it) and it is NOT routed through Web Audio (a no-CORS source would be silenced).
     const el = new Audio()
+    if (kind === 'cors') el.crossOrigin = 'anonymous'
     el.preload = 'none'
     el.setAttribute('playsinline', '')
     ;(el as HTMLAudioElement & { playsInline?: boolean }).playsInline = true
+    const current = () => hasSrc && !destroyed && kind === mode
     const markPlaying = () => {
-      if (!hasSrc || destroyed) return
+      if (!current()) return
+      everPlayed = true
       if (connState !== 'playing') {
         connState = 'playing'
         connectTimer = clearT(connectTimer)
         retryTimer = clearT(retryTimer)
+        if (kind === 'cors') startZeroDetector()
         tickFade()
         notifyIfChanged()
       }
     }
     const markWaiting = () => {
-      if (!hasSrc || destroyed || connState !== 'playing') return
+      if (!current() || connState !== 'playing') return
       connState = 'connecting'
       armConnectTimeout()
       tickFade()
@@ -141,20 +178,79 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
     el.addEventListener('waiting', markWaiting)
     el.addEventListener('stalled', markWaiting)
     el.addEventListener('error', () => {
-      if (hasSrc && !destroyed) fail()
+      if (!current()) return
+      if (kind === 'cors' && !everPlayed && locked) {
+        // The browser refused the CORS load: retry at once on the plain element (no 8 s wait).
+        noAnalysis.add(locked.id)
+        startLoad(locked, true)
+        return
+      }
+      fail()
     })
-    audio = el
     return el
+  }
+
+  function ensureAudio(): HTMLAudioElement {
+    if (!audio) audio = makeElement('plain')
+    return audio
+  }
+
+  function releaseElement(el: HTMLAudioElement | null) {
+    if (!el) return
+    el.pause()
+    el.removeAttribute('src')
+    el.load()
+  }
+
+  function stopZeroDetector() {
+    if (zeroTimer) clearInterval(zeroTimer)
+    zeroTimer = null
+    zeroMs = 0
+  }
+
+  /** CORS element is "playing" but the analyser sees EXACT zeros: the source is tainted, so use the plain element. */
+  function startZeroDetector() {
+    stopZeroDetector()
+    zeroLastAt = performance.now()
+    zeroLastCT = corsEl?.currentTime ?? 0
+    zeroTimer = setInterval(() => {
+      const now = performance.now()
+      const elapsed = now - zeroLastAt
+      zeroLastAt = now
+      if (mode !== 'cors' || connState !== 'playing' || !corsEl || !tapAnalyser || !ctx || ctx.state !== 'running') {
+        zeroMs = 0
+        return
+      }
+      const ct = corsEl.currentTime
+      const advanced = ct > zeroLastCT + 0.01
+      zeroLastCT = ct
+      tapAnalyser.getFloatTimeDomainData(tapFloats)
+      let silent = true
+      for (let i = 0; i < tapFloats.length; i++) {
+        if (tapFloats[i] !== 0) {
+          silent = false
+          break
+        }
+      }
+      if (!silent || !advanced) {
+        zeroMs = 0
+        return
+      }
+      zeroMs += elapsed
+      if (zeroMs >= ZERO_LIMIT_MS && locked) {
+        const st = locked
+        noAnalysis.add(st.id)
+        startLoad(st, true)
+      }
+    }, ZERO_CHECK_MS)
   }
 
   function dropConnection() {
     loadToken++
     connectTimer = clearT(connectTimer)
-    if (audio) {
-      audio.pause()
-      audio.removeAttribute('src')
-      audio.load()
-    }
+    stopZeroDetector()
+    releaseElement(audio)
+    releaseElement(corsEl)
     hasSrc = false
   }
 
@@ -167,17 +263,25 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
     }, CONNECT_TIMEOUT_MS)
   }
 
-  function startLoad(station: Station) {
+  function startLoad(station: Station, forcePlain = false) {
     if (destroyed) return
-    const el = ensureAudio()
+    const useCors = !forcePlain && !!corsEl && station.analyser === true && !noAnalysis.has(station.id)
     const token = ++loadToken
+    stopZeroDetector()
+    connectTimer = clearT(connectTimer)
+    // Only one connection: fully release the element we are NOT about to use. The CORS element
+    // never keeps a source once we move to the plain one.
+    releaseElement(useCors ? audio : corsEl)
+    const el = useCors ? corsEl! : ensureAudio()
+    mode = useCors ? 'cors' : 'plain'
+    everPlayed = false
     locked = station
     hasSrc = true
     connState = 'connecting'
     blocked = false
     armConnectTimeout()
     el.src = station.streamUrl
-    el.volume = 0
+    el.volume = useCors ? 1 : 0
     el.play().catch((err: unknown) => {
       if (token !== loadToken) return
       const name = (err as { name?: string } | null)?.name
@@ -281,7 +385,14 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
   const levelTarget = () => (power && lockMatches() && connState === 'playing' ? tuning.signal : 0)
 
   function applyLevel() {
-    if (audio) audio.volume = Math.min(1, Math.max(0, volumeGainValue() * level))
+    const g = Math.min(1, Math.max(0, volumeGainValue() * level))
+    if (mode === 'cors') {
+      if (audio) audio.volume = 0
+      if (streamGain && ctx) setParam(streamGain.gain, g, 0.02)
+    } else {
+      if (audio) audio.volume = g
+      if (streamGain && ctx) setParam(streamGain.gain, 0, 0.02)
+    }
     updateAudioParams()
   }
 
@@ -488,8 +599,98 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
     powerGain.gain.value = 0
     dropGain.connect(spHP).connect(spLP).connect(clip).connect(volumeGainNode).connect(powerGain).connect(c.destination)
 
+    // Static-bus analyser (side branch after the band dropout, before the speaker/volume stage).
+    staticAnalyser = c.createAnalyser()
+    staticAnalyser.fftSize = FFT_STATIC
+    staticAnalyser.smoothingTimeConstant = 0.7
+    staticBytes = new Uint8Array(staticAnalyser.frequencyBinCount)
+    dropGain.connect(staticAnalyser)
+
+    // CORS element: permanently routed  corsEl -> source -> tap(analyser side branch) -> streamGain -> out.
+    // Element volume stays 1 (an analyser sees post-volume data, and iOS ignores element volume);
+    // loudness is streamGain, applied after the tap.
+    corsEl = makeElement('cors')
+    const corsSrc = c.createMediaElementSource(corsEl)
+    tapAnalyser = c.createAnalyser()
+    tapAnalyser.fftSize = FFT_STREAM
+    tapAnalyser.smoothingTimeConstant = 0.6
+    tapBytes = new Uint8Array(tapAnalyser.frequencyBinCount)
+    tapFloats = new Float32Array(tapAnalyser.fftSize)
+    streamGain = c.createGain()
+    streamGain.gain.value = 0
+    corsSrc.connect(tapAnalyser)
+    corsSrc.connect(streamGain)
+    streamGain.connect(c.destination)
+
     audibleBand = band
     applyBand()
+  }
+
+  // ---------------------------------------------------------------- visuals
+  /** Mean of a byte-spectrum range mapped with a floor + expand, 0..1. */
+  function bandLevel(bytes: Uint8Array, hz: number, loHz: number, hiHz: number, gain: number): number {
+    const lo = Math.max(1, Math.round(loHz / hz))
+    const hi = Math.min(bytes.length - 1, Math.max(lo, Math.round(hiHz / hz)))
+    let sum = 0
+    for (let i = lo; i <= hi; i++) sum += bytes[i]
+    const v = (sum / (hi - lo + 1) / 255 - SPEC_FLOOR) / (1 - SPEC_FLOOR)
+    return Math.min(1, Math.max(0, v * gain))
+  }
+
+  function readVisual(out: Levels): VisualSource {
+    out.level = out.bass = out.mid = out.treble = 0
+    if (destroyed || !power || !ctx || !staticAnalyser || !tapAnalyser) {
+      vBass = vMid = vTreble = 0
+      vLastAt = 0
+      return 'none'
+    }
+    const now = performance.now()
+    const dt = vLastAt ? Math.min(0.25, Math.max(0.001, (now - vLastAt) / 1000)) : 0.016
+    vLastAt = now
+    const vol = Math.min(1, 0.25 + volume)
+    let tb = 0
+    let tm = 0
+    let tt = 0
+    let source: VisualSource
+    const playing = lockMatches() && connState === 'playing'
+    if (playing && mode === 'cors') {
+      tapAnalyser.getByteFrequencyData(tapBytes)
+      const hz = ctx.sampleRate / tapAnalyser.fftSize
+      const k = vol * level
+      tb = bandLevel(tapBytes, hz, 0, 200, 1.0) * k
+      tm = bandLevel(tapBytes, hz, 200, 2000, 1.15) * k
+      tt = bandLevel(tapBytes, hz, 2000, 6000, 1.5) * k
+      source = 'real'
+    } else if (playing) {
+      const kind = tuning.station?.genre === 'News' ? 'speech' : 'music'
+      const key = `${tuning.station?.id}|${kind}`
+      if (!synth || key !== synthKey) {
+        synth = createFallbackSignal(kind)
+        synthKey = key
+      }
+      synth.step(dt, synthFrame)
+      const k = 1.25 * vol * level
+      tb = synthFrame.bass * k
+      tm = synthFrame.mid * k
+      tt = synthFrame.treble * k
+      source = 'synthetic'
+    } else {
+      staticAnalyser.getByteFrequencyData(staticBytes)
+      const hz = ctx.sampleRate / staticAnalyser.fftSize
+      const k = 0.45 * vol
+      tb = Math.min(0.25, bandLevel(staticBytes, hz, 0, 200, 1.0) * k)
+      tm = Math.min(0.25, bandLevel(staticBytes, hz, 200, 2000, 1.0) * k)
+      tt = Math.min(0.25, bandLevel(staticBytes, hz, 2000, 6000, 1.0) * k)
+      source = 'static'
+    }
+    vBass += (tb - vBass) * (1 - Math.exp(-dt / (tb > vBass ? ATTACK_S : RELEASE_S)))
+    vMid += (tm - vMid) * (1 - Math.exp(-dt / (tm > vMid ? ATTACK_S : RELEASE_S)))
+    vTreble += (tt - vTreble) * (1 - Math.exp(-dt / (tt > vTreble ? ATTACK_S : RELEASE_S)))
+    out.bass = vBass
+    out.mid = vMid
+    out.treble = vTreble
+    out.level = Math.min(1, 0.45 * vBass + 0.4 * vMid + 0.15 * vTreble)
+    return source
   }
 
   // ---------------------------------------------------------------- API
@@ -631,9 +832,10 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
     for (const t of [lockTimer, unloadTimer, connectTimer, retryTimer, pauseTimer, bandTimer]) if (t) clearTimeout(t)
     if (fadeTimer) clearInterval(fadeTimer)
     fadeTimer = null
-    dropConnection()
+    dropConnection() // pauses and unloads both elements
     listeners.clear()
     audio = null
+    corsEl = null
     if (ctx) ctx.close().catch(() => {})
     ctx = null
   }
@@ -641,5 +843,5 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
   computeTuning()
   lastKey = ''
 
-  return { setPower, setBand, setFrequency, setVolume, sfx, getTuning, subscribe, destroy }
+  return { setPower, setBand, setFrequency, setVolume, sfx, readVisual, getTuning, subscribe, destroy }
 }

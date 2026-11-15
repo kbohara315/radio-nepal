@@ -54,6 +54,7 @@ export default function App() {
             band={band}
             freq={dial}
             signal={signal}
+            readVisual={radio.readVisual}
             powerSwitch={<PowerSwitch checked={power} onChange={radio.setPower} />}
             bandSwitch={<BandSwitch band={band} onChange={radio.setBand} />}
             volumeKnob={

@@ -1,6 +1,7 @@
+import { useEffect, useRef } from 'react'
 import type { CSSProperties } from 'react'
 import { BAND_RANGE } from '../types'
-import type { Band, RadioBodyProps } from '../types'
+import type { Band, Levels, RadioBodyProps } from '../types'
 import './RadioBody.css'
 
 const FM_LABELS = [88, 92, 96, 100, 104, 108]
@@ -50,8 +51,101 @@ function formatReading(band: Band, freq: number) {
   return `${band} ${band === 'FM' ? freq.toFixed(1) : Math.round(freq)} ${unit}`
 }
 
+const EPS = 0.004
+
+/**
+ * One rAF loop that maps audio levels onto three LEAF elements (cone, grille shimmer, dial glow).
+ * Never writes to the root .radio element (that forces a costly style recalc of the whole body)
+ * and never uses React state per frame.
+ */
+function useVisualizer(
+  power: boolean,
+  readVisual: RadioBodyProps['readVisual'],
+  refs: { cone: React.RefObject<HTMLDivElement | null>; shine: React.RefObject<HTMLDivElement | null>; glow: React.RefObject<HTMLDivElement | null> },
+) {
+  const readRef = useRef(readVisual)
+  readRef.current = readVisual
+  const { cone, shine, glow } = refs
+
+  useEffect(() => {
+    const coneEl = cone.current
+    const shineEl = shine.current
+    const glowEl = glow.current
+    if (!coneEl || !shineEl || !glowEl) return
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const levels: Levels = { level: 0, bass: 0, mid: 0, treble: 0 }
+    // last written values (NaN forces the first write)
+    let wScale = NaN, wTx = NaN, wTy = NaN, wShine = NaN, wGlow = NaN
+    let raf = 0
+
+    const write = (scale: number, tx: number, ty: number, shineV: number, glowV: number, still: boolean) => {
+      if (!still && !(Math.abs(scale - wScale) < EPS / 4 && Math.abs(tx - wTx) < EPS && Math.abs(ty - wTy) < EPS)) {
+        wScale = scale; wTx = tx; wTy = ty
+        coneEl.style.transform = scale === 1 && tx === 0 && ty === 0
+          ? ''
+          : `translate3d(${tx.toFixed(3)}cqw, ${ty.toFixed(3)}cqw, 0) scale(${scale.toFixed(4)})`
+      }
+      if (!still && !(Math.abs(shineV - wShine) < EPS)) {
+        wShine = shineV
+        shineEl.style.opacity = shineV.toFixed(3)
+      }
+      if (!(Math.abs(glowV - wGlow) < EPS)) {
+        wGlow = glowV
+        glowEl.style.opacity = glowV.toFixed(3)
+      }
+    }
+
+    const frame = (t: number) => {
+      raf = requestAnimationFrame(frame)
+      const src = readRef.current(levels)
+      if (src === 'none') return write(1, 0, 0, 0, 0, mq.matches)
+      const { level, bass, mid, treble } = levels
+      const j = t * 0.001
+      const still = mq.matches
+      // Reduced motion: only a slow, small lamp change (CSS transition does the smoothing).
+      const glowV = still ? 0.15 + 0.2 * level : 0.12 + 0.55 * level
+      write(
+        1 + 0.06 * Math.min(1, bass * 1.5),
+        0.18 * mid * Math.sin(j * 61),
+        0.14 * mid * Math.sin(j * 47 + 1.3),
+        Math.min(1, 0.55 * treble + 0.4 * mid),
+        glowV,
+        still,
+      )
+    }
+
+    const start = () => {
+      if (!raf && !document.hidden) raf = requestAnimationFrame(frame)
+    }
+    const stop = () => {
+      cancelAnimationFrame(raf)
+      raf = 0
+    }
+    const reset = () => {
+      write(1, 0, 0, 0, 0, false)
+    }
+    const onVis = () => (document.hidden ? stop() : start())
+
+    if (!power) {
+      reset()
+      return
+    }
+    document.addEventListener('visibilitychange', onVis)
+    start()
+    return () => {
+      document.removeEventListener('visibilitychange', onVis)
+      stop()
+      reset()
+    }
+  }, [power, cone, shine, glow])
+}
+
 export function RadioBody(props: RadioBodyProps) {
-  const { power, band, freq, signal, powerSwitch, bandSwitch, volumeKnob, tuningKnob } = props
+  const { power, band, freq, signal, readVisual, powerSwitch, bandSwitch, volumeKnob, tuningKnob } = props
+  const coneRef = useRef<HTMLDivElement>(null)
+  const shineRef = useRef<HTMLDivElement>(null)
+  const glowRef = useRef<HTMLDivElement>(null)
+  useVisualizer(power, readVisual, { cone: coneRef, shine: shineRef, glow: glowRef })
   const n = dialPos(band, freq)
   const led = power ? 0.6 + 0.35 * clamp01(signal) : 0
   const style = { '--n': n.toFixed(4), '--led': led.toFixed(2) } as CSSProperties
@@ -97,7 +191,8 @@ export function RadioBody(props: RadioBodyProps) {
         {/* Speaker grille */}
         <div className="grille" aria-hidden="true">
           <div className="grille__back">
-            <div className="grille__cone" />
+            <div className="grille__cone" ref={coneRef} />
+            <div className="grille__shine" ref={shineRef} />
           </div>
           <svg className="grille__mesh" viewBox="0 0 460 540" focusable="false">
             <defs>
@@ -172,6 +267,7 @@ export function RadioBody(props: RadioBodyProps) {
 
           <div className="dial" role="group" aria-label="Tuning dial">
             <div className="dial__lamp" aria-hidden="true" />
+            <div className="dial__glow" ref={glowRef} aria-hidden="true" />
             <svg className="dial__ticks" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
               <g className="ticks ticks--am" data-active={band === 'AM'}>
                 <Ticks band="AM" y0={24} h={14} />

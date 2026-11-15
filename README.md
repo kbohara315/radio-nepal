@@ -29,13 +29,24 @@ Stations come and go; re-run `check-stations` now and then.
 
 ### Streams, CORS and https
 
-- Streams are played through a plain `<audio>` element **without `crossorigin`**, so a station
-  does not need to send CORS headers. The consequence is that the audio cannot be analysed,
-  which is why there is no visualizer.
+- Whether a stream can be analysed is decided at build time: `pnpm build-stations` (and
+  `pnpm check-stations`) probe each stream the way a browser would and record `analyser: true`
+  only if it can be played with `crossorigin="anonymous"` (CORS allowed). Only those are played
+  that way and fed to a Web Audio analyser; the rest are played plainly.
 - **https only.** The page is meant to be served over https, and browsers block http audio on
   an https page (mixed content), so only `https://` stream URLs are used.
 - Nothing is proxied, re-streamed or recorded: the browser talks straight to each station's own
   server. A station that is offline or blocks browsers shows "No signal — stream unreachable".
+
+## Visualizer
+
+The speaker cone swells with bass (about 6%) and jitters a hair with mids, the grille shimmers with
+treble/mid, and the dial lamp glows with overall level. One `requestAnimationFrame` loop in
+`RadioBody` reads levels from the engine (`readVisual`) and writes `transform`/`opacity` straight
+onto three leaf elements: no React state, nothing on the root element, paused while the tab is
+hidden or the radio is off. Stations with `analyser: true` use the real audio; the others (and
+static, connecting or failed states) use a simulated signal, and the radio at rest when off.
+With `prefers-reduced-motion` the cone and grille stay still and only the lamp changes, slowly.
 
 ## Keys
 

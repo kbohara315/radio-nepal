@@ -5,6 +5,7 @@
     "band": "FM",
     "freq": 88.3,
     "streamUrl": "https://radio11.plathong.net/7136/;stream.mp3",
+    "analyser": true,
     "sourceUrl": "http://naphoradio.com/"
   },
   {
@@ -14,6 +15,7 @@
     "freq": 90,
     "genre": "Mixed",
     "streamUrl": "https://stream.zenolive.com/wtuvp08xq1duv",
+    "analyser": true,
     "sourceUrl": "https://ujyaaloonline.com/"
   },
   {
@@ -24,6 +26,7 @@
     "city": "New Baneshwar",
     "genre": "Music",
     "streamUrl": "https://usa15.fastcast4u.com/proxy/hitsfm912?mp=/1",
+    "analyser": true,
     "sourceUrl": "http://www.hitsfm.com.np/"
   },
   {
@@ -32,6 +35,7 @@
     "band": "FM",
     "freq": 95.2,
     "streamUrl": "https://streaming.softnep.net:10828/stream",
+    "analyser": true,
     "sourceUrl": "http://www.kalikafm.com.np/"
   },
   {
@@ -41,6 +45,7 @@
     "freq": 96.1,
     "city": "Pulchowk",
     "streamUrl": "https://radio-broadcast.ekantipur.com/stream",
+    "analyser": true,
     "sourceUrl": "https://radiokantipur.com/"
   },
   {
@@ -50,6 +55,7 @@
     "freq": 98.2,
     "city": "Rupendehi",
     "streamUrl": "https://streaming.softnep.net:10854/;stream.nsv;type=mp3&volume=70",
+    "analyser": true,
     "sourceUrl": "https://tinaufm.com.np/"
   },
   {
@@ -58,6 +64,7 @@
     "band": "FM",
     "freq": 99.4,
     "streamUrl": "https://streaming.softnep.net:10988/;stream.nsv&type=mp3",
+    "analyser": true,
     "sourceUrl": "https://thahasanchar.com/live"
   },
   {
@@ -67,6 +74,7 @@
     "freq": 100,
     "genre": "News",
     "streamUrl": "https://stream1.radionepal.gov.np/live/",
+    "analyser": false,
     "sourceUrl": "https://radionepal.gov.np/"
   },
   {
@@ -75,6 +83,7 @@
     "band": "FM",
     "freq": 103,
     "streamUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_nepali_radio",
+    "analyser": true,
     "sourceUrl": "https://bbc.co.uk/nepali"
   },
   {
@@ -84,6 +93,7 @@
     "freq": 106.3,
     "genre": "Music",
     "streamUrl": "https://stream.zeno.fm/fvrx47wpg0quv",
+    "analyser": true,
     "sourceUrl": "https://www.aradioaudio.com/"
   },
   {
@@ -94,6 +104,7 @@
     "city": "Bagbazar",
     "genre": "Mixed",
     "streamUrl": "https://live.itech.host/himalayaradio?1588276425741",
+    "analyser": true,
     "sourceUrl": "http://www.radiohimalaya.com/"
   },
   {
@@ -103,6 +114,7 @@
     "freq": 810,
     "genre": "Mixed",
     "streamUrl": "https://streaming.softnep.net:10996/;stream.nsv&type=mp3&volume=60",
+    "analyser": true,
     "sourceUrl": "https://www.cinkhabar.com/"
   },
   {
@@ -111,7 +123,8 @@
     "band": "AM",
     "freq": 1060,
     "genre": "Music",
-    "streamUrl": "https://eu1.fastcast4u.com/proxy/radiosag?mp=/stream/1/"
+    "streamUrl": "https://eu1.fastcast4u.com/proxy/radiosag?mp=/stream/1/",
+    "analyser": true
   },
   {
     "id": "am-bfbs-gurkha-radio",
@@ -119,6 +132,7 @@
     "band": "AM",
     "freq": 1310,
     "streamUrl": "https://listen-ssvcbfbs.sharp-stream.com/ssvcbfbs3.aac",
+    "analyser": true,
     "sourceUrl": "https://radio.bfbs.com/stations/bfbs-gurkha-network"
   },
   {
@@ -128,6 +142,7 @@
     "freq": 1560,
     "genre": "News",
     "streamUrl": "https://radio.universalhealthradio.org/uhr-ne.mp3",
+    "analyser": false,
     "sourceUrl": "https://universalhealthradio.org/"
   }
 ]

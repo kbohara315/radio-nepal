@@ -3,7 +3,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { probe, pool } from './probe.mjs'
+import { probe, probeCors, pool } from './probe.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const cacheDir = join(root, 'scripts', '.cache')
@@ -148,6 +148,10 @@ am.forEach((e, i) => {
   e.band = 'AM'
 })
 
+// ---- CORS / analyser flag (browser-accurate rule, see probe.mjs)
+const corsResults = await pool([...fm, ...am], 6, async (e) => ({ e, c: await probeCors(e.streamUrl) }))
+for (const { e, c } of corsResults) e.analyser = c.analyser
+
 const ids = new Set()
 const out = [...fm, ...am]
   .sort((a, b) => (a.band === b.band ? a.freq - b.freq : a.band === 'AM' ? 1 : -1))
@@ -159,6 +163,7 @@ const out = [...fm, ...am]
     if (e.city) o.city = e.city
     if (e.genre) o.genre = e.genre
     o.streamUrl = e.streamUrl
+    o.analyser = e.analyser
     if (e.sourceUrl) o.sourceUrl = e.sourceUrl
     return o
   })
@@ -170,4 +175,4 @@ await writeFile(
 )
 console.log(`\nprobed ${cands.length}, reachable ${alive.length}, kept ${out.length} (${fm.length} FM, ${am.length} AM)`)
 if (dropped.length) console.log('dropped:', dropped.join('; '))
-console.table(out.map((s) => ({ band: s.band, freq: s.freq, name: s.name, city: s.city, genre: s.genre, host: new URL(s.streamUrl).host })))
+console.table(out.map((s) => ({ band: s.band, freq: s.freq, name: s.name, city: s.city, genre: s.genre, analyser: s.analyser, host: new URL(s.streamUrl).host })))

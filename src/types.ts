@@ -24,6 +24,11 @@ export interface Station {
   /** e.g. "News", "Music". Short. */
   genre?: string
   streamUrl: string
+  /**
+   * Build-time result of the browser-accurate CORS probe (scripts/probe.mjs): true if the stream
+   * can be played with crossOrigin='anonymous' and analysed with Web Audio. Missing = false.
+   */
+  analyser?: boolean
   /** Where the station was listed, for credits. */
   sourceUrl?: string
 }
@@ -44,6 +49,21 @@ export interface Tuning {
   state: PlayState
 }
 
+/** Smoothed 0..1 values that drive the speaker / lamp motion. */
+export interface Levels {
+  level: number
+  bass: number
+  mid: number
+  treble: number
+}
+
+/**
+ * Where the numbers came from: 'real' = analyser on the playing stream; 'synthetic' = procedural
+ * music/speech signal (station cannot be analysed); 'static' = analyser on our own synthesized
+ * static (idle / connecting / failed); 'none' = radio off, all zeros.
+ */
+export type VisualSource = 'real' | 'synthetic' | 'static' | 'none'
+
 export type SfxName = 'knobTick' | 'switchClick' | 'bandClunk'
 
 export interface RadioEngine {
@@ -56,6 +76,11 @@ export interface RadioEngine {
   setVolume(volume: number): void
   /** Mechanical sounds. Audible even when power is off (they are physical clicks). */
   sfx(name: SfxName): void
+  /**
+   * Fills `out` (no allocation, safe every animation frame) and says where it came from.
+   * Must be cheap and must not throw before the AudioContext exists (returns 'none').
+   */
+  readVisual(out: Levels): VisualSource
   getTuning(): Tuning
   /** Fires when station / state / signal (quantized to ~0.05) changes. Returns unsubscribe. */
   subscribe(listener: (tuning: Tuning) => void): () => void
@@ -70,6 +95,8 @@ export interface RadioBodyProps {
   freq: number
   /** 0..1, drives the power LED / dial-lamp glow when locked on. */
   signal: number
+  /** Called every animation frame by the body; fills the object and returns the source. */
+  readVisual: (out: Levels) => VisualSource
   /** Interactive controls, rendered into fixed slots; each fills 100% of its slot. */
   powerSwitch: React.ReactNode
   bandSwitch: React.ReactNode

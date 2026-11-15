@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { createRadioEngine } from '../audio/engine'
 import { stations } from '../data/stations'
-import { BAND_RANGE, type Band, type Station, type RadioEngine, type Tuning } from '../types'
+import { BAND_RANGE, type Band, type Station, type RadioEngine, type Tuning, type Levels, type VisualSource } from '../types'
 
 const STORAGE_KEY = 'vintage-radio:v1'
 const NO_TUNING: Tuning = { station: null, signal: 0, state: 'idle' }
@@ -174,6 +174,14 @@ export function useRadio() {
     [setVolume],
   )
 
+  /** Stable, allocation-free per-frame read of the engine's levels (no React state). */
+  const readVisual = React.useCallback((out: Levels): VisualSource => {
+    const e = engineRef.current
+    if (e) return e.readVisual(out)
+    out.level = out.bass = out.mid = out.treble = 0
+    return 'none'
+  }, [])
+
   const tick = React.useCallback(() => engineRef.current?.sfx('knobTick'), [])
 
   /**
@@ -226,6 +234,7 @@ export function useRadio() {
     nudgeFreq,
     nudgeVolume,
     tick,
+    readVisual,
     tuneTo,
     nextStation,
     prevStation,
