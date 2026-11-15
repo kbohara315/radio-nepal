@@ -1,64 +1,246 @@
+/*
+ * "Load-shedding Night": rooftop at blue hour.
+ *
+ * Geometry: everything is anchored to the bottom of the scene, mirroring how the stage places the
+ * radio (bottom-aligned, App.css sizes it). --rw is the radio width (same formula as .app__radio),
+ * --feet is the distance from the scene bottom to the radio's feet, --horizon is the parapet lip.
+ *
+ * State (set from the radio's own markup, no props needed):
+ *   --on   1 while the radio is powered
+ *   --live 1 while a stream is actually playing
+ */
+@property --sway { syntax: '<number>'; inherits: true; initial-value: 1; }
+@property --g { syntax: '<number>'; inherits: true; initial-value: 1; }
+
 .scene {
-  position: relative; width: 100%; min-height: 100dvh; overflow: hidden; background: #0b1316;
+  --rw: clamp(280px, min(920px, 100svw - 24px, (100svh - 250px) / 0.82), 920px);
+  --capH: 8.6rem;
+  --feet: calc(9dvh + var(--capH) + var(--rw) * 0.05);
+  --horizon: calc(var(--feet) + var(--rw) * 0.22);
+  --on: 0;
+  --live: 0;
+  --ink: #0d1226;
+  --plum: #6b2e5e;
+  --gold: #f2a93b;
+  position: relative; width: 100%; min-height: 100dvh; overflow: hidden; background: var(--ink);
   color: #e9e4d8;
 }
+.scene:has(.radio[data-power='on']) { --on: 1; }
+.scene:has(.strip[data-play='playing']) { --live: 1; }
+
 .scene__bg, .scene__bg > * { position: absolute; }
-.scene__bg { inset: 0; pointer-events: none; }
+.scene__bg { inset: 0; pointer-events: none; overflow: hidden; }
 .scene__bg > * { display: block; }
+.scene__bg svg { overflow: visible; }
 
+/* ---------- Sky ---------- */
 .scene__sky {
-  inset: 0 0 auto 0; height: 66%;
+  inset: 0;
+  background: linear-gradient(180deg, #080b1c 0%, #0d1226 20%, #1a1a42 46%, #2b2058 70%, #43265d 100%);
+}
+.scene__stars {
+  inset: 0 0 45% 0;
   background:
-    radial-gradient(ellipse 50% 40% at 62% 38%, rgba(255, 176, 96, .55), transparent 70%),
-    radial-gradient(ellipse 40% 50% at 12% 25%, rgba(214, 120, 60, .5), transparent 70%),
-    radial-gradient(ellipse 60% 30% at 80% 8%, rgba(210, 150, 80, .35), transparent 70%),
-    linear-gradient(180deg, #42585a 0%, #6a7773 38%, #8b8472 62%, #6f7a74 100%);
+    radial-gradient(1px 1px at 8% 12%, #fff 50%, transparent 52%),
+    radial-gradient(1px 1px at 17% 31%, #cfd8ff 50%, transparent 52%),
+    radial-gradient(1.4px 1.4px at 29% 8%, #fff 50%, transparent 52%),
+    radial-gradient(1px 1px at 38% 24%, #cfd8ff 50%, transparent 52%),
+    radial-gradient(1px 1px at 46% 6%, #fff 50%, transparent 52%),
+    radial-gradient(1.2px 1.2px at 55% 19%, #fff 50%, transparent 52%),
+    radial-gradient(1px 1px at 64% 33%, #cfd8ff 50%, transparent 52%),
+    radial-gradient(1px 1px at 72% 11%, #fff 50%, transparent 52%),
+    radial-gradient(1.4px 1.4px at 81% 27%, #fff 50%, transparent 52%),
+    radial-gradient(1px 1px at 89% 9%, #cfd8ff 50%, transparent 52%),
+    radial-gradient(1px 1px at 95% 36%, #fff 50%, transparent 52%),
+    radial-gradient(1px 1px at 4% 41%, #cfd8ff 50%, transparent 52%);
+  opacity: .55;
+  -webkit-mask-image: linear-gradient(180deg, #000 35%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 35%, transparent 100%);
 }
-.scene__street {
-  left: 0; right: 0; top: 30%; height: 36%;
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 35%, #000 70%, transparent);
-  mask-image: linear-gradient(180deg, transparent, #000 35%, #000 70%, transparent);
+.scene__moon {
+  left: 9%; top: clamp(34px, 7vh, 90px); width: clamp(30px, 4.4vw, 58px); aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 36% 32%, #f6f8ff 0, #cdd7f6 55%, #8f9ed4 100%);
+  box-shadow: 0 0 2.2rem .8rem rgba(150, 170, 255, .16);
+  opacity: .85;
+}
+/* Dusk afterglow band sitting on the horizon; it lifts the sky behind the radio so its handle reads. */
+.scene__afterglow {
+  left: 0; right: 0; bottom: var(--horizon); height: calc(var(--rw) * 0.95 + 150px);
   background:
-    linear-gradient(90deg, rgba(40, 70, 75, .0), rgba(30, 58, 62, .55) 18%, rgba(150, 100, 60, .35) 36%, rgba(60, 80, 80, .4) 60%, rgba(120, 90, 60, .45) 82%, rgba(30, 55, 60, .5)),
-    linear-gradient(180deg, rgba(120, 130, 125, 0), rgba(100, 110, 104, .6));
+    radial-gradient(ellipse 62% 100% at 50% 100%, rgba(242, 169, 59, .42) 0, rgba(210, 96, 100, .38) 22%, rgba(130, 56, 120, .42) 48%, rgba(107, 46, 94, .22) 72%, transparent 92%);
 }
-.scene__bokeh {
-  border-radius: 50%; transform: translate(-50%, -50%);
-  max-width: 200px; max-height: 200px; opacity: .8;
-}
-.scene__bokeh--warm { background: radial-gradient(circle, rgba(255, 196, 140, .55) 0, rgba(255, 170, 100, .3) 60%, rgba(255, 150, 80, 0) 72%); }
-.scene__bokeh--amber { background: radial-gradient(circle, rgba(255, 224, 150, .5) 0, rgba(255, 200, 110, .28) 60%, rgba(255, 190, 90, 0) 72%); }
-.scene__bokeh--teal { background: radial-gradient(circle, rgba(150, 215, 215, .38) 0, rgba(100, 180, 185, .22) 60%, rgba(90, 170, 175, 0) 72%); }
 
-.scene__ground {
-  left: 0; right: 0; bottom: 0; height: 40%;
+/* ---------- Himalaya, city ---------- */
+.scene__ridge {
+  left: 50%; bottom: calc(var(--horizon) - 6px);
+  height: calc(var(--rw) * 0.7 + 70px); width: max(100%, calc((var(--rw) * 0.7 + 70px) * 3.2));
+  transform: translateX(-50%);
+}
+.scene__city {
+  left: 50%; bottom: calc(var(--horizon) - 4px);
+  height: calc(var(--rw) * 0.3 + 90px); width: max(100%, calc((var(--rw) * 0.3 + 90px) * 3.8));
+  transform: translateX(-50%);
+}
+.scene__city .pane { fill: #070920; opacity: .7; }
+
+/* Windows: the power group stutters on with the radio, the rest light up one by one once a stream plays. */
+.w { opacity: 0; }
+.w--p { opacity: var(--on); transition: opacity .7s ease-out calc(var(--on) * var(--d, 0s)); }
+.w--l, .w--tv { opacity: var(--live); transition: opacity 1.4s ease-in-out calc(var(--live) * var(--d, 0s)); }
+.w--d { opacity: calc(.28 + .22 * var(--on)); transition: opacity 1.4s ease-in-out; }
+.w--p rect:last-child { animation: win-hum 7s ease-in-out infinite; }
+.scene:has(.radio[data-power='on']) .w--p rect:last-child {
+  animation: win-hum 7s ease-in-out infinite, win-on 1.3s steps(1, end) backwards;
+  animation-delay: 0s, var(--d, 0s);
+}
+.scene:has(.strip[data-play='playing']) .w--tv rect:last-child { animation: win-tv 2.3s steps(1, end) infinite; }
+@keyframes win-hum { 0%, 100% { opacity: 1; } 46% { opacity: .92; } 50% { opacity: .78; } 54% { opacity: .96; } }
+@keyframes win-on { 0% { opacity: 0; } 12% { opacity: 1; } 20% { opacity: .1; } 34% { opacity: .9; } 41% { opacity: .25; } 56%, 100% { opacity: 1; } }
+@keyframes win-tv { 0% { opacity: 1; } 14% { opacity: .55; } 29% { opacity: .9; } 43% { opacity: .4; } 58% { opacity: 1; } 71% { opacity: .65; } 86% { opacity: .95; } }
+
+/* ---------- Prayer flags ---------- */
+.scene__flagwrap {
+  inset: 0;
+  /* flags show at the flanks, and above the radio; never through its handle */
+  -webkit-mask-image:
+    linear-gradient(90deg, #000 0, #000 calc(50% - var(--rw) / 2 - 6px), transparent calc(50% - var(--rw) / 2 - 6px), transparent calc(50% + var(--rw) / 2 + 6px), #000 calc(50% + var(--rw) / 2 + 6px)),
+    linear-gradient(180deg, #000 0, #000 calc(100% - var(--feet) - var(--rw) * .84 - 10px), transparent calc(100% - var(--feet) - var(--rw) * .84 - 10px));
+  mask-image:
+    linear-gradient(90deg, #000 0, #000 calc(50% - var(--rw) / 2 - 6px), transparent calc(50% - var(--rw) / 2 - 6px), transparent calc(50% + var(--rw) / 2 + 6px), #000 calc(50% + var(--rw) / 2 + 6px)),
+    linear-gradient(180deg, #000 0, #000 calc(100% - var(--feet) - var(--rw) * .84 - 10px), transparent calc(100% - var(--feet) - var(--rw) * .84 - 10px));
+}
+.scene__flags {
+  --sway: calc(1 + 1.2 * var(--on) + 2.6 * var(--live));
+  position: absolute; left: 0; top: clamp(18px, 4%, 60px); width: 100%; height: clamp(120px, 20dvh, 210px);
+  opacity: .82;
+  transition: --sway 2.6s ease-in-out;
+}
+.flag {
+  transform-origin: 0 0;
+  animation: flap 3.6s ease-in-out infinite alternate;
+}
+@keyframes flap {
+  from { transform: rotate(calc(var(--sway) * -1.1deg)) skewX(calc(var(--sway) * -4deg)); }
+  to { transform: rotate(calc(var(--sway) * 1.1deg)) skewX(calc(var(--sway) * 4deg)); }
+}
+
+/* ---------- Roof: corrugated tin, warm from the radio ---------- */
+.scene__roof {
+  left: 0; right: 0; bottom: 0; height: var(--horizon);
   background:
-    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255, 160, 90, .22), transparent 70%),
-    repeating-linear-gradient(97deg, rgba(255, 255, 255, .035) 0 2px, transparent 2px 7px),
-    repeating-linear-gradient(8deg, rgba(0, 0, 0, .12) 0 1px, transparent 1px 5px),
-    linear-gradient(180deg, #7d7461 0%, #5b5547 30%, #3c3a33 70%, #22211e 100%);
-  box-shadow: 0 -1.2vmin 3vmin rgba(40, 40, 30, .55);
+    /* rivet rows along two sheet seams */
+    radial-gradient(circle, rgba(200, 210, 255, .2) 0 1.3px, transparent 1.9px) 0 calc(24% + 7px) / 22px 8px repeat-x,
+    linear-gradient(rgba(0, 0, 0, .35), rgba(0, 0, 0, .35)) 0 24% / 100% 2px no-repeat,
+    linear-gradient(rgba(180, 190, 255, .08), rgba(180, 190, 255, .08)) 0 calc(24% + 2px) / 100% 1px no-repeat,
+    radial-gradient(circle, rgba(200, 210, 255, .16) 0 1.3px, transparent 1.9px) 0 calc(62% + 7px) / 22px 8px repeat-x,
+    linear-gradient(rgba(0, 0, 0, .35), rgba(0, 0, 0, .35)) 0 62% / 100% 2px no-repeat,
+    linear-gradient(rgba(180, 190, 255, .06), rgba(180, 190, 255, .06)) 0 calc(62% + 2px) / 100% 1px no-repeat,
+    /* corrugation, 24px period */
+    repeating-linear-gradient(90deg, rgba(160, 170, 240, .05) 0 3px, transparent 3px 9px, rgba(0, 0, 0, .22) 9px 14px, transparent 14px 24px),
+    /* rust and weathering */
+    radial-gradient(ellipse 9% 6% at 14% 38%, rgba(110, 50, 40, .22), transparent),
+    radial-gradient(ellipse 12% 5% at 82% 70%, rgba(110, 50, 40, .2), transparent),
+    radial-gradient(ellipse 7% 4% at 66% 22%, rgba(90, 40, 60, .22), transparent),
+    linear-gradient(180deg, rgba(107, 46, 94, .34), transparent 30%),
+    linear-gradient(180deg, #1d2250 0%, #131738 34%, #0b0e26 100%);
 }
-.scene__line {
-  left: -5%; right: -5%; bottom: 3.5%; height: 6%;
-  background: linear-gradient(180deg, #ecead9 0, #cfcfc0 55%, #a9a99b 100%);
-  clip-path: polygon(0 18%, 14% 0, 100% 0, 100% 100%, 0 100%);
-  box-shadow: 0 0 2vmin rgba(240, 235, 215, .25);
-  opacity: .88;
+/* concrete parapet lip */
+.scene__roof::before {
+  content: ''; position: absolute; left: 0; right: 0; top: -9px; height: 13px;
+  background: linear-gradient(180deg, #4a4378 0, #2c2b5c 40%, #151839 100%);
+  border-top: 1px solid rgba(200, 190, 255, .3);
 }
-.scene__grade {
-  inset: 0; mix-blend-mode: soft-light;
-  background: linear-gradient(180deg, rgba(20, 130, 140, .55), rgba(255, 140, 60, .35) 55%, rgba(30, 110, 120, .5));
+.scene__sheen, .scene__pool { position: absolute; inset: 0; display: block; }
+/* the lit crests of the corrugation, only around the radio */
+.scene__sheen {
+  background: repeating-linear-gradient(90deg, rgba(255, 190, 100, .3) 0 4px, transparent 4px 24px);
+  -webkit-mask-image: radial-gradient(ellipse calc(var(--rw) * .72) calc(var(--rw) * .2) at 50% calc(var(--rw) * .2), #000 0, transparent 100%);
+  mask-image: radial-gradient(ellipse calc(var(--rw) * .72) calc(var(--rw) * .2) at 50% calc(var(--rw) * .2), #000 0, transparent 100%);
+  opacity: calc(.5 * var(--on) + .5 * var(--live));
+  transition: opacity 1.2s ease-out;
 }
-.scene__grain {
-  inset: 0; opacity: .22; mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
+.scene__pool {
+  background: radial-gradient(ellipse calc(var(--rw) * .8) calc(var(--rw) * .22) at 50% calc(var(--rw) * .2), rgba(242, 169, 59, .5) 0, rgba(190, 90, 60, .2) 48%, transparent 78%);
+  opacity: calc(.7 * var(--on) + .3 * var(--live));
+  transition: opacity 1.2s ease-out;
 }
+
+/* ---------- Props (flank the radio; hidden when the flank is too narrow) ---------- */
+.scene__flank {
+  bottom: calc(var(--feet) - var(--rw) * 0.02); height: calc(var(--rw) * 0.2);
+  width: calc((100% - var(--rw)) / 2);
+  container-type: inline-size;
+  display: flex; align-items: flex-end;
+}
+.scene__flank--l { left: 0; justify-content: flex-end; padding-right: 7%; }
+.scene__flank--r { right: 0; justify-content: flex-start; gap: 8%; padding-left: 7%; }
+.prop { position: relative; flex: none; }
+.prop svg { display: block; width: 100%; height: auto; }
+.prop--tiffin { width: min(clamp(50px, calc(var(--rw) * .13), 112px), 80cqw); }
+.prop--candle { width: min(clamp(30px, calc(var(--rw) * .066), 58px), 30cqw); }
+.prop--chiya { width: min(clamp(34px, calc(var(--rw) * .078), 70px), 32cqw); }
+@container (max-width: 125px) { .prop { display: none; } }
+.prop--tiffin .warm { opacity: calc(.12 + .8 * var(--on)); transition: opacity 1.2s ease-out; }
+
+/* steam */
+.steam { opacity: .5; animation: steam 4s ease-in infinite; }
+.steam--b { animation-delay: -1.3s; }
+.steam--c { animation-delay: -2.6s; }
+@keyframes steam {
+  0% { transform: translateY(4px); opacity: 0; }
+  25% { opacity: .55; }
+  100% { transform: translateY(-14px); opacity: 0; }
+}
+
+/* candle: always lit; gutters harder while a stream plays */
+.prop--candle {
+  --g: calc(1 + 1.7 * var(--live));
+  transition: --g 1.6s ease-in-out;
+}
+.flame {
+  transform-box: fill-box; transform-origin: 50% 100%;
+  animation: flame 2.4s ease-in-out infinite;
+}
+@keyframes flame {
+  0%, 100% { transform: scale(1, 1) rotate(0deg); opacity: 1; }
+  18% { transform: scale(calc(1 - .03 * var(--g)), calc(1 + .08 * var(--g))) rotate(calc(-1.2deg * var(--g))); }
+  37% { transform: scale(calc(1 + .03 * var(--g)), calc(1 - .07 * var(--g))) rotate(calc(1.8deg * var(--g))); opacity: calc(1 - .08 * var(--g)); }
+  61% { transform: scale(calc(1 - .02 * var(--g)), calc(1 + .05 * var(--g))) rotate(calc(-1.6deg * var(--g))); }
+  80% { transform: scale(calc(1 + .01 * var(--g)), calc(1 - .04 * var(--g))) rotate(calc(.8deg * var(--g))); opacity: calc(1 - .1 * var(--g)); }
+}
+.glow { transform-box: fill-box; transform-origin: 50% 50%; animation: glow 2.4s ease-in-out infinite; }
+@keyframes glow {
+  0%, 100% { opacity: .85; transform: scale(1); }
+  37% { opacity: calc(.95 - .12 * var(--g)); transform: scale(calc(1 - .03 * var(--g))); }
+  61% { opacity: 1; transform: scale(1.03); }
+}
+.candle-pool {
+  left: 50%; bottom: -14%; width: 560%; height: 46%; transform: translateX(-50%); position: absolute;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(242, 169, 59, .3), rgba(242, 150, 59, .1) 55%, transparent 75%);
+  animation: glow 2.4s ease-in-out infinite;
+}
+
+/* moth circling the candle */
+.moth { position: absolute; left: 50%; top: 22%; width: 36%; min-width: 11px; aspect-ratio: 14 / 10; animation: moth 9s linear infinite; }
+.moth svg { display: block; width: 100%; }
+.moth__wing { transform-box: fill-box; transform-origin: 50% 50%; animation: wings .16s ease-in-out infinite alternate; }
+@keyframes wings { from { transform: scaleY(1); } to { transform: scaleY(.45); } }
+@keyframes moth {
+  0% { transform: translate(-250%, -40%); }
+  16% { transform: translate(-60%, -230%); }
+  33% { transform: translate(180%, -120%); }
+  50% { transform: translate(260%, 90%); }
+  66% { transform: translate(40%, 30%); }
+  83% { transform: translate(-190%, 130%); }
+  100% { transform: translate(-250%, -40%); }
+}
+
 .scene__vignette {
   inset: 0;
-  background: radial-gradient(ellipse 85% 75% at 50% 55%, rgba(0, 0, 0, 0) 45%, rgba(4, 10, 12, .7) 100%);
+  background: radial-gradient(ellipse 90% 80% at 50% 55%, rgba(0, 0, 0, 0) 50%, rgba(3, 4, 14, .66) 100%);
 }
 
+/* ---------- Stage ---------- */
 .scene__stage {
   position: relative; z-index: 1; min-height: 100dvh; box-sizing: border-box;
   display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
@@ -71,4 +253,15 @@
 }
 @media (max-width: 320px) {
   .scene__content { width: min(280px, 100%); }
+}
+
+/* ---------- Reduced motion: no sway, flicker or stutter; keep the slow fades ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .flag, .flame, .glow, .candle-pool, .steam, .w--p rect:last-child,
+  .scene:has(.radio[data-power='on']) .w--p rect:last-child,
+  .scene:has(.strip[data-play='playing']) .w--tv rect:last-child { animation: none; }
+  .steam { opacity: .3; }
+  .moth { display: none; }
+  .scene__flags, .prop--candle { transition: none; }
+  .w--p, .w--l, .w--tv { transition: opacity 1.8s ease-in-out; }
 }
