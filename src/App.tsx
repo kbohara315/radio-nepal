@@ -118,12 +118,12 @@ export default function App() {
               </>
             }
           />
-          <div className="app__foot">
-            <Credits stations={stations} />
-          </div>
         </div>
       </main>
     </Scene>
+    <div className="app__info">
+      <Credits stations={stations} />
+    </div>
     </div>
     </StageContext>
   )

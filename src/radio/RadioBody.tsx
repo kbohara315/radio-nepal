@@ -1,7 +1,7 @@
 import { createRef, useEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 import { BAND_RANGE } from '../types'
-import type { Band, Levels, RadioBodyProps } from '../types'
+import { N_BARS, type Band, type Levels, type RadioBodyProps } from '../types'
 import { getStageSize, isStageRotated, toStagePoint } from '../hooks/useOrientation'
 import './RadioBody.css'
 
@@ -106,8 +106,9 @@ function useRadioMotion(
     const glintEl = refs.glint.current
     if (!coneEl || !shineEl || !glowEl || !dimEl || !needleEl || !hotEl || !glintEl) return
     const rootEl = needleEl.closest('.radio')
+    const sceneEl = needleEl.closest<HTMLElement>('.scene')
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const levels: Levels = { level: 0, bass: 0, mid: 0, treble: 0 }
+    const levels: Levels = { level: 0, bass: 0, mid: 0, treble: 0, spectrum: new Float32Array(N_BARS) }
 
     // needle spring
     let pos = 0, vel = 0, target = 0, easing = false, first = true, lastBand: Band | null = null
@@ -118,6 +119,33 @@ function useRadioMotion(
     // last written values (NaN forces the first write)
     let wPos = NaN, wScale = NaN, wTx = NaN, wTy = NaN, wShine = NaN, wGlow = NaN, wDim = NaN, wPx = NaN, wPy = NaN
     let raf = 0, prevT = 0
+
+    // City visualizer: the speaker's bass / mid / treble drive the windows of the skyline (Scene.css).
+    const wViz = [NaN, NaN, NaN]
+    const wBars = new Float32Array(N_BARS).fill(NaN)
+    /** Per-bar levels for the skyline towers: --s0 .. --s23 on the scene (see Scene.tsx). */
+    const writeBars = (zero: boolean) => {
+      if (!sceneEl) return
+      for (let i = 0; i < N_BARS; i++) {
+        const v = zero ? 0 : Math.round(Math.min(1, levels.spectrum![i]) * 40) / 40
+        if (v !== wBars[i]) {
+          wBars[i] = v
+          sceneEl.style.setProperty(`--s${i}`, String(v))
+        }
+      }
+    }
+    const writeViz = (b: number, m: number, t: number) => {
+      if (!sceneEl) return
+      const vals = [b, m, t]
+      const names = ['--vb', '--vm', '--vt']
+      for (let i = 0; i < 3; i++) {
+        const v = Math.round(Math.min(1, vals[i]) * 50) / 50
+        if (v !== wViz[i]) {
+          wViz[i] = v
+          sceneEl.style.setProperty(names[i], String(v))
+        }
+      }
+    }
 
     const writeNeedle = () => {
       if (Math.abs(pos - wPos) < 1e-5) return
@@ -196,6 +224,8 @@ function useRadioMotion(
       if (!on) {
         lock = 0
         write(1, 0, 0, 0, 0, 0, false)
+        writeViz(0, 0, 0)
+        writeBars(true)
       } else {
         busy = true
         lock += (clamp01(sig) - lock) * (1 - Math.exp(-dt / (still ? 0.6 : 0.25)))
@@ -205,9 +235,14 @@ function useRadioMotion(
         const thump = still || ts < 0 || ts > 0.4 ? 0 : 0.045 * (1 - Math.exp(-ts / 0.006)) * Math.exp(-ts / 0.07)
         const src = read(levels)
         if (src === 'none') {
+          writeViz(0, 0, 0)
+          writeBars(true)
           write(1 + thump, 0, 0, 0, 0, still ? 0.12 * (1 - lock) : 0.14 * (1 - lock), still)
         } else {
           const { level, bass, mid, treble } = levels
+          if (still) writeViz(0, 0, 0)
+          else writeViz(bass * 1.8, mid * 1.8, treble * 2.2)
+          writeBars(still)
           const j = t * 0.001
           // Reduced motion: only a slow, small lamp change (CSS transition does the smoothing).
           const glowV = still ? 0.15 + 0.2 * level + 0.05 * lock : (0.12 + 0.55 * level + 0.1 * lock) * (1 - 0.6 * drop)

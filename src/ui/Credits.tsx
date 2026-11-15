@@ -24,7 +24,13 @@ export function Credits({ stations }: { stations: readonly Station[] }) {
       : `${simulated.slice(0, -1).join(', ')} and ${simulated[simulated.length - 1]}`
   return (
     <Dialog container={container}>
-      <DialogTrigger className="credits-btn">About / Credits</DialogTrigger>
+      <DialogTrigger className="credits-btn" aria-label="About and credits">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9.5" />
+          <path d="M12 11v6" />
+          <circle cx="12" cy="7.4" r="0.6" fill="currentColor" />
+        </svg>
+      </DialogTrigger>
       <DialogBackdrop className="credits-backdrop" />
       <DialogContent className="credits" initialFocus="content">
         <header className="credits__head">

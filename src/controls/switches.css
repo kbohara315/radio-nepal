@@ -90,6 +90,13 @@
 .slide__switch[data-checked] > .slide__nub {
   translate: calc(100% + 4%) 0;
 }
+/* dragging: the nub follows the pointer (--p: 0 at AM, 1 at FM), no easing */
+.slide__switch--drag { cursor: grab; touch-action: none; }
+.slide__switch--drag[data-dragging] { cursor: grabbing; }
+.slide__switch[data-dragging] > .slide__nub {
+  transition: none;
+  translate: calc(var(--p, 0) * (100% + 4%)) 0;
+}
 /* the legend of the active side is printed on the nub, like the band switch */
 .slide__switch > .slide__label {
   z-index: 2;

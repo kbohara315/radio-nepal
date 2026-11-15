@@ -34,14 +34,14 @@
 /* Wide: radio on the left, a slim caption column on the right. The radio is limited by the stage
    width minus column, gaps and padding, and by the stage height (aspect 100:82 includes the handle). */
 .stage[data-wide] .scene {
-  --colw: clamp(13rem, calc(var(--vw) * 17 / 100), 16rem);
-  --gapx: clamp(0.9rem, calc(var(--vw) * 2.4 / 100), 2.25rem);
+  --colw: clamp(10.5rem, calc(var(--vw) * 13 / 100), 12rem);
+  --gapx: 0.75rem;
   --padl: max(1rem, var(--sa-l));
   --padr: max(1rem, var(--sa-r));
   --padt: max(calc(var(--vh) * 1.5 / 100), var(--sa-t));
   --padb: max(calc(var(--vh) * 1.5 / 100), var(--sa-b));
   --sidew: 0px;                       /* caption floats over the radio's top-right corner: no side column */
-  --rw: clamp(240px, min(1100px, calc(var(--vw) - var(--padl) - var(--padr) - var(--sidew)), calc((var(--vh) - var(--padt) - var(--padb)) / 0.82)), 1100px);
+  --rw: clamp(240px, min(1100px, calc(var(--vw) - var(--padl) - var(--padr) - 2 * (var(--colw) + var(--gapx))), calc((var(--vh) - var(--padt) - var(--padb)) * 0.8 / 0.82)), 1100px);
   --cx: calc(50% + (var(--padl) - var(--padr) - var(--sidew)) / 2);
   /* Radio is centred vertically: its box (aspect 100:82) sits mid-stage. */
   --feet: calc((var(--vh) - var(--rw) * 0.82) / 2 + var(--rw) * 0.05);
@@ -86,6 +86,7 @@
 }
 /* Dusk afterglow band sitting on the horizon; it lifts the sky behind the radio so its handle reads. */
 .scene__afterglow {
+  opacity: calc(.82 + .35 * var(--vb, 0));
   left: 0; right: 0; bottom: var(--horizon); height: calc(var(--rw) * 0.95 + 150px);
   background:
     radial-gradient(ellipse 62% 100% at var(--cx) 100%, rgba(242, 169, 59, .42) 0, rgba(210, 96, 100, .38) 22%, rgba(130, 56, 120, .42) 48%, rgba(107, 46, 94, .22) 72%, transparent 92%);
@@ -99,7 +100,7 @@
 }
 .scene__city {
   left: 50%; bottom: calc(var(--horizon) - 4px);
-  height: calc(var(--rw) * 0.3 + 90px); width: max(100%, calc((var(--rw) * 0.3 + 90px) * 3.8));
+  height: calc(var(--rw) * 0.55 + 120px); width: max(100%, calc((var(--rw) * 0.55 + 120px) * 2.9));
   transform: translateX(-50%);
 }
 .scene__city .pane { fill: #070920; opacity: .7; }
@@ -108,6 +109,13 @@
 .w { opacity: 0; }
 .w--p { opacity: var(--on); transition: opacity .7s ease-out calc(var(--on) * var(--d, 0s)); }
 .w--l, .w--tv { opacity: var(--live); transition: opacity 1.4s ease-in-out calc(var(--live) * var(--d, 0s)); }
+/* Skyline equalizer: each tower is one bar of the spectrum (--lv, 0..1). Its floors light from the
+   ground up to that level and the whole tower rises a little with it; a bright cap marks the peak.
+   Opacity clamps itself, so (lv - floor) * 9 is a soft 0..1 step per floor. */
+.tower { transform: translateY(calc(var(--lv, 0) * -9px)); }
+.tower--far { transform: translateY(calc(var(--lv, 0) * -4px)); }
+.tower__peak { fill: #ffd27a; opacity: calc(var(--live) * (var(--lv, 0) * 1.6 - .12)); }
+.w--l > *, .w--tv > * { opacity: calc((var(--lv, 0) * 1.1 - var(--r, 0)) * 9 + .05); }
 .w--d { opacity: calc(.28 + .22 * var(--on)); transition: opacity 1.4s ease-in-out; }
 .w--p rect:last-child { animation: win-hum 7s ease-in-out infinite; }
 .scene:has(.radio[data-power='on']) .w--p rect:last-child {
@@ -281,4 +289,8 @@
   .moth { display: none; }
   .scene__flags, .prop--candle { transition: none; }
   .w--p, .w--l, .w--tv { transition: opacity 1.8s ease-in-out; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .w--l > *, .w--tv > * { opacity: .8; }
 }

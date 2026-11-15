@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react'
+import { N_BARS } from '../types'
 import './Scene.css'
 
 /*
@@ -10,7 +11,7 @@ import './Scene.css'
  */
 
 const VB_W = 1600
-const VB_H = 420
+const VB_H = 560
 
 function mulberry32(seed: number) {
   let a = seed
@@ -23,9 +24,9 @@ function mulberry32(seed: number) {
 }
 
 type WinKind = 'p' | 'l' | 'tv' | 'd' | 'x'
-interface Win { x: number; y: number; kind: WinKind; d: number }
+interface Win { x: number; y: number; kind: WinKind; d: number; band: 0 | 1 | 2; r: number }
 type Extra = 'tank' | 'rebar' | 'dish' | 'antenna' | 'shed' | 'none'
-interface House { x: number; y: number; w: number; h: number; extra: Extra; ex: number; wins: Win[] }
+interface House { bar: number; x: number; y: number; w: number; h: number; extra: Extra; ex: number; wins: Win[] }
 
 const smooth = (a: number, b: number, v: number) => {
   const t = Math.min(1, Math.max(0, (v - a) / (b - a)))
@@ -45,28 +46,32 @@ function buildCity() {
   for (let x = -30; x < VB_W + 30; ) {
     const w = 46 + rand() * 50
     const edge = Math.abs(x + w / 2 - 800) / 800
-    const h = 34 + rand() * 50 + 60 * smooth(0.3, 1, edge)
-    far.push({ x, y: VB_H - h, w, h, extra: rand() < 0.15 ? 'antenna' : 'none', ex: rand(), wins: [] })
+    const h = 70 + rand() * 90 + 70 * smooth(0.3, 1, edge)
+    far.push({ bar: 0, x, y: VB_H - h, w, h, extra: rand() < 0.15 ? 'antenna' : 'none', ex: rand(), wins: [] })
     x += w - 4
   }
   for (let x = -40; x < VB_W + 40; ) {
     const w = 52 + rand() * 44
     const edge = Math.abs(x + w / 2 - 800) / 800
-    const h = 40 + rand() * 40 + 120 * smooth(0.25, 1, edge)
-    mid.push({ x, y: VB_H - h, w, h, extra: edge > 0.4 ? pick() : 'none', ex: rand(), wins: [] })
+    const h = 120 + rand() * 150 + 60 * smooth(0.25, 1, edge)
+    mid.push({ bar: 0, x, y: VB_H - h, w, h, extra: edge > 0.4 ? pick() : 'none', ex: rand(), wins: [] })
     x += w - 5
   }
   const flank = (from: number, to: number) => {
     for (let x = from; x < to; ) {
       const w = 74 + rand() * 46
       const edge = Math.abs(x + w / 2 - 800) / 800
-      const h = 120 + rand() * 120 + 50 * edge
-      near.push({ x, y: VB_H - h, w, h, extra: pick(), ex: rand(), wins: [] })
+      const h = 190 + rand() * 190 + 40 * edge
+      near.push({ bar: 0, x, y: VB_H - h, w, h, extra: pick(), ex: rand(), wins: [] })
       x += w - 6
     }
   }
-  flank(-30, 470)
-  flank(1130, 1640)
+  flank(-30, 1640)
+
+  // Every tower is one bar of the spectrum: bass at the left of the skyline, treble at the right.
+  for (const list of [far, mid, near]) {
+    for (const h of list) h.bar = Math.min(N_BARS - 1, Math.floor(((h.x + h.w / 2) / VB_W) * N_BARS))
+  }
 
   // Windows. Mid + near houses carry them.
   const all: Win[] = []
@@ -74,21 +79,29 @@ function buildCity() {
     for (const hs of list) {
       const cols = Math.max(1, Math.floor((hs.w - 12) / wide))
       const off = (hs.w - cols * wide + (wide - 12)) / 2
-      for (let r = 0; hs.y + 18 + r * 34 + 17 < VB_H - 10; r++) {
+      let rows = 0
+      while (hs.y + 18 + rows * 34 + 17 < VB_H - 10) rows++
+      for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           const roll = rand()
-          const kind: WinKind = roll < 0.4 ? 'l' : roll < 0.47 ? 'd' : 'x'
-          const win: Win = { x: hs.x + off + c * wide, y: hs.y + 18 + r * 34, kind, d: 0 }
+          const kind: WinKind = roll < 0.8 ? 'l' : roll < 0.88 ? 'd' : 'x'
+          // r: how far up the tower this window sits (0 = bottom floor, 1 = top floor).
+          const win: Win = { x: hs.x + off + c * wide, y: hs.y + 18 + r * 34, kind, d: 0, band: 0, r: rows > 1 ? 1 - r / (rows - 1) : 0.5 }
           hs.wins.push(win)
           all.push(win)
         }
       }
     }
   }
+  // Spectrum across the skyline: bass lights the middle (behind the radio), treble the outer edges.
+  for (const w of all) {
+    const dx = Math.abs(w.x - 800)
+    w.band = dx < 330 ? 0 : dx < 580 ? 1 : 2
+  }
   // A handful nearest the radio come on with the power switch; the rest wait for a live stream.
   const lit = all.filter((w) => w.kind === 'l').sort((a, b) => Math.abs(a.x - 800) - Math.abs(b.x - 800))
   lit.forEach((w, i) => {
-    w.d = i * 0.2 + rand() * 0.25
+    w.d = i * 0.012 + rand() * 0.25
   })
   const byDist = [...lit].sort((a, b) => a.y - b.y)
   byDist.slice(0, 6).forEach((w, i) => {
@@ -131,7 +144,7 @@ function Windows({ list }: { list: Win[] }) {
         <g key={i}>
           <rect className="pane" x={w.x} y={w.y} width="12" height="17" rx="1" />
           {w.kind !== 'x' && (
-            <g className={`w w--${w.kind}`} style={{ '--d': `${w.d.toFixed(2)}s` } as CSSProperties}>
+            <g className={`w w--${w.kind}`} style={{ '--d': `${w.d.toFixed(2)}s`, '--r': w.r.toFixed(2) } as CSSProperties}>
               <circle cx={w.x + 6} cy={w.y + 9} r={w.kind === 'd' ? 15 : 26} fill="url(#sk-halo)" />
               <rect x={w.x} y={w.y} width="12" height="17" rx="1" fill={w.kind === 'tv' ? '#8fb2ff' : '#f7b845'} />
             </g>
@@ -200,11 +213,13 @@ function CityLayer({ list, fill, tone, brick }: { list: House[]; fill: string; t
   return (
     <g>
       {list.map((h, i) => (
-        <g key={i}>
+        <g key={i} className={`tower tower--${tone}`} style={{ '--lv': `var(--s${h.bar}, 0)` } as CSSProperties}>
           <Roof h={h} tone={tone} />
-          <rect x={h.x} y={h.y} width={h.w} height={h.h + 4} fill={fill} />
-          {brick && <rect x={h.x} y={h.y} width={h.w} height={h.h + 4} fill="url(#sk-brick)" />}
+          {/* 16 extra units below so the tower can rise without showing a gap under it */}
+          <rect x={h.x} y={h.y} width={h.w} height={h.h + 20} fill={fill} />
+          {brick && <rect x={h.x} y={h.y} width={h.w} height={h.h + 20} fill="url(#sk-brick)" />}
           <rect x={h.x - 2} y={h.y - 5} width={h.w + 4} height="5" fill={tone === 'far' ? '#2c2c66' : '#23255a'} opacity={tone === 'far' ? 1 : 0.9} />
+          <rect className="tower__peak" x={h.x - 2} y={h.y - 5} width={h.w + 4} height="2.4" rx="1" />
           <Windows list={h.wins} />
         </g>
       ))}

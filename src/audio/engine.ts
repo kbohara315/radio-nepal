@@ -1,3 +1,4 @@
+import { N_BARS } from '../types'
 import type { Band, Levels, PlayState, RadioEngine, SfxName, Station, Tuning, VisualSource } from '../types'
 import { BAND_RANGE } from '../types'
 import { createFallbackSignal, type FallbackSignal, type SignalFrame } from './visualizer'
@@ -92,6 +93,8 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
   let vMid = 0
   let vTreble = 0
   let vLastAt = 0
+  const vBars = new Float32Array(N_BARS)
+  const barTarget = new Float32Array(N_BARS)
   let synth: FallbackSignal | null = null
   let synthKey = ''
   const synthFrame: SignalFrame = { bass: 0, mid: 0, treble: 0, level: 0 }
@@ -677,6 +680,8 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
     out.level = out.bass = out.mid = out.treble = 0
     if (destroyed || !power || !ctx || !staticAnalyser || !tapAnalyser) {
       vBass = vMid = vTreble = 0
+      vBars.fill(0)
+      out.spectrum?.fill(0)
       vLastAt = 0
       return 'none'
     }
@@ -696,6 +701,12 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
       tb = bandLevel(tapBytes, hz, 0, 200, 1.0) * k
       tm = bandLevel(tapBytes, hz, 200, 2000, 1.15) * k
       tt = bandLevel(tapBytes, hz, 2000, 6000, 1.5) * k
+      // Log-spaced bars from 60 Hz to 7 kHz, a gentle tilt so the treble bars are not always short.
+      for (let i = 0; i < N_BARS; i++) {
+        const f0 = 60 * Math.pow(7000 / 60, i / N_BARS)
+        const f1 = 60 * Math.pow(7000 / 60, (i + 1) / N_BARS)
+        barTarget[i] = Math.min(1, bandLevel(tapBytes, hz, f0, f1, 1.1 + 1.1 * (i / N_BARS)) * k)
+      }
       source = 'real'
     } else if (playing) {
       const kind = tuning.station?.genre === 'News' ? 'speech' : 'music'
@@ -718,6 +729,19 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
       tm = Math.min(0.25, bandLevel(staticBytes, hz, 200, 2000, 1.0) * k)
       tt = Math.min(0.25, bandLevel(staticBytes, hz, 2000, 6000, 1.0) * k)
       source = 'static'
+    }
+    if (source !== 'real') {
+      // No analysable audio: spread the three bands across the bars with a lively per-bar shimmer.
+      for (let i = 0; i < N_BARS; i++) {
+        const u = i / (N_BARS - 1)
+        const base = u < 0.5 ? tb + (tm - tb) * (u * 2) : tm + (tt - tm) * ((u - 0.5) * 2)
+        const wob = 0.62 + 0.38 * Math.sin(now * 0.0045 * (1 + (i % 5) * 0.27) + i * 1.9)
+        barTarget[i] = Math.min(1, base * wob * 1.25)
+      }
+    }
+    for (let i = 0; i < N_BARS; i++) {
+      vBars[i] += (barTarget[i] - vBars[i]) * (1 - Math.exp(-dt / (barTarget[i] > vBars[i] ? ATTACK_S : RELEASE_S)))
+      if (out.spectrum) out.spectrum[i] = vBars[i]
     }
     vBass += (tb - vBass) * (1 - Math.exp(-dt / (tb > vBass ? ATTACK_S : RELEASE_S)))
     vMid += (tm - vMid) * (1 - Math.exp(-dt / (tm > vMid ? ATTACK_S : RELEASE_S)))

@@ -127,11 +127,17 @@ export function useRadio() {
     (band: Band) => {
       const s = stateRef.current
       if (band === s.band) return
-      update({ band })
+      // Like a real set: the band switch does not touch the tuning mechanism. The needle (and the
+      // tuning knob) stay where they are; the new band just reads whatever frequency that spot is.
+      const from = BAND_RANGE[s.band]
+      const to = BAND_RANGE[band]
+      const at = (s.freq[s.band] - from.min) / (from.max - from.min)
+      const freq = clampFreq(band, to.min + at * (to.max - to.min))
+      update({ band, freq: { ...s.freq, [band]: freq } })
       const e = engineRef.current
       e?.sfx('bandClunk')
       e?.setBand(band)
-      e?.setFrequency(s.freq[band])
+      e?.setFrequency(freq)
     },
     [update],
   )

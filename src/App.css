@@ -66,7 +66,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  min-height: var(--vh);
 }
 .stage[data-wide] .app__radio {
   align-self: center;
@@ -83,4 +82,12 @@
 }
 .stage[data-wide] .app__foot {
   justify-content: flex-start;
+}
+
+/* Info icon, bottom-right corner of the stage. */
+.app__info {
+  position: absolute;
+  z-index: 5;
+  right: max(0.6rem, var(--sa-r));
+  bottom: max(0.6rem, var(--sa-b));
 }

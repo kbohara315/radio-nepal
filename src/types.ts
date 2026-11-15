@@ -55,7 +55,12 @@ export interface Levels {
   bass: number
   mid: number
   treble: number
+  /** N_BARS smoothed 0..1 spectrum bars, low to high pitch. Filled only when the caller supplies the array. */
+  spectrum?: Float32Array
 }
+
+/** Bars in the skyline visualizer. */
+export const N_BARS = 24
 
 /**
  * Where the numbers came from: 'real' = analyser on the playing stream; 'synthetic' = procedural
