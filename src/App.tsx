@@ -9,6 +9,7 @@ import { Scene } from './radio/Scene'
 import { BAND_RANGE } from './types'
 import { Credits } from './ui/Credits'
 import { StationList } from './ui/StationList'
+import { KeysHint } from './ui/KeysHint'
 import { OnAirCard } from './ui/OnAirCard'
 import './App.css'
 
@@ -90,18 +91,20 @@ export default function App() {
         </div>
 
         <div className="app__caption">
-          <OnAirCard power={power} band={band} freq={dial} tuning={tuning} />
-          <div className="app__row">
-            <p className="app__keys">
-              <kbd>Space</kbd> power <kbd>B</kbd> band <kbd>←</kbd>
-              <kbd>→</kbd> tune <kbd>[</kbd>
-              <kbd>]</kbd> station <kbd>↑</kbd>
-              <kbd>↓</kbd> volume
-            </p>
-            <div className="app__btns">
-              <StationList stations={stations} tuned={tuned} onTune={radio.tuneTo} />
-              <Credits stations={stations} />
-            </div>
+          <OnAirCard
+            power={power}
+            band={band}
+            freq={dial}
+            tuning={tuning}
+            actions={
+              <>
+                <StationList stations={stations} tuned={tuned} onTune={radio.tuneTo} />
+                <KeysHint />
+              </>
+            }
+          />
+          <div className="app__foot">
+            <Credits stations={stations} />
           </div>
         </div>
       </main>

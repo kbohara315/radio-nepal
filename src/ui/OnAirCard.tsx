@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { BAND_RANGE, type Band, type Station, type Tuning } from '../types'
 import './ui.css'
 
@@ -6,6 +7,8 @@ interface OnAirCardProps {
   band: Band
   freq: number
   tuning: Tuning
+  /** Buttons engraved at the right end of the strip (Stations, help). */
+  actions?: ReactNode
 }
 
 export function formatFreq(band: Band, freq: number) {
@@ -22,54 +25,44 @@ const STATUS: Record<Tuning['state'], string> = {
   failed: 'No signal — stream unreachable',
 }
 
-/** The paper "on air" label under the radio. */
-export function OnAirCard({ power, band, freq, tuning }: OnAirCardProps) {
+/** One slim engraved info strip under the radio: status lamp, station, and the buttons. */
+export function OnAirCard({ power, band, freq, tuning, actions }: OnAirCardProps) {
   const station = tuning.station
   const locked = power && station !== null && tuning.signal >= 0.5
   const view = !power ? 'off' : locked ? 'locked' : 'static'
   const state = tuning.state
 
+  let name = 'Radio off'
+  let status: string | null = 'Slide the power switch to ON'
+  let meta = `Dial reads ${formatFreq(band, freq)}`
+  if (view === 'static') {
+    name = 'Between stations'
+    status = null
+    meta = `Dial reads ${formatFreq(band, freq)} · keep turning`
+  } else if (view === 'locked' && station) {
+    name = station.name
+    status = STATUS[state]
+    meta = [
+      isInternetOnly(station) ? `Internet · AM dial ${formatFreq('AM', station.freq)}` : `FM ${formatFreq('FM', station.freq)}`,
+      station.city,
+      station.genre,
+    ]
+      .filter(Boolean)
+      .join(' · ')
+  }
+
   return (
-    <section className="card" data-state={view} data-play={locked ? state : undefined} aria-label="On air">
-      <header className="card__head">
-        <span className="card__lamp" aria-hidden="true" />
-        <span className="card__tag">{power ? 'On air' : 'Off air'}</span>
-        <span className="card__dial">
-          {band} {band === 'FM' ? freq.toFixed(1) : Math.round(freq)}
-        </span>
-      </header>
-
-      {/* Only this region is announced; it changes on station or state changes, not while the dial moves. */}
-      <div className="card__body" aria-live="polite" aria-atomic="true">
-        {view === 'off' && <p className="card__hint">Radio is off. Slide the power switch to ON to listen.</p>}
-        {view === 'static' && <p className="card__static">…static…</p>}
-        {view === 'locked' && station && (
-          <>
-            <h2 className="card__station">{station.name}</h2>
-            <p className="card__status" data-state={state}>
-              <span className="card__pulse" aria-hidden="true" />
-              {STATUS[state]}
-            </p>
-          </>
-        )}
+    <section className="strip" data-state={view} data-play={locked ? state : undefined} aria-label="On air">
+      <span className="strip__lamp" aria-hidden="true" />
+      <div className="strip__text">
+        {/* Only this region is announced; it changes on station or state changes, not while the dial moves. */}
+        <div className="strip__live" aria-live="polite" aria-atomic="true">
+          <h2 className="strip__name">{name}</h2>
+          {status && <p className="strip__status" data-state={view === 'locked' ? state : 'off'}>{status}</p>}
+        </div>
+        <p className="strip__meta">{meta}</p>
       </div>
-
-      <div className="card__more">
-        {view === 'off' && <p className="card__meta">Dial reads {band} {formatFreq(band, freq)}.</p>}
-        {view === 'static' && <p className="card__meta">Dial reads {formatFreq(band, freq)}. Keep turning.</p>}
-        {view === 'locked' && station && (
-          <>
-            <p className="card__meta">
-              {isInternetOnly(station)
-                ? `Internet station · AM dial ${formatFreq('AM', station.freq)}`
-                : `FM ${formatFreq('FM', station.freq)}`}
-            </p>
-            {(station.city || station.genre) && (
-              <p className="card__meta">{[station.city, station.genre].filter(Boolean).join(' · ')}</p>
-            )}
-          </>
-        )}
-      </div>
+      {actions && <div className="strip__actions">{actions}</div>}
     </section>
   )
 }

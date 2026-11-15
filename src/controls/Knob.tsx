@@ -45,6 +45,11 @@ function decimalsOf(step: number) {
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 
+/** Rubber band at the end stops (tuning only): at most ~6 degrees of give, over at most 24 degrees of push. */
+const BAND_DEG = 6
+const BAND_REACH_DEG = 24
+const bandDeg = (excessDeg: number) => Math.sign(excessDeg) * BAND_DEG * (1 - Math.exp(-Math.abs(excessDeg) / 12))
+
 interface Drag {
   pointerId: number
   cx: number
@@ -52,6 +57,8 @@ interface Drag {
   lastAngle: number
   lastY: number
   raw: number
+  /** Unclamped position (value units): runs past min/max by up to BAND_REACH_DEG when soft. */
+  virt: number
   vertical: boolean
   total: number
 }
@@ -62,6 +69,7 @@ export function Knob(props: KnobProps) {
   const detentDeg = props.detentDeg ?? 15
 
   const surfaceRef = React.useRef<HTMLDivElement>(null)
+  const capRef = React.useRef<HTMLDivElement>(null)
   const [controller] = React.useState(() => createSliderController<number>())
   const [dragging, setDragging] = React.useState(false)
   const [tracker] = React.useState(() => createVelocityTracker())
@@ -72,6 +80,8 @@ export function Knob(props: KnobProps) {
 
   const drag = React.useRef<Drag | null>(null)
   const raf = React.useRef(0)
+  const overRaf = React.useRef(0)
+  const over = React.useRef(0)
   const wheelRaw = React.useRef<number | null>(null)
   const lastTick = React.useRef(0)
 
@@ -79,6 +89,38 @@ export function Knob(props: KnobProps) {
     if (raf.current) cancelAnimationFrame(raf.current)
     raf.current = 0
   }, [])
+
+  /** Visual give past an end stop, in degrees. Written on the cap leaf only. */
+  const setOver = React.useCallback((deg: number) => {
+    if (Math.abs(deg - over.current) < 0.01 && deg !== 0) return
+    over.current = deg
+    capRef.current?.style.setProperty('--knob-over', `${deg.toFixed(2)}deg`)
+  }, [])
+
+  const stopOver = React.useCallback(() => {
+    if (overRaf.current) cancelAnimationFrame(overRaf.current)
+    overRaf.current = 0
+    if (over.current !== 0) setOver(0)
+  }, [setOver])
+
+  /** Let go: the band relaxes back, critically damped (~0.2 s), no bounce. */
+  const settleOver = React.useCallback(() => {
+    if (overRaf.current) cancelAnimationFrame(overRaf.current)
+    let prev = performance.now()
+    const frame = (now: number) => {
+      const dt = Math.min(0.05, (now - prev) / 1000)
+      prev = now
+      const next = over.current * Math.exp(-dt / 0.06)
+      if (Math.abs(next) < 0.05) {
+        overRaf.current = 0
+        setOver(0)
+        return
+      }
+      setOver(next)
+      overRaf.current = requestAnimationFrame(frame)
+    }
+    overRaf.current = requestAnimationFrame(frame)
+  }, [setOver])
 
   /** Snap, clamp, and report a new value; fires a tick when a detent is crossed. */
   const commit = React.useCallback((raw: number) => {
@@ -115,17 +157,23 @@ export function Knob(props: KnobProps) {
         const settled = t > 80 && Math.abs(spring.position(t)) < 0.15 && Math.abs(spring.velocity(t)) < 0.003
         if (atEnd || settled || t > 3000) {
           raf.current = 0
+          // A flick that hits the stop gives a little, then relaxes.
+          if (atEnd) {
+            setOver(Math.sign(velocity) * Math.min(BAND_DEG * 0.7, Math.abs(velocity) * 6))
+            settleOver()
+          }
           return
         }
         raf.current = requestAnimationFrame(frame)
       }
       raf.current = requestAnimationFrame(frame)
     },
-    [commit],
+    [commit, setOver, settleOver],
   )
 
   // A flick must not outlive a band change or the knob itself.
   React.useEffect(() => stopMomentum, [min, max, stopMomentum])
+  React.useEffect(() => stopOver, [stopOver])
 
   // Wheel needs a non-passive listener so the page does not scroll.
   React.useEffect(() => {
@@ -150,6 +198,7 @@ export function Knob(props: KnobProps) {
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return
     stopMomentum() // stop dead on touch
+    stopOver()
     const el = e.currentTarget
     el.setPointerCapture(e.pointerId)
     const rect = el.getBoundingClientRect()
@@ -164,6 +213,7 @@ export function Knob(props: KnobProps) {
       lastAngle: (Math.atan2(dy, dx) * 180) / Math.PI,
       lastY: e.clientY,
       raw: live.current.value,
+      virt: live.current.value,
       // Pressing near the centre has no meaningful angle: drag vertically instead.
       vertical: Math.hypot(dx, dy) < rect.width * 0.5 * 0.35,
       total: 0,
@@ -191,7 +241,12 @@ export function Knob(props: KnobProps) {
       else if (deg < -180) deg += 360
       d.lastAngle = angle
     }
-    d.raw = clamp(d.raw + (deg / sweep) * (max - min), min, max)
+    const perDeg = (max - min) / sweep
+    const soft = momentum && !prefersReducedMotion()
+    const reach = soft ? BAND_REACH_DEG * perDeg : 0
+    d.virt = clamp(d.virt + deg * perDeg, min - reach, max + reach)
+    d.raw = clamp(d.virt, min, max)
+    if (soft) setOver(bandDeg((d.virt - d.raw) / perDeg))
     d.total += deg
     tracker.add(e.timeStamp, d.total)
     commit(d.raw)
@@ -203,6 +258,7 @@ export function Knob(props: KnobProps) {
     drag.current = null
     setDragging(false)
     if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId)
+    if (over.current !== 0) settleOver()
     if (!canceled && momentum && !prefersReducedMotion()) {
       const v = tracker.velocity(e.timeStamp) // degrees per millisecond
       if (Math.abs(v) > 0.12) startMomentum(v, d.raw)
@@ -237,15 +293,19 @@ export function Knob(props: KnobProps) {
         onLostPointerCapture={(e) => endDrag(e, true)}
       >
         <div className="knob__shadow" />
-        <div className="knob__chrome" />
-        <div className="knob__cap">
-          <div className="knob__ribs" />
-          <div className="knob__face">
-            <div className="knob__pointer" />
-            <div className="knob__dimple" />
+        <div className="knob__body">
+          <div className="knob__chrome" />
+          <div className="knob__skirt" />
+          <div className="knob__cap" ref={capRef}>
+            <div className="knob__ribs" />
+            <div className="knob__spec" />
+            <div className="knob__face">
+              <div className="knob__pointer" />
+              <div className="knob__dimple" />
+            </div>
           </div>
+          <div className="knob__gloss" />
         </div>
-        <div className="knob__gloss" />
       </div>
       <SliderControl className="knob__control">
         <SliderTrack className="knob__track">
