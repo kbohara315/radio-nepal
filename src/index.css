@@ -54,3 +54,11 @@ img,
 svg {
   max-width: 100%;
 }
+
+/* A phone held upright shows the rotated stage: nothing may scroll or bounce. */
+html[data-rotated],
+html[data-rotated] body {
+  overflow: hidden;
+  height: 100%;
+  overscroll-behavior: none;
+}

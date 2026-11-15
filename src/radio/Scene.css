@@ -2,7 +2,7 @@
  * "Load-shedding Night": rooftop at blue hour.
  *
  * Geometry: everything is anchored to the bottom of the scene, mirroring how the stage places the
- * radio (bottom-aligned, App.css sizes it). --rw is the radio width (same formula as .app__radio),
+ * radio (bottom-aligned, App.css sizes it). --rw is the radio width (the one definition, reused by .app__radio),
  * --feet is the distance from the scene bottom to the radio's feet, --horizon is the parapet lip.
  *
  * State (set from the radio's own markup, no props needed):
@@ -13,17 +13,37 @@
 @property --g { syntax: '<number>'; inherits: true; initial-value: 1; }
 
 .scene {
-  --rw: clamp(280px, min(920px, 100svw - 24px, (100svh - 250px) / 0.82), 920px);
-  --capH: 8.6rem;
-  --feet: calc(9dvh + var(--capH) + var(--rw) * 0.05);
+  /* Stage-relative units: --vw/--vh come from .stage (swapped while the stage is rotated). */
+  --padl: 0px;
+  --padr: 0px;
+  --sidew: 0px;                       /* width of the caption column + gap beside the radio (wide only) */
+  --capH: 8.6rem;                     /* tall layout: caption strip + gap under the radio */
+  /* The one place the radio's width is defined. Tall: width, or height minus the caption strip. */
+  --rw: clamp(280px, min(920px, calc(var(--vw) - 24px), calc((var(--vh) - 250px) / 0.82)), 920px);
+  --cx: 50%;                          /* where the radio's centre sits horizontally */
+  --feet: calc(var(--vh) * 9 / 100 + var(--capH) + var(--rw) * 0.05);
   --horizon: calc(var(--feet) + var(--rw) * 0.22);
   --on: 0;
   --live: 0;
   --ink: #0d1226;
   --plum: #6b2e5e;
   --gold: #f2a93b;
-  position: relative; width: 100%; min-height: 100dvh; overflow: hidden; background: var(--ink);
+  position: relative; width: 100%; min-height: var(--vh); overflow: hidden; background: var(--ink);
   color: #e9e4d8;
+}
+/* Wide: radio on the left, a slim caption column on the right. The radio is limited by the stage
+   width minus column, gaps and padding, and by the stage height (aspect 100:82 includes the handle). */
+.stage[data-wide] .scene {
+  --colw: clamp(13rem, calc(var(--vw) * 17 / 100), 16rem);
+  --gapx: clamp(0.9rem, calc(var(--vw) * 2.4 / 100), 2.25rem);
+  --padl: max(1rem, var(--sa-l));
+  --padr: max(1rem, var(--sa-r));
+  --padt: max(calc(var(--vh) * 3.5 / 100), var(--sa-t));
+  --padb: max(calc(var(--vh) * 5 / 100), var(--sa-b));
+  --sidew: calc(var(--colw) + var(--gapx));
+  --rw: clamp(240px, min(1100px, calc(var(--vw) - var(--padl) - var(--padr) - var(--sidew)), calc((var(--vh) - var(--padt) - var(--padb)) / 0.82)), 1100px);
+  --cx: calc(50% + (var(--padl) - var(--padr) - var(--sidew)) / 2);
+  --feet: calc(var(--padb) + var(--rw) * 0.05);
 }
 .scene:has(.radio[data-power='on']) { --on: 1; }
 .scene:has(.strip[data-play='playing']) { --live: 1; }
@@ -58,7 +78,7 @@
   mask-image: linear-gradient(180deg, #000 35%, transparent 100%);
 }
 .scene__moon {
-  left: 9%; top: clamp(34px, 7vh, 90px); width: clamp(30px, 4.4vw, 58px); aspect-ratio: 1; border-radius: 50%;
+  left: 9%; top: clamp(34px, calc(var(--vh) * 7 / 100), 90px); width: clamp(30px, calc(var(--vw) * 4.4 / 100), 58px); aspect-ratio: 1; border-radius: 50%;
   background: radial-gradient(circle at 36% 32%, #f6f8ff 0, #cdd7f6 55%, #8f9ed4 100%);
   box-shadow: 0 0 2.2rem .8rem rgba(150, 170, 255, .16);
   opacity: .85;
@@ -67,7 +87,7 @@
 .scene__afterglow {
   left: 0; right: 0; bottom: var(--horizon); height: calc(var(--rw) * 0.95 + 150px);
   background:
-    radial-gradient(ellipse 62% 100% at 50% 100%, rgba(242, 169, 59, .42) 0, rgba(210, 96, 100, .38) 22%, rgba(130, 56, 120, .42) 48%, rgba(107, 46, 94, .22) 72%, transparent 92%);
+    radial-gradient(ellipse 62% 100% at var(--cx) 100%, rgba(242, 169, 59, .42) 0, rgba(210, 96, 100, .38) 22%, rgba(130, 56, 120, .42) 48%, rgba(107, 46, 94, .22) 72%, transparent 92%);
 }
 
 /* ---------- Himalaya, city ---------- */
@@ -103,15 +123,15 @@
   inset: 0;
   /* flags show at the flanks, and above the radio; never through its handle */
   -webkit-mask-image:
-    linear-gradient(90deg, #000 0, #000 calc(50% - var(--rw) / 2 - 6px), transparent calc(50% - var(--rw) / 2 - 6px), transparent calc(50% + var(--rw) / 2 + 6px), #000 calc(50% + var(--rw) / 2 + 6px)),
+    linear-gradient(90deg, #000 0, #000 calc(var(--cx) - var(--rw) / 2 - 6px), transparent calc(var(--cx) - var(--rw) / 2 - 6px), transparent calc(var(--cx) + var(--rw) / 2 + 6px), #000 calc(var(--cx) + var(--rw) / 2 + 6px)),
     linear-gradient(180deg, #000 0, #000 calc(100% - var(--feet) - var(--rw) * .84 - 10px), transparent calc(100% - var(--feet) - var(--rw) * .84 - 10px));
   mask-image:
-    linear-gradient(90deg, #000 0, #000 calc(50% - var(--rw) / 2 - 6px), transparent calc(50% - var(--rw) / 2 - 6px), transparent calc(50% + var(--rw) / 2 + 6px), #000 calc(50% + var(--rw) / 2 + 6px)),
+    linear-gradient(90deg, #000 0, #000 calc(var(--cx) - var(--rw) / 2 - 6px), transparent calc(var(--cx) - var(--rw) / 2 - 6px), transparent calc(var(--cx) + var(--rw) / 2 + 6px), #000 calc(var(--cx) + var(--rw) / 2 + 6px)),
     linear-gradient(180deg, #000 0, #000 calc(100% - var(--feet) - var(--rw) * .84 - 10px), transparent calc(100% - var(--feet) - var(--rw) * .84 - 10px));
 }
 .scene__flags {
   --sway: calc(1 + 1.2 * var(--on) + 2.6 * var(--live));
-  position: absolute; left: 0; top: clamp(18px, 4%, 60px); width: 100%; height: clamp(120px, 20dvh, 210px);
+  position: absolute; left: 0; top: clamp(18px, 4%, 60px); width: 100%; height: clamp(120px, calc(var(--vh) * 20 / 100), 210px);
   opacity: .82;
   transition: --sway 2.6s ease-in-out;
 }
@@ -154,13 +174,13 @@
 /* the lit crests of the corrugation, only around the radio */
 .scene__sheen {
   background: repeating-linear-gradient(90deg, rgba(255, 190, 100, .3) 0 4px, transparent 4px 24px);
-  -webkit-mask-image: radial-gradient(ellipse calc(var(--rw) * .72) calc(var(--rw) * .2) at 50% calc(var(--rw) * .2), #000 0, transparent 100%);
-  mask-image: radial-gradient(ellipse calc(var(--rw) * .72) calc(var(--rw) * .2) at 50% calc(var(--rw) * .2), #000 0, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse calc(var(--rw) * .72) calc(var(--rw) * .2) at var(--cx) calc(var(--rw) * .2), #000 0, transparent 100%);
+  mask-image: radial-gradient(ellipse calc(var(--rw) * .72) calc(var(--rw) * .2) at var(--cx) calc(var(--rw) * .2), #000 0, transparent 100%);
   opacity: calc(.5 * var(--on) + .5 * var(--live));
   transition: opacity 1.2s ease-out;
 }
 .scene__pool {
-  background: radial-gradient(ellipse calc(var(--rw) * .8) calc(var(--rw) * .22) at 50% calc(var(--rw) * .2), rgba(242, 169, 59, .5) 0, rgba(190, 90, 60, .2) 48%, transparent 78%);
+  background: radial-gradient(ellipse calc(var(--rw) * .8) calc(var(--rw) * .22) at var(--cx) calc(var(--rw) * .2), rgba(242, 169, 59, .5) 0, rgba(190, 90, 60, .2) 48%, transparent 78%);
   opacity: calc(.7 * var(--on) + .3 * var(--live));
   transition: opacity 1.2s ease-out;
 }
@@ -168,12 +188,11 @@
 /* ---------- Props (flank the radio; hidden when the flank is too narrow) ---------- */
 .scene__flank {
   bottom: calc(var(--feet) - var(--rw) * 0.02); height: calc(var(--rw) * 0.2);
-  width: calc((100% - var(--rw)) / 2);
   container-type: inline-size;
   display: flex; align-items: flex-end;
 }
-.scene__flank--l { left: 0; justify-content: flex-end; padding-right: 7%; }
-.scene__flank--r { right: 0; justify-content: flex-start; gap: 8%; padding-left: 7%; }
+.scene__flank--l { left: 0; width: calc(var(--cx) - var(--rw) / 2); justify-content: flex-end; padding-right: 7%; }
+.scene__flank--r { right: 0; width: calc(100% - var(--cx) - var(--rw) / 2 - var(--sidew)); justify-content: flex-start; gap: 8%; padding-left: 7%; }
 .prop { position: relative; flex: none; }
 .prop svg { display: block; width: 100%; height: auto; }
 .prop--tiffin { width: min(clamp(50px, calc(var(--rw) * .13), 112px), 80cqw); }
@@ -242,17 +261,14 @@
 
 /* ---------- Stage ---------- */
 .scene__stage {
-  position: relative; z-index: 1; min-height: 100dvh; box-sizing: border-box;
+  position: relative; z-index: 1; min-height: var(--vh); box-sizing: border-box;
   display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
-  padding: 4dvh 0 7dvh;
+  padding: calc(var(--vh) * 4 / 100) 0 calc(var(--vh) * 7 / 100);
 }
+.stage[data-wide] .scene__stage { padding: var(--padt) var(--padr) var(--padb) var(--padl); }
 .scene__content {
-  width: max(280px, min(92vw, 1100px, 70dvh));
-  max-width: 100%;
-  display: flex; flex-direction: column; align-items: stretch; gap: 2dvh;
-}
-@media (max-width: 320px) {
-  .scene__content { width: min(280px, 100%); }
+  width: 100%;
+  display: flex; flex-direction: column; align-items: stretch;
 }
 
 /* ---------- Reduced motion: no sway, flicker or stutter; keep the slow fades ---------- */

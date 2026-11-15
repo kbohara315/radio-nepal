@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from '@ui-sdk/react/popover'
+import { useStagePopup } from './stage'
 import './ui.css'
 
 const KEYS: { keys: string[]; does: string }[] = [
@@ -11,12 +13,14 @@ const KEYS: { keys: string[]; does: string }[] = [
 
 /** Collapsed "?" button: the keyboard shortcuts live in a small popover instead of under the radio. */
 export function KeysHint() {
+  const [open, setOpen] = useState(false)
+  const popup = useStagePopup('end', open)
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen} {...popup.root}>
       <PopoverTrigger className="strip__btn strip__btn--round keys-trigger" aria-label="Keyboard shortcuts">
         ?
       </PopoverTrigger>
-      <PopoverContent className="keys" side="top" align="end" sideOffset={8} collisionPadding={8}>
+      <PopoverContent className="keys" ref={popup.contentRef} {...popup.content} sideOffset={8} collisionPadding={8}>
         <PopoverTitle className="keys__title">Keyboard</PopoverTitle>
         <dl className="keys__list">
           {KEYS.map(({ keys, does }) => (

@@ -9,6 +9,7 @@ import {
 import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from '@ui-sdk/react/popover'
 import type { Band, Station } from '../types'
 import { formatFreq } from './OnAirCard'
+import { useStagePopup } from './stage'
 import './ui.css'
 
 interface StationListProps {
@@ -26,6 +27,7 @@ const GROUPS: { band: Band; label: string }[] = [
 /** Small "Stations" shortcut: a popover with a scrollable listbox. Enter or a click tunes the dial. */
 export function StationList({ stations, tuned, onTune }: StationListProps) {
   const [open, setOpen] = React.useState(false)
+  const popup = useStagePopup('start', open)
   const byId = React.useMemo(() => new Map(stations.map((s) => [s.id, s])), [stations])
 
   const choose = (id: string | null) => {
@@ -35,9 +37,9 @@ export function StationList({ stations, tuned, onTune }: StationListProps) {
   }
 
   return (
-    <Popover open={open} onOpenChange={(next) => setOpen(next)}>
-      <PopoverTrigger className="strip__btn">Stations</PopoverTrigger>
-      <PopoverContent className="stations" side="top" align="start" sideOffset={8} collisionPadding={8}>
+    <Popover open={open} onOpenChange={(next) => setOpen(next)} {...popup.root}>
+      <PopoverTrigger className="strip__btn" ref={popup.triggerRef}>Stations</PopoverTrigger>
+      <PopoverContent className="stations" ref={popup.contentRef} {...popup.content} sideOffset={8} collisionPadding={8}>
         <PopoverTitle className="stations__title">Stations</PopoverTitle>
         <Listbox
           className="stations__list"

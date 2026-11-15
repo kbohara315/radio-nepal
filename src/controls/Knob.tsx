@@ -7,6 +7,7 @@ import {
   SliderTrack,
 } from '@ui-sdk/react/slider'
 import * as React from 'react'
+import { toStagePoint } from '../hooks/useOrientation'
 import './Knob.css'
 
 export interface KnobProps {
@@ -201,17 +202,19 @@ export function Knob(props: KnobProps) {
     stopOver()
     const el = e.currentTarget
     el.setPointerCapture(e.pointerId)
+    // All drag maths happens in stage coordinates (the stage may be rotated 90 degrees). The rect is
+    // the on-screen bounding box; its centre maps to the knob's centre in the stage.
     const rect = el.getBoundingClientRect()
-    const cx = rect.left + rect.width / 2
-    const cy = rect.top + rect.height / 2
-    const dx = e.clientX - cx
-    const dy = e.clientY - cy
+    const { x: cx, y: cy } = toStagePoint(rect.left + rect.width / 2, rect.top + rect.height / 2)
+    const p = toStagePoint(e.clientX, e.clientY)
+    const dx = p.x - cx
+    const dy = p.y - cy
     drag.current = {
       pointerId: e.pointerId,
       cx,
       cy,
       lastAngle: (Math.atan2(dy, dx) * 180) / Math.PI,
-      lastY: e.clientY,
+      lastY: p.y,
       raw: live.current.value,
       virt: live.current.value,
       // Pressing near the centre has no meaningful angle: drag vertically instead.
@@ -228,13 +231,14 @@ export function Knob(props: KnobProps) {
     const d = drag.current
     if (!d || d.pointerId !== e.pointerId) return
     const { min, max, sweep } = live.current
+    const p = toStagePoint(e.clientX, e.clientY)
     let deg: number
     if (d.vertical) {
-      const dy = e.clientY - d.lastY
-      d.lastY = e.clientY
+      const dy = p.y - d.lastY
+      d.lastY = p.y
       deg = (-dy * sweep) / (sweep > 360 ? 480 : 200)
     } else {
-      const angle = (Math.atan2(e.clientY - d.cy, e.clientX - d.cx) * 180) / Math.PI
+      const angle = (Math.atan2(p.y - d.cy, p.x - d.cx) * 180) / Math.PI
       deg = angle - d.lastAngle
       // Crossing the ±180° seam: take the short way round.
       if (deg > 180) deg -= 360

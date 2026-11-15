@@ -204,9 +204,9 @@
   position: fixed;
   inset: 0;
   margin: auto;
-  width: min(34rem, calc(100vw - 1.5rem));
+  width: min(34rem, calc(var(--vw, 100vw) - 1.5rem));
   height: fit-content;
-  max-height: min(42rem, calc(100dvh - 1.5rem));
+  max-height: min(42rem, calc(var(--vh, 100dvh) - 1.5rem));
   padding: 0.6rem;
   border: 0;
   border-radius: 1rem;
@@ -352,7 +352,7 @@
 /* Stations popover: a small cream paper slip in a bakelite frame */
 .stations,
 .keys {
-  width: min(19rem, calc(100vw - 1rem));
+  width: min(19rem, calc(var(--vw, 100vw) - 1rem));
   padding: 0.3rem;
   border-radius: 0.6rem;
   color: #2a2118;
@@ -378,7 +378,7 @@
   text-transform: uppercase;
 }
 .stations__list {
-  max-height: min(14rem, var(--available-height, 14rem));
+  max-height: min(14rem, var(--available-height, 14rem), calc(var(--vh, 100dvh) * 0.4));
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 0.2rem 0.3rem 0.4rem;
@@ -486,4 +486,117 @@
   margin-top: 0;
   padding-top: 0;
   border-top: 0;
+}
+
+/* ---------- Wide layout: the strip becomes a slim vertical column beside the radio ---------- */
+.stage[data-wide] .strip {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 0.4rem 0.6rem;
+  padding: 0.65rem 0.7rem 0.7rem;
+  border-radius: 0.5rem;
+  opacity: 0.94;
+  box-shadow:
+    inset 0 0.14rem 0.4rem rgb(0 0 0 / 0.85),
+    inset 0.08rem 0.1rem 0 rgb(0 0 0 / 0.5),
+    0 1px 0 rgb(255 236 214 / 0.08),
+    0 0.3rem 0.7rem rgb(0 0 0 / 0.3);
+}
+.stage[data-wide] .strip__lamp {
+  margin-top: 0.3rem;
+  width: 0.65rem;
+  height: 0.65rem;
+}
+.stage[data-wide] .strip__text {
+  flex: none;
+}
+.stage[data-wide] .strip__live {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+.stage[data-wide] .strip__name {
+  font-size: 0.95rem;
+}
+.stage[data-wide] .strip__status {
+  font-size: 0.62rem;
+}
+.stage[data-wide] .strip__meta {
+  font-size: 0.68rem;
+  margin-top: 0.25rem;
+}
+.stage[data-wide] .strip__actions {
+  grid-column: 1 / -1;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.1rem 0 0;
+}
+.stage[data-wide] .strip__btn {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.7rem;
+  letter-spacing: 0.14em;
+}
+.stage[data-wide] .strip__btn--round {
+  width: 2.25rem;
+  padding: 0;
+}
+@media (pointer: coarse) {
+  .stage[data-wide] .strip__btn {
+    min-height: 2.5rem;
+  }
+  .stage[data-wide] .strip__btn--round {
+    width: 2.5rem;
+  }
+}
+.stage[data-wide] .credits-btn {
+  padding: 0.4rem 0.2rem;
+  min-height: 2rem;
+  background: transparent;
+  color: #b9b19a;
+  font-size: 0.62rem;
+}
+
+/* Orientation toggle: the icon turns a quarter when the state flips (not under reduced motion). */
+.orientation-toggle svg {
+  transition: rotate 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.orientation-toggle[data-rotated] svg {
+  rotate: 90deg;
+}
+@media (prefers-reduced-motion: reduce) {
+  .orientation-toggle svg {
+    transition: none;
+  }
+}
+
+/* ---------- Rotated stage: top-layer popups ignore the stage's transform, so turn them by hand ----------
+   Turned 90deg about their own centre. The dialog is centred; popovers are pinned by ui/stage.ts
+   (--pop-x/--pop-y are the centre of the turned box, in viewport pixels). */
+.stage[data-rotated='true'] .credits,
+.stage[data-rotated='true'] .stations,
+.stage[data-rotated='true'] .keys {
+  transform-origin: 50% 50%;
+  rotate: 90deg;
+}
+.stage[data-rotated='true'] .credits {
+  inset: auto;
+  left: 50%;
+  top: 50%;
+  margin: 0;
+  translate: -50% -50%;
+}
+.stage[data-rotated='true'] .credits:is([data-starting-style], [data-ending-style]) {
+  translate: -50% calc(-50% + 1rem);
+}
+.stage[data-rotated='true'] .stations,
+.stage[data-rotated='true'] .keys {
+  inset: auto !important;
+  left: var(--pop-x, 50%) !important;
+  top: var(--pop-y, 50%) !important;
+  translate: -50% -50%;
+}
+/* Rotated: the popup opens "up" from a trigger near the stage bottom, so keep it a little shorter. */
+.stage[data-rotated='true'] .stations__list {
+  max-height: min(14rem, calc(var(--vh) * 0.34));
 }

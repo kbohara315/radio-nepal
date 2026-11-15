@@ -2,6 +2,7 @@ import { createRef, useEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 import { BAND_RANGE } from '../types'
 import type { Band, Levels, RadioBodyProps } from '../types'
+import { getStageSize, isStageRotated, toStagePoint } from '../hooks/useOrientation'
 import './RadioBody.css'
 
 const FM_LABELS = [88, 92, 96, 100, 104, 108]
@@ -252,14 +253,19 @@ function useRadioMotion(
     }
     const onMove = (e: PointerEvent) => {
       if (mq.matches) return
-      tpx = Math.round((clamp01(e.clientX / window.innerWidth) * 2 - 1) * 50) / 50
-      tpy = Math.round((clamp01(e.clientY / window.innerHeight) * 2 - 1) * 50) / 50
+      const p = toStagePoint(e.clientX, e.clientY)
+      const size = getStageSize()
+      tpx = Math.round((clamp01(p.x / size.w) * 2 - 1) * 50) / 50
+      tpy = Math.round((clamp01(p.y / size.h) * 2 - 1) * 50) / 50
       wake()
     }
     const onTilt = (e: DeviceOrientationEvent) => {
       if (mq.matches || e.gamma == null || e.beta == null) return
-      tpx = Math.round(Math.max(-1, Math.min(1, e.gamma / 25)) * 50) / 50
-      tpy = Math.round(Math.max(-1, Math.min(1, (e.beta - 50) / 30)) * 50) / 50
+      // Device tilt axes belong to the screen; the rotated stage swaps them (stage x = screen y, stage y = -screen x).
+      const side = Math.max(-1, Math.min(1, e.gamma / 25))
+      const fwd = Math.max(-1, Math.min(1, (e.beta - 50) / 30))
+      tpx = Math.round((isStageRotated() ? fwd : side) * 50) / 50
+      tpy = Math.round((isStageRotated() ? -side : fwd) * 50) / 50
       wake()
     }
     rootEl?.addEventListener('pointerdown', onDown as EventListener)
