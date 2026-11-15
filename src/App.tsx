@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { StageContext } from './ui/stage'
 import { useShortcut } from '@ui-sdk/react/shortcuts'
 import { BandSwitch } from './controls/BandSwitch'
 import { Knob } from './controls/Knob'
@@ -12,6 +14,8 @@ import { InstallButton } from './ui/InstallButton'
 import { StationList } from './ui/StationList'
 import { KeysHint } from './ui/KeysHint'
 import { OnAirCard } from './ui/OnAirCard'
+import { OrientationToggle } from './ui/OrientationToggle'
+import { useOrientation } from './hooks/useOrientation'
 import './App.css'
 
 /** True when the focused element does not itself use these keys. */
@@ -24,6 +28,9 @@ const notOnArrowUser = focusIsNot('input, select, textarea, [role="radio"], [rol
 
 export default function App() {
   const radio = useRadio()
+  const orientation = useOrientation()
+  // Popups render into the stage so the stage CSS can reach (and rotate) them; see ui/stage.ts.
+  const [stageEl, setStageEl] = useState<HTMLDivElement | null>(null)
   const { band, freq, power, volume, tuning } = radio
   const range = BAND_RANGE[band]
   const dial = freq[band]
@@ -48,6 +55,13 @@ export default function App() {
   const fmtDial = (v: number) => `${band === 'FM' ? v.toFixed(1) : Math.round(v)} ${range.unit}`
 
   return (
+    <StageContext value={{ container: stageEl, rotated: orientation.rotated }}>
+    <div
+      className="stage"
+      ref={setStageEl}
+      data-rotated={orientation.rotated ? 'true' : undefined}
+      data-wide={orientation.wide ? 'true' : undefined}
+    >
     <Scene>
       <main className="app">
         <div className="app__radio">
@@ -102,6 +116,7 @@ export default function App() {
                 <InstallButton />
                 <StationList stations={stations} tuned={tuned} onTune={radio.tuneTo} />
                 <KeysHint />
+                {orientation.relevant && <OrientationToggle rotated={orientation.rotated} onToggle={orientation.toggle} />}
               </>
             }
           />
@@ -111,5 +126,7 @@ export default function App() {
         </div>
       </main>
     </Scene>
+    </div>
+    </StageContext>
   )
 }

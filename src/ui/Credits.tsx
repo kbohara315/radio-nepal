@@ -9,19 +9,21 @@ import {
 } from '@ui-sdk/react/dialog'
 import type { Station } from '../types'
 import { formatFreq } from './OnAirCard'
+import { useStageContainer } from './stage'
 import './ui.css'
 
 const ext = { target: '_blank', rel: 'noopener noreferrer' } as const
 
 /** "About / Credits" button plus a dialog that credits the stream sources. */
 export function Credits({ stations }: { stations: readonly Station[] }) {
+  const container = useStageContainer()
   const simulated = stations.filter((s) => !s.analyser).map((s) => s.name)
   const list =
     simulated.length <= 2
       ? simulated.join(' and ')
       : `${simulated.slice(0, -1).join(', ')} and ${simulated[simulated.length - 1]}`
   return (
-    <Dialog>
+    <Dialog container={container}>
       <DialogTrigger className="credits-btn">About / Credits</DialogTrigger>
       <DialogBackdrop className="credits-backdrop" />
       <DialogContent className="credits" initialFocus="content">
