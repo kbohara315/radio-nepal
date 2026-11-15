@@ -1,0 +1,133 @@
+[
+  {
+    "id": "fm-napho-radio-fm",
+    "name": "Napho Radio FM",
+    "band": "FM",
+    "freq": 88.3,
+    "streamUrl": "https://radio11.plathong.net/7136/;stream.mp3",
+    "sourceUrl": "http://naphoradio.com/"
+  },
+  {
+    "id": "fm-ujyaalo-network",
+    "name": "Ujyaalo Network",
+    "band": "FM",
+    "freq": 90,
+    "genre": "Mixed",
+    "streamUrl": "https://stream.zenolive.com/wtuvp08xq1duv",
+    "sourceUrl": "https://ujyaaloonline.com/"
+  },
+  {
+    "id": "fm-hits-fm",
+    "name": "Hits FM",
+    "band": "FM",
+    "freq": 91.2,
+    "city": "New Baneshwar",
+    "genre": "Music",
+    "streamUrl": "https://usa15.fastcast4u.com/proxy/hitsfm912?mp=/1",
+    "sourceUrl": "http://www.hitsfm.com.np/"
+  },
+  {
+    "id": "fm-kalika-fm",
+    "name": "Kalika FM",
+    "band": "FM",
+    "freq": 95.2,
+    "streamUrl": "https://streaming.softnep.net:10828/stream",
+    "sourceUrl": "http://www.kalikafm.com.np/"
+  },
+  {
+    "id": "fm-radio-kantipur-fm",
+    "name": "Radio Kantipur FM",
+    "band": "FM",
+    "freq": 96.1,
+    "city": "Pulchowk",
+    "streamUrl": "https://radio-broadcast.ekantipur.com/stream",
+    "sourceUrl": "https://radiokantipur.com/"
+  },
+  {
+    "id": "fm-tinau-fm",
+    "name": "Tinau FM",
+    "band": "FM",
+    "freq": 98.2,
+    "city": "Rupendehi",
+    "streamUrl": "https://streaming.softnep.net:10854/;stream.nsv;type=mp3&volume=70",
+    "sourceUrl": "https://tinaufm.com.np/"
+  },
+  {
+    "id": "fm-radio-thaha-sanchar",
+    "name": "Radio Thaha Sanchar",
+    "band": "FM",
+    "freq": 99.4,
+    "streamUrl": "https://streaming.softnep.net:10988/;stream.nsv&type=mp3",
+    "sourceUrl": "https://thahasanchar.com/live"
+  },
+  {
+    "id": "fm-radio-nepal",
+    "name": "Radio Nepal",
+    "band": "FM",
+    "freq": 100,
+    "genre": "News",
+    "streamUrl": "https://stream1.radionepal.gov.np/live/",
+    "sourceUrl": "https://radionepal.gov.np/"
+  },
+  {
+    "id": "fm-bbc-nepali",
+    "name": "BBC Nepali",
+    "band": "FM",
+    "freq": 103,
+    "streamUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_nepali_radio",
+    "sourceUrl": "https://bbc.co.uk/nepali"
+  },
+  {
+    "id": "fm-radio-audio",
+    "name": "Radio Audio",
+    "band": "FM",
+    "freq": 106.3,
+    "genre": "Music",
+    "streamUrl": "https://stream.zeno.fm/fvrx47wpg0quv",
+    "sourceUrl": "https://www.aradioaudio.com/"
+  },
+  {
+    "id": "am-radio-himalaya",
+    "name": "Radio Himalaya",
+    "band": "AM",
+    "freq": 560,
+    "city": "Bagbazar",
+    "genre": "Mixed",
+    "streamUrl": "https://live.itech.host/himalayaradio?1588276425741",
+    "sourceUrl": "http://www.radiohimalaya.com/"
+  },
+  {
+    "id": "am-cin-khabar",
+    "name": "CIN Khabar",
+    "band": "AM",
+    "freq": 810,
+    "genre": "Mixed",
+    "streamUrl": "https://streaming.softnep.net:10996/;stream.nsv&type=mp3&volume=60",
+    "sourceUrl": "https://www.cinkhabar.com/"
+  },
+  {
+    "id": "am-radiosagar",
+    "name": "RadioSagar",
+    "band": "AM",
+    "freq": 1060,
+    "genre": "Music",
+    "streamUrl": "https://eu1.fastcast4u.com/proxy/radiosag?mp=/stream/1/"
+  },
+  {
+    "id": "am-bfbs-gurkha-radio",
+    "name": "BFBS Gurkha Radio",
+    "band": "AM",
+    "freq": 1310,
+    "streamUrl": "https://listen-ssvcbfbs.sharp-stream.com/ssvcbfbs3.aac",
+    "sourceUrl": "https://radio.bfbs.com/stations/bfbs-gurkha-network"
+  },
+  {
+    "id": "am-universal-health-radio",
+    "name": "Universal Health Radio (नेपाली)",
+    "band": "AM",
+    "freq": 1560,
+    "genre": "News",
+    "streamUrl": "https://radio.universalhealthradio.org/uhr-ne.mp3",
+    "sourceUrl": "https://universalhealthradio.org/"
+  }
+]

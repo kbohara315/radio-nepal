@@ -1,0 +1,238 @@
+/* Everything is in cqw of the .radio root width (100cqw = radio width). */
+.radio {
+  --led: 0;
+  --n: 0.5;
+  --track: 27.4cqw;
+  --pad: 2.8cqw;
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 100 / 82;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.radio *, .radio *::before, .radio *::after { box-sizing: border-box; }
+
+.radio__handle {
+  position: absolute; left: 0; top: 0; width: 100cqw; height: 15cqw;
+  filter: drop-shadow(0 .5cqw .5cqw rgba(0,0,0,.45));
+}
+.radio__shadow {
+  position: absolute; left: -4cqw; width: 108cqw; top: 73cqw; height: 9cqw;
+  background: radial-gradient(ellipse at 50% 42%, rgba(0,0,0,.78) 0, rgba(0,0,0,.5) 38%, rgba(0,0,0,0) 70%);
+}
+.radio__feet i {
+  position: absolute; top: 76.4cqw; width: 8cqw; height: 1.6cqw; border-radius: 0 0 1cqw 1cqw;
+  background: linear-gradient(#0a0c0f, #020304);
+}
+.radio__feet i:first-child { left: 8cqw; }
+.radio__feet i:last-child { right: 8cqw; }
+
+.box {
+  position: absolute; left: 0; top: 13cqw; width: 100cqw; height: 64cqw;
+  border-radius: 4.4cqw 4.4cqw 3cqw 3cqw;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.07) 0, rgba(255,255,255,0) 14%),
+    linear-gradient(100deg, #1a212b 0%, #10151c 45%, #0b0f14 100%);
+  box-shadow:
+    inset 0 .3cqw 0 rgba(255,255,255,.28),
+    inset 0 .8cqw 1.2cqw rgba(160,200,220,.12),
+    inset 0 -1.4cqw 2cqw rgba(0,0,0,.6),
+    inset .25cqw 0 0 rgba(255,255,255,.07),
+    inset -.25cqw 0 0 rgba(255,255,255,.05),
+    0 .6cqw 1.2cqw rgba(0,0,0,.5);
+}
+.box__texture {
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: .5; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .55 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+  background-size: 14cqw 14cqw;
+}
+.box__sheen {
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(190,225,240,.16) 0, rgba(190,225,240,0) 5%),
+    radial-gradient(ellipse 60% 40% at 25% 0%, rgba(255,255,255,.07), transparent 70%);
+}
+.side-vents { position: absolute; left: .9cqw; top: 14cqw; width: 2cqw; display: grid; gap: 1.1cqw; }
+.side-vents i { display: block; height: .7cqw; border-radius: .4cqw; background: #020304; box-shadow: 0 .15cqw 0 rgba(255,255,255,.08); }
+
+/* ---------- Grille ---------- */
+.grille {
+  position: absolute; left: 4.6cqw; top: 5cqw; width: 46cqw; height: 54cqw;
+  border-radius: 2.4cqw; overflow: hidden;
+  background: #020304;
+  box-shadow:
+    0 0 0 .45cqw #0d1218,
+    0 0 0 .7cqw rgba(255,255,255,.08),
+    0 .5cqw .9cqw .5cqw rgba(0,0,0,.55),
+    inset 0 0 1.4cqw rgba(0,0,0,.9);
+}
+.grille__back { position: absolute; inset: 0; overflow: hidden; background: #03060a; }
+.grille__cone {
+  position: absolute; left: 4cqw; top: 3cqw; width: 38cqw; height: 38cqw; border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%,
+    #9db4bd 0 7%, #243138 8% 13%, #7e98a3 14% 18%, #18222a 19% 34%,
+    #5f7783 36% 40%, #16202a 42% 62%, #3d505b 64% 70%, #0c1218 72% 100%);
+  opacity: .3;
+}
+.grille__mesh { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+.tweeter {
+  position: absolute; left: 24cqw; top: 15.8cqw; width: 9.4cqw; height: 9.4cqw;
+  filter: drop-shadow(0 .4cqw .5cqw rgba(0,0,0,.7));
+}
+.tweeter svg { width: 100%; height: 100%; display: block; }
+
+.sticker {
+  position: absolute; left: 10.2cqw; top: 31.5cqw; width: 21.5cqw; height: 14.2cqw;
+  transform: rotate(-9deg); transform-origin: 50% 50%;
+  background: #f7f5ee; border-radius: 1.6cqw 2.2cqw 1.3cqw 1.8cqw;
+  padding: .55cqw; color: #1a1a1a;
+  box-shadow: 0 .35cqw .7cqw rgba(0,0,0,.65), inset 0 0 .4cqw rgba(0,0,0,.18);
+  display: flex; flex-direction: column; gap: .35cqw;
+}
+.sticker__top {
+  flex: 1 1 auto; display: flex; align-items: center; justify-content: center; gap: .5cqw;
+  background: linear-gradient(180deg, #1d1410, #0e0a08); border-radius: 1.2cqw 1.6cqw .6cqw .6cqw;
+}
+.sticker__num {
+  font: italic 900 6.3cqw/1 'Arial Black', Impact, 'Helvetica Neue', Arial, sans-serif; letter-spacing: -.02em;
+  color: #ff4a1c; text-shadow: 0 0 .1cqw #fff, .15cqw .15cqw 0 #ffb21e;
+  -webkit-text-stroke: .12cqw #fff;
+}
+.sticker__unit {
+  font: italic 900 1.9cqw/1.05 'Arial Black', 'Helvetica Neue', Arial, sans-serif; color: #ff7a1c; text-transform: uppercase;
+}
+.sticker__strip {
+  flex: 0 0 auto; background: #ffd21a; text-align: center; border-radius: .5cqw .6cqw 1.2cqw 1cqw;
+  font: italic 900 1.9cqw/1.08 'Arial Black', 'Helvetica Neue', Arial, sans-serif; color: #17120a; padding: .3cqw 0;
+  transform: skewX(-4deg);
+}
+
+/* ---------- Panel ---------- */
+.panel {
+  position: absolute; left: 52.4cqw; top: 0; right: 0; bottom: 0;
+  border-radius: 0 4.4cqw 3cqw 0;
+  background: linear-gradient(180deg, #121920 0, #0c1117 40%, #090c11 100%);
+  box-shadow: inset .3cqw 0 .5cqw rgba(0,0,0,.7), inset 1px 0 0 rgba(255,255,255,.08);
+}
+.panel__edge {
+  position: absolute; left: 0; top: 0; right: 0; height: 2.2cqw; border-radius: 0 4.4cqw 0 0;
+  background: linear-gradient(180deg, #5aa0ad 0, #2b6571 18%, #163640 60%, rgba(14,40,48,0) 100%);
+  opacity: .78;
+}
+.power-label {
+  position: absolute; left: 3cqw; top: 3.5cqw; font-size: 1.3cqw; letter-spacing: .12em; color: #c9d0d4; line-height: 1;
+}
+.led {
+  position: absolute; left: 9.4cqw; top: 3.4cqw; width: 1.3cqw; height: 1.3cqw; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #4a1010 0, #260707 70%);
+  box-shadow: 0 0 0 .18cqw #05070a;
+}
+.led::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #ffd0c0 0, #ff3a2a 35%, #d3150f 100%);
+  box-shadow: 0 0 calc(.5cqw + var(--led) * 1.4cqw) calc(var(--led) * .35cqw) rgba(255, 50, 30, .85);
+  opacity: var(--led);
+  transition: opacity .6s ease-in, box-shadow .4s ease;
+}
+
+/* Slots */
+.slot { position: absolute; display: block; }
+.slot--switch { width: 9cqw; height: 3.5cqw; }
+.slot--knob { width: 13cqw; height: 13cqw; }
+.slot--power { left: 13cqw; top: 2.4cqw; }
+.slot--band { left: 36.8cqw; top: 13.2cqw; }
+.slot--volume { left: 4.7cqw; top: 36.2cqw; }
+.slot--tuning { left: 28.5cqw; top: 36.2cqw; }
+.slot > * { position: relative; }
+
+/* ---------- Dial ---------- */
+.dial {
+  --ink: #34474b;
+  --ink-dim: #34474b;
+  position: absolute; left: 2.4cqw; top: 10.2cqw; width: 33cqw; height: 12cqw;
+  border-radius: .8cqw; overflow: hidden;
+  background: linear-gradient(180deg, #06161b, #0a2229 55%, #06161b);
+  box-shadow: 0 0 0 .4cqw #040608, 0 0 0 .6cqw rgba(255,255,255,.07), inset 0 .3cqw .8cqw rgba(0,0,0,.8);
+  transition: box-shadow .6s ease-in;
+}
+.radio[data-power='on'] .dial {
+  --ink: #eafcf6;
+  --ink-dim: #7fb3b0;
+  box-shadow: 0 0 0 .4cqw #040608, 0 0 0 .6cqw rgba(255,255,255,.07), inset 0 .3cqw .8cqw rgba(0,0,0,.5),
+    0 0 2.5cqw .2cqw rgba(40, 190, 190, .28);
+}
+.dial__lamp {
+  position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease-in;
+  background:
+    radial-gradient(ellipse 70% 120% at 50% 50%, #2e9aa0 0, #1b6d78 45%, #0f4552 100%),
+    #123;
+}
+.radio[data-power='on'] .dial__lamp { opacity: 1; }
+.dial__ticks { position: absolute; left: var(--pad); top: 0; width: var(--track); height: 12cqw; display: block; overflow: visible; }
+.ticks { fill: var(--ink-dim); transition: fill .6s ease; }
+.ticks[data-active='true'] { fill: var(--ink); }
+.dial__labels { position: absolute; left: var(--pad); width: var(--track); height: 1.8cqw; }
+.dial__labels--am { top: .8cqw; }
+.dial__labels--am span { font-size: 1.1cqw; letter-spacing: 0; }
+.dial__labels--fm { top: 8.7cqw; }
+.dial__labels span {
+  position: absolute; left: calc(var(--p) * 100%); transform: translateX(-50%);
+  font-size: 1.45cqw; line-height: 1.8cqw; letter-spacing: .02em; font-weight: 600;
+  color: var(--ink-dim); transition: color .6s ease;
+}
+.dial__labels[data-active='true'] span { color: var(--ink); text-shadow: 0 0 .5cqw rgba(200,255,245,.5); }
+.dial__unit { position: absolute; font-size: 1cqw; color: var(--ink-dim); letter-spacing: .06em; transition: color .6s ease; }
+.dial__unit--am { left: .3cqw; top: 2.7cqw; display: none; }
+.dial__unit--fm { left: .3cqw; top: 6.3cqw; display: none; }
+.dial__needle {
+  position: absolute; left: var(--pad); top: .3cqw; bottom: .3cqw; width: .3cqw; margin-left: -.15cqw;
+  background: linear-gradient(180deg, #ff6a50, #e0200f 50%, #ff4a30);
+  box-shadow: 0 0 .5cqw rgba(255, 40, 20, .75), .12cqw 0 .2cqw rgba(0,0,0,.5);
+  translate: calc(var(--n) * var(--track)) 0;
+  transition: translate .28s cubic-bezier(.22, .9, .3, 1);
+  will-change: translate;
+}
+.radio:not([data-power='on']) .dial__needle { filter: brightness(.55); box-shadow: .12cqw 0 .2cqw rgba(0,0,0,.5); }
+.dial__glass {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, rgba(255,255,255,.12) 0, rgba(255,255,255,.02) 38%, rgba(255,255,255,0) 40%, rgba(255,255,255,.04) 100%);
+}
+
+.band-label {
+  position: absolute; left: 36.8cqw; top: 17.4cqw; width: 9cqw; text-align: center;
+  font-size: 1.25cqw; letter-spacing: .14em; color: #c9d0d4; line-height: 1;
+}
+
+.brand {
+  position: absolute; left: 2.6cqw; top: 24.8cqw;
+  font: 700 3cqw/1 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif;
+  letter-spacing: .16em; color: #f2f2ee; text-shadow: 0 .12cqw .2cqw rgba(0,0,0,.8);
+}
+
+.knob-label {
+  position: absolute; font-size: 1.35cqw; letter-spacing: .14em; color: #d3d9dc; line-height: 1; width: 13cqw; text-align: center;
+}
+.knob-label--volume { left: 4.7cqw; top: 31.6cqw; }
+.knob-label--tuning { left: 28.5cqw; top: 31.6cqw; }
+.vol-arc { position: absolute; left: 1.7cqw; top: 33.2cqw; width: 19cqw; height: 19cqw; pointer-events: none; display: none; }
+.vol-arc { display: block; transform: translate(0, 0); }
+
+.model {
+  position: absolute; left: 3.2cqw; bottom: 3.4cqw;
+  font: italic 500 3.1cqw/1 'Segoe Script', 'Brush Script MT', 'Lucida Handwriting', 'URW Chancery L', 'Z003', cursive;
+  color: #e9edf0; text-shadow: 0 .1cqw .2cqw rgba(0,0,0,.8);
+}
+.badge-mini { position: absolute; left: 2.6cqw; bottom: 7.2cqw; display: flex; gap: .5cqw; opacity: .8; }
+.badge-mini i { width: 2cqw; height: 1.5cqw; border-radius: .3cqw; border: .15cqw solid #aab4b9; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dial__needle { transition-duration: .01s; }
+}

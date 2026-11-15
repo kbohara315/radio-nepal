@@ -1,0 +1,74 @@
+.scene {
+  position: relative; width: 100%; min-height: 100dvh; overflow: hidden; background: #0b1316;
+  color: #e9e4d8;
+}
+.scene__bg, .scene__bg > * { position: absolute; }
+.scene__bg { inset: 0; pointer-events: none; }
+.scene__bg > * { display: block; }
+
+.scene__sky {
+  inset: 0 0 auto 0; height: 66%;
+  background:
+    radial-gradient(ellipse 50% 40% at 62% 38%, rgba(255, 176, 96, .55), transparent 70%),
+    radial-gradient(ellipse 40% 50% at 12% 25%, rgba(214, 120, 60, .5), transparent 70%),
+    radial-gradient(ellipse 60% 30% at 80% 8%, rgba(210, 150, 80, .35), transparent 70%),
+    linear-gradient(180deg, #42585a 0%, #6a7773 38%, #8b8472 62%, #6f7a74 100%);
+}
+.scene__street {
+  left: 0; right: 0; top: 30%; height: 36%;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 35%, #000 70%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 35%, #000 70%, transparent);
+  background:
+    linear-gradient(90deg, rgba(40, 70, 75, .0), rgba(30, 58, 62, .55) 18%, rgba(150, 100, 60, .35) 36%, rgba(60, 80, 80, .4) 60%, rgba(120, 90, 60, .45) 82%, rgba(30, 55, 60, .5)),
+    linear-gradient(180deg, rgba(120, 130, 125, 0), rgba(100, 110, 104, .6));
+}
+.scene__bokeh {
+  border-radius: 50%; transform: translate(-50%, -50%);
+  max-width: 200px; max-height: 200px; opacity: .8;
+}
+.scene__bokeh--warm { background: radial-gradient(circle, rgba(255, 196, 140, .55) 0, rgba(255, 170, 100, .3) 60%, rgba(255, 150, 80, 0) 72%); }
+.scene__bokeh--amber { background: radial-gradient(circle, rgba(255, 224, 150, .5) 0, rgba(255, 200, 110, .28) 60%, rgba(255, 190, 90, 0) 72%); }
+.scene__bokeh--teal { background: radial-gradient(circle, rgba(150, 215, 215, .38) 0, rgba(100, 180, 185, .22) 60%, rgba(90, 170, 175, 0) 72%); }
+
+.scene__ground {
+  left: 0; right: 0; bottom: 0; height: 40%;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255, 160, 90, .22), transparent 70%),
+    repeating-linear-gradient(97deg, rgba(255, 255, 255, .035) 0 2px, transparent 2px 7px),
+    repeating-linear-gradient(8deg, rgba(0, 0, 0, .12) 0 1px, transparent 1px 5px),
+    linear-gradient(180deg, #7d7461 0%, #5b5547 30%, #3c3a33 70%, #22211e 100%);
+  box-shadow: 0 -1.2vmin 3vmin rgba(40, 40, 30, .55);
+}
+.scene__line {
+  left: -5%; right: -5%; bottom: 3.5%; height: 6%;
+  background: linear-gradient(180deg, #ecead9 0, #cfcfc0 55%, #a9a99b 100%);
+  clip-path: polygon(0 18%, 14% 0, 100% 0, 100% 100%, 0 100%);
+  box-shadow: 0 0 2vmin rgba(240, 235, 215, .25);
+  opacity: .88;
+}
+.scene__grade {
+  inset: 0; mix-blend-mode: soft-light;
+  background: linear-gradient(180deg, rgba(20, 130, 140, .55), rgba(255, 140, 60, .35) 55%, rgba(30, 110, 120, .5));
+}
+.scene__grain {
+  inset: 0; opacity: .22; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
+}
+.scene__vignette {
+  inset: 0;
+  background: radial-gradient(ellipse 85% 75% at 50% 55%, rgba(0, 0, 0, 0) 45%, rgba(4, 10, 12, .7) 100%);
+}
+
+.scene__stage {
+  position: relative; z-index: 1; min-height: 100dvh; box-sizing: border-box;
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+  padding: 4dvh 0 7dvh;
+}
+.scene__content {
+  width: max(280px, min(92vw, 1100px, 70dvh));
+  max-width: 100%;
+  display: flex; flex-direction: column; align-items: stretch; gap: 2dvh;
+}
+@media (max-width: 320px) {
+  .scene__content { width: min(280px, 100%); }
+}
