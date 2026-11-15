@@ -38,12 +38,13 @@
   --gapx: clamp(0.9rem, calc(var(--vw) * 2.4 / 100), 2.25rem);
   --padl: max(1rem, var(--sa-l));
   --padr: max(1rem, var(--sa-r));
-  --padt: max(calc(var(--vh) * 3.5 / 100), var(--sa-t));
-  --padb: max(calc(var(--vh) * 5 / 100), var(--sa-b));
-  --sidew: calc(var(--colw) + var(--gapx));
+  --padt: max(calc(var(--vh) * 1.5 / 100), var(--sa-t));
+  --padb: max(calc(var(--vh) * 1.5 / 100), var(--sa-b));
+  --sidew: 0px;                       /* caption floats over the radio's top-right corner: no side column */
   --rw: clamp(240px, min(1100px, calc(var(--vw) - var(--padl) - var(--padr) - var(--sidew)), calc((var(--vh) - var(--padt) - var(--padb)) / 0.82)), 1100px);
   --cx: calc(50% + (var(--padl) - var(--padr) - var(--sidew)) / 2);
-  --feet: calc(var(--padb) + var(--rw) * 0.05);
+  /* Radio is centred vertically: its box (aspect 100:82) sits mid-stage. */
+  --feet: calc((var(--vh) - var(--rw) * 0.82) / 2 + var(--rw) * 0.05);
 }
 .scene:has(.radio[data-power='on']) { --on: 1; }
 .scene:has(.strip[data-play='playing']) { --live: 1; }
@@ -262,7 +263,7 @@
 /* ---------- Stage ---------- */
 .scene__stage {
   position: relative; z-index: 1; min-height: var(--vh); box-sizing: border-box;
-  display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
   padding: calc(var(--vh) * 4 / 100) 0 calc(var(--vh) * 7 / 100);
 }
 .stage[data-wide] .scene__stage { padding: var(--padt) var(--padr) var(--padb) var(--padl); }

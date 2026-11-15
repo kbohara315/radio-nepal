@@ -4,7 +4,7 @@ import { useStagePopup } from './stage'
 import './ui.css'
 
 const KEYS: { keys: string[]; does: string }[] = [
-  { keys: ['Space'], does: 'Power' },
+  { keys: ['Space'], does: 'On / off (volume)' },
   { keys: ['B'], does: 'Switch band' },
   { keys: ['←', '→'], does: 'Tune (Shift: big step)' },
   { keys: ['[', ']'], does: 'Previous / next station' },

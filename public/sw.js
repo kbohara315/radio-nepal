@@ -1,5 +1,5 @@
 /*
- * Service worker for the Sunkoshi Night Owl PWA.
+ * Service worker for the Pensonic Night Owl PWA.
  *
  * Its two jobs: make the app installable, and keep the radio's shell on screen when the phone is
  * offline. The live streams are cross-origin and never cached or touched — they need a network

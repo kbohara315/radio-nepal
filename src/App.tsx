@@ -3,7 +3,6 @@ import { StageContext } from './ui/stage'
 import { useShortcut } from '@ui-sdk/react/shortcuts'
 import { BandSwitch } from './controls/BandSwitch'
 import { Knob } from './controls/Knob'
-import { PowerSwitch } from './controls/PowerSwitch'
 import { stations } from './data/stations'
 import { stationAtDial, useRadio } from './hooks/useRadio'
 import { RadioBody } from './radio/RadioBody'
@@ -60,7 +59,7 @@ export default function App() {
       className="stage"
       ref={setStageEl}
       data-rotated={orientation.rotated ? 'true' : undefined}
-      data-wide={orientation.wide ? 'true' : undefined}
+      data-wide="true"
     >
     <Scene>
       <main className="app">
@@ -71,7 +70,6 @@ export default function App() {
             freq={dial}
             signal={signal}
             readVisual={radio.readVisual}
-            powerSwitch={<PowerSwitch checked={power} onChange={radio.setPower} />}
             bandSwitch={<BandSwitch band={band} onChange={radio.setBand} />}
             volumeKnob={
               <Knob

@@ -1,4 +1,4 @@
-# Sunkoshi Night Owl — a vintage radio for live Nepali stations
+# Pensonic Night Owl — a vintage radio for live Nepali stations
 
 A hobby web app: one old portable transistor radio, drawn in SVG/CSS, that plays live Nepali
 radio. Switch it on, turn the tuning knob (or use the keys), and hear static between stations

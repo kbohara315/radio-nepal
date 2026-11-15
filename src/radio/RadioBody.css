@@ -225,7 +225,7 @@
 .slot--switch { width: 9cqw; height: 3.5cqw; }
 .slot--knob { width: 13cqw; height: 13cqw; }
 .slot--power { left: 13cqw; top: 2.4cqw; }
-.slot--band { left: 36.8cqw; top: 13.2cqw; }
+.slot--band { left: 13cqw; top: 2.4cqw; }
 .slot--volume { left: 4.7cqw; top: 36.2cqw; }
 .slot--tuning { left: 28.5cqw; top: 36.2cqw; }
 .slot > * { position: relative; }

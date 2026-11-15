@@ -30,7 +30,7 @@ interactive controls. Web Audio API for all sound. No other runtime dependencies
 - Scene: the radio sits on rough asphalt near a painted white line, low warm evening sun,
   background a heavily blurred street with soft bokeh. Shallow depth of field, teal/orange grade.
 
-Do NOT use the real brand. Brand: **SUNKOSHI**. Model script: *Night Owl*. Sticker text is kept
+Do NOT use the real brand. Brand: **PENSONIC**. Model script: *Night Owl*. Sticker text is kept
 ("150 Watts PMPO / POWERFUL & COMPACT") — it is generic.
 
 Everything is drawn in code (SVG/CSS). No photos, no external images or fonts from a CDN

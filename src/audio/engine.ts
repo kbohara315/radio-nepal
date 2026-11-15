@@ -76,6 +76,7 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
   let ctx: AudioContext | null = null
   let audio: HTMLAudioElement | null = null
   let corsEl: HTMLAudioElement | null = null
+  let bandSwitchBuf: AudioBuffer | null = null
   let tapAnalyser: AnalyserNode | null = null
   let staticAnalyser: AnalyserNode | null = null
   let streamGain: GainNode | null = null
@@ -519,8 +520,30 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
       ctx = new Ctor({ latencyHint: 'interactive' })
       buildGraph(ctx)
     }
-    if (ctx.state === 'suspended') ctx.resume().catch(() => {})
+    // iOS WebKit (Safari and every iOS browser, Chrome included) reports 'interrupted' as well.
+    if (ctx.state !== 'running') ctx.resume().catch(() => {})
     return ctx
+  }
+
+  /**
+   * iOS: sound is silenced by the ring/mute switch unless the page opts into 'playback', and each
+   * <audio> element only plays later if play() was called on it once inside a user gesture.
+   */
+  function unlockForIOS() {
+    try {
+      const session = (navigator as unknown as { audioSession?: { type: string } }).audioSession
+      if (session) session.type = 'playback'
+    } catch {
+      /* not supported */
+    }
+    if (hasSrc) return
+    const silent =
+      'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA='
+    for (const el of [corsEl, ensureAudio()]) {
+      if (!el || el.src) continue
+      el.src = silent
+      el.play().catch(() => {})
+    }
   }
 
   function buildGraph(c: AudioContext) {
@@ -624,6 +647,19 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
 
     audibleBand = band
     applyBand()
+    loadBandSwitchSound(c)
+  }
+
+  /** Recorded click for the AM/FM switch (public/sfx/band-switch.mp3). Falls back to the synth clunk until decoded. */
+  function loadBandSwitchSound(c: AudioContext) {
+    fetch(`${import.meta.env.BASE_URL}sfx/band-switch.mp3`)
+      .then((r) => r.arrayBuffer())
+      // Callback form: older Safari has no promise-returning decodeAudioData.
+      .then((data) => new Promise<AudioBuffer>((ok, bad) => c.decodeAudioData(data, ok, bad)))
+      .then((buf) => {
+        bandSwitchBuf = buf
+      })
+      .catch(() => {})
   }
 
   // ---------------------------------------------------------------- visuals
@@ -703,6 +739,7 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
         power = false
         return
       }
+      unlockForIOS()
       pauseTimer = clearT(pauseTimer)
       blocked = false
       const t = c.currentTime
@@ -805,6 +842,15 @@ export function createRadioEngine(stations: Station[]): RadioEngine {
         break
       }
       case 'bandClunk': {
+        if (bandSwitchBuf) {
+          const src = c.createBufferSource()
+          src.buffer = bandSwitchBuf
+          const g = c.createGain()
+          g.gain.value = 0.9
+          src.connect(g).connect(out)
+          src.start(t)
+          break
+        }
         noiseBurst(out, t, 0.03, 'lowpass', 900, 0.7, 0.3)
         tone(out, t, 180, 75, 0.1, 0.4)
         noiseBurst(out, t + 0.09, 0.025, 'lowpass', 700, 0.7, 0.25)

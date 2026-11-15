@@ -33,7 +33,7 @@ export function OnAirCard({ power, band, freq, tuning, actions }: OnAirCardProps
   const state = tuning.state
 
   let name = 'Radio off'
-  let status: string | null = 'Slide the power switch to ON'
+  let status: string | null = 'Turn the volume up to switch on'
   let meta = `Dial reads ${formatFreq(band, freq)}`
   if (view === 'static') {
     name = 'Between stations'

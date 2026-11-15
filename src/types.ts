@@ -98,7 +98,6 @@ export interface RadioBodyProps {
   /** Called every animation frame by the body; fills the object and returns the source. */
   readVisual: (out: Levels) => VisualSource
   /** Interactive controls, rendered into fixed slots; each fills 100% of its slot. */
-  powerSwitch: React.ReactNode
   bandSwitch: React.ReactNode
   volumeKnob: React.ReactNode
   tuningKnob: React.ReactNode

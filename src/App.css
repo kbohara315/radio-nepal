@@ -64,19 +64,22 @@
 /* Wide: radio left, quiet caption column right, both standing on the roof. */
 .stage[data-wide] .app {
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  gap: var(--gapx);
+  min-height: var(--vh);
 }
 .stage[data-wide] .app__radio {
-  align-self: flex-end;
+  align-self: center;
 }
+/* The caption card floats over the stage's top-right corner, on the radio. */
 .stage[data-wide] .app__caption {
+  position: absolute;
+  z-index: 5;
+  top: max(0.6rem, var(--sa-t));
+  right: max(0.6rem, var(--sa-r));
   width: var(--colw);
-  flex: none;
-  align-self: flex-end;
   gap: 0.35rem;
-  padding-bottom: calc(var(--rw) * 0.05);
+  padding-bottom: 0;
 }
 .stage[data-wide] .app__foot {
   justify-content: flex-start;

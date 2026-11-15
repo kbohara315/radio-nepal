@@ -335,7 +335,7 @@ function useRadioMotion(
 }
 
 export function RadioBody(props: RadioBodyProps) {
-  const { power, band, freq, signal, readVisual, powerSwitch, bandSwitch, volumeKnob, tuningKnob } = props
+  const { power, band, freq, signal, readVisual, bandSwitch, volumeKnob, tuningKnob } = props
   const [refs] = useState<DialRefs>(() => ({
     cone: createRef<HTMLDivElement>(),
     shine: createRef<HTMLDivElement>(),
@@ -476,9 +476,6 @@ export function RadioBody(props: RadioBodyProps) {
           <i className="screw screw--br" aria-hidden="true" />
           <span className="power-label" aria-hidden="true">POWER</span>
           <span className="led" aria-hidden="true" />
-          <div className="slot slot--switch slot--power" data-slot="power">
-            {powerSwitch}
-          </div>
 
           <div className="dial-halo" aria-hidden="true" />
           <div className="dial" role="group" aria-label="Tuning dial">
@@ -521,7 +518,7 @@ export function RadioBody(props: RadioBodyProps) {
             {bandSwitch}
           </div>
 
-          <div className="brand" aria-hidden="true">SUNKOSHI</div>
+          <div className="brand" aria-hidden="true">PENSONIC</div>
 
           <span className="knob-label knob-label--tuning" aria-hidden="true">TUNING</span>
           <span className="knob-label knob-label--volume" aria-hidden="true">VOLUME</span>

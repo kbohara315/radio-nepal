@@ -36,6 +36,8 @@ const DEFAULTS: RadioState = {
   freq: { FM: 90.2, AM: 760 },
   volume: 0.6,
 }
+// The radio is on exactly while the volume is above zero, so it always starts off, at zero.
+const START_VOLUME = 0
 
 const decimals = (step: number) => (String(step).split('.')[1] ?? '').length
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v))
@@ -47,8 +49,11 @@ export function clampFreq(band: Band, f: number) {
   return clamp(Number((min + n * step).toFixed(decimals(step))), min, max)
 }
 
+/** Volume the radio returns to when switched on without turning the knob (Space / P). */
+let lastVolume = DEFAULTS.volume
+
 function load(): RadioState {
-  const state: RadioState = { ...DEFAULTS, freq: { ...DEFAULTS.freq } }
+  const state: RadioState = { ...DEFAULTS, freq: { ...DEFAULTS.freq }, volume: START_VOLUME }
   try {
     const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null') as unknown
     if (!raw || typeof raw !== 'object') return state
@@ -60,7 +65,7 @@ function load(): RadioState {
         if (typeof f[b] === 'number' && Number.isFinite(f[b])) state.freq[b] = clampFreq(b, f[b])
       }
     }
-    if (typeof r.volume === 'number' && Number.isFinite(r.volume)) state.volume = clamp(r.volume, 0, 1)
+    if (typeof r.volume === 'number' && Number.isFinite(r.volume)) lastVolume = clamp(r.volume, 0, 1) || DEFAULTS.volume
   } catch {
     // unreadable storage or bad JSON: fall back to defaults
   }
@@ -95,7 +100,7 @@ export function useRadio() {
     try {
       localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify({ band: state.band, freq: state.freq, volume: state.volume }),
+        JSON.stringify({ band: state.band, freq: state.freq, volume: state.volume > 0 ? state.volume : lastVolume }),
       )
     } catch {
       // storage unavailable (private mode, quota): not worth failing for
@@ -117,8 +122,6 @@ export function useRadio() {
     },
     [update],
   )
-
-  const togglePower = React.useCallback(() => setPower(!stateRef.current.power), [setPower])
 
   const setBand = React.useCallback(
     (band: Band) => {
@@ -155,9 +158,18 @@ export function useRadio() {
       const next = clamp(Math.round(v * 100) / 100, 0, 1)
       if (next === stateRef.current.volume) return
       update({ volume: next })
+      if (next > 0) lastVolume = next
       engineRef.current?.setVolume(next)
+      // Volume above zero is "on"; zero is "off".
+      setPower(next > 0)
     },
-    [update],
+    [update, setPower],
+  )
+
+  /** Space / P: mute to zero, or bring the volume back to where it was. */
+  const togglePower = React.useCallback(
+    () => setVolume(stateRef.current.volume > 0 ? 0 : lastVolume),
+    [setVolume],
   )
 
   /** Move the dial by whole steps of the current band. */
