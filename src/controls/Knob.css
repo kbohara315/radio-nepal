@@ -21,16 +21,41 @@
   cursor: grabbing;
 }
 
+/* Contact shadow: fixed in the world (never rotates or scales), thrown down and to the right,
+   away from the light at the top left. Two layers: soft and wide, tight and dark. */
 .knob__shadow {
   position: absolute;
-  inset: 4% -4% -8% 4%;
+  inset: 6% -6% -10% 6%;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(0 0 0 / 0.65), rgb(0 0 0 / 0.35) 70%, transparent);
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.32) 70%, transparent);
   filter: blur(3cqw);
   pointer-events: none;
 }
+.knob__shadow::after {
+  content: '';
+  position: absolute;
+  inset: 8% 4% 0 8%;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.75);
+  filter: blur(0.9cqw);
+}
 
-/* chrome ring */
+/* Everything that visibly belongs to the knob body; presses in as one piece. */
+.knob__body {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.knob[data-dragging] .knob__body {
+  transform: scale(0.985);
+  transition: transform 90ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.knob:not([data-dragging]) .knob__body {
+  transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* chrome ring: lit from the top left */
 .knob__chrome {
   position: absolute;
   inset: 0;
@@ -51,31 +76,65 @@
     );
   box-shadow:
     inset 0 0 0 0.6cqw rgb(255 255 255 / 0.25),
-    0 0.8cqw 2cqw rgb(0 0 0 / 0.5);
-  pointer-events: none;
+    inset 0.5cqw 0.5cqw 0.8cqw rgb(255 244 228 / 0.35),
+    inset -0.5cqw -0.5cqw 0.8cqw rgb(0 0 0 / 0.35);
 }
 
-/* black cap, rotates with the value */
-.knob__cap {
+/* skirt: the dark rubber collar between the chrome and the cap */
+.knob__skirt {
   position: absolute;
-  inset: 8%;
+  inset: 5%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #050607 0 78%, #17191d 90%, #050607 100%);
+  box-shadow:
+    inset 0.35cqw 0.45cqw 0.7cqw rgb(0 0 0 / 0.9),
+    0 0.12cqw 0 rgb(255 244 228 / 0.22);
+}
+
+/* black cap, rotates with the value (plus any rubber-band give) */
+.knob__cap {
+  --knob-over: 0deg;
+  position: absolute;
+  inset: 9%;
   border-radius: 50%;
   background: #08090b;
-  transform: rotate(var(--knob-angle));
+  transform: rotate(calc(var(--knob-angle) + var(--knob-over)));
   box-shadow:
     inset 0 0 0 0.6cqw #000,
-    0 0 1.5cqw rgb(0 0 0 / 0.8);
-  pointer-events: none;
+    0.3cqw 0.45cqw 1cqw rgb(0 0 0 / 0.7);
+}
+.knob[data-dragging] .knob__cap {
+  will-change: transform;
 }
 
-/* ribbed edge */
+/* knurled edge: fine ridges */
 .knob__ribs {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: repeating-conic-gradient(from 0deg, #1d1f23 0deg 3.2deg, #050607 3.2deg 7.2deg);
-  mask: radial-gradient(closest-side, transparent 80%, #000 81%);
-  -webkit-mask: radial-gradient(closest-side, transparent 80%, #000 81%);
+  background: repeating-conic-gradient(from 0deg, #2a2d33 0deg 1.4deg, #050607 1.4deg 3deg);
+  mask: radial-gradient(closest-side, transparent 79%, #000 80%);
+  -webkit-mask: radial-gradient(closest-side, transparent 79%, #000 80%);
+}
+
+/* specular highlight on the knurl: counter-rotates, so the light stays at the top left while the ridges turn */
+.knob__spec {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 292deg,
+    transparent 0deg,
+    rgb(255 244 228 / 0.42) 22deg,
+    rgb(255 244 228 / 0.08) 44deg,
+    transparent 64deg,
+    transparent 190deg,
+    rgb(255 244 228 / 0.1) 225deg,
+    transparent 250deg
+  );
+  mask: radial-gradient(closest-side, transparent 79%, #000 80%);
+  -webkit-mask: radial-gradient(closest-side, transparent 79%, #000 80%);
+  transform: rotate(calc(-1 * (var(--knob-angle) + var(--knob-over))));
 }
 
 .knob__face {
@@ -119,10 +178,10 @@
 /* fixed light, does not rotate */
 .knob__gloss {
   position: absolute;
-  inset: 8%;
+  inset: 9%;
   border-radius: 50%;
   background:
-    radial-gradient(ellipse 60% 40% at 35% 22%, rgb(255 255 255 / 0.2), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 35% 22%, rgb(255 244 228 / 0.2), transparent 70%),
     linear-gradient(160deg, rgb(255 255 255 / 0.07), transparent 40%, rgb(0 0 0 / 0.25));
   pointer-events: none;
 }
@@ -156,5 +215,8 @@
 @media (prefers-reduced-motion: reduce) {
   .knob * {
     transition: none !important;
+  }
+  .knob[data-dragging] .knob__body {
+    transform: none;
   }
 }

@@ -74,7 +74,16 @@
     inset 0 0.5cqh 0.6cqh rgb(255 255 255 / 0.7),
     inset 0 -0.5cqh 0.8cqh rgb(0 0 0 / 0.35),
     0 0.8cqh 1.2cqh rgb(0 0 0 / 0.7);
-  transition: translate 0.18s cubic-bezier(0.3, 1.4, 0.5, 1);
+  /* ease-out settle; the curve overshoots by a pixel or two at most */
+  transition: translate 120ms cubic-bezier(0.2, 0.85, 0.3, 1.04), scale 70ms ease-out, box-shadow 70ms ease-out;
+}
+/* press-in: the nub sinks a hair and loses its drop shadow */
+.slide__switch:active > .slide__nub {
+  scale: 0.97;
+  box-shadow:
+    inset 0 0.5cqh 0.6cqh rgb(255 255 255 / 0.5),
+    inset 0 -0.5cqh 0.8cqh rgb(0 0 0 / 0.4),
+    0 0.3cqh 0.5cqh rgb(0 0 0 / 0.7);
 }
 
 /* power: nub travels 100% of its own width */
@@ -96,13 +105,14 @@
 .slide__nub--indicator {
   top: calc(var(--segmented-control-indicator-top) + 8cqh);
   bottom: auto;
-  left: calc(var(--segmented-control-indicator-left) + 2cqh);
+  /* both halves are the same width, so only a translate moves (compositor-only) */
+  left: 0;
+  translate: calc(var(--segmented-control-indicator-left) + 2cqh) 0;
   width: calc(var(--segmented-control-indicator-width) - 4cqh);
   height: calc(var(--segmented-control-indicator-height) - 16cqh);
-  transition-property: left, width, top, height;
-  transition-duration: 0.18s;
-  transition-timing-function: cubic-bezier(0.3, 1.2, 0.5, 1);
-  translate: none;
+  transition-property: translate, scale, box-shadow;
+  transition-duration: 120ms, 70ms, 70ms;
+  transition-timing-function: cubic-bezier(0.2, 0.85, 0.3, 1.04), ease-out, ease-out;
   margin: 0;
   background: linear-gradient(#e9ecef, #b5bbc1 45%, #8a9097 55%, #c9ced3);
 }
@@ -134,5 +144,8 @@
 @media (prefers-reduced-motion: reduce) {
   .slide__nub {
     transition: none;
+  }
+  .slide__switch:active > .slide__nub {
+    scale: none;
   }
 }

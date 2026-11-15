@@ -36,7 +36,7 @@ export function StationList({ stations, tuned, onTune }: StationListProps) {
 
   return (
     <Popover open={open} onOpenChange={(next) => setOpen(next)}>
-      <PopoverTrigger className="credits-btn">Stations</PopoverTrigger>
+      <PopoverTrigger className="strip__btn">Stations</PopoverTrigger>
       <PopoverContent className="stations" side="top" align="start" sideOffset={8} collisionPadding={8}>
         <PopoverTitle className="stations__title">Stations</PopoverTitle>
         <Listbox
