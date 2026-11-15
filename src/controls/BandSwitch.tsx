@@ -13,6 +13,8 @@ interface Drag {
   pointerId: number
   startX: number
   startP: number
+  /** Band currently selected by this drag. */
+  side: Band
 }
 
 /**
@@ -62,12 +64,21 @@ export function BandSwitch({ band, onChange }: BandSwitchProps) {
         onPointerDown={(e: React.PointerEvent<HTMLButtonElement>) => {
           if (e.pointerType === 'mouse' && e.button !== 0) return
           e.currentTarget.setPointerCapture(e.pointerId)
-          drag.current = { pointerId: e.pointerId, startX: toStagePoint(e.clientX, e.clientY).x, startP: fm ? 1 : 0 }
+          drag.current = { pointerId: e.pointerId, startX: toStagePoint(e.clientX, e.clientY).x, startP: fm ? 1 : 0, side: band }
         }}
         onPointerMove={(e: React.PointerEvent<HTMLButtonElement>) => {
           const d = drag.current
           if (!d || d.pointerId !== e.pointerId) return
-          if (Math.abs(toStagePoint(e.clientX, e.clientY).x - d.startX) > 3) setP(pFrom(e, d))
+          if (Math.abs(toStagePoint(e.clientX, e.clientY).x - d.startX) > 3) {
+            const p = pFrom(e, d)
+            setP(p)
+            // The contact flips (and clicks) the moment the nub passes the middle, not on release.
+            const next: Band = p > 0.5 ? 'FM' : 'AM'
+            if (next !== d.side) {
+              d.side = next
+              onChange(next)
+            }
+          }
         }}
         onPointerUp={(e: React.PointerEvent<HTMLButtonElement>) => {
           const d = drag.current
@@ -75,7 +86,7 @@ export function BandSwitch({ band, onChange }: BandSwitchProps) {
           drag.current = null
           const moved = ref.current?.hasAttribute('data-dragging')
           setP(null)
-          if (moved) onChange(pFrom(e, d) > 0.5 ? 'FM' : 'AM')
+          if (moved && d.side !== (pFrom(e, d) > 0.5 ? 'FM' : 'AM')) onChange(pFrom(e, d) > 0.5 ? 'FM' : 'AM')
         }}
         onPointerCancel={() => {
           drag.current = null
