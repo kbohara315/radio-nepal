@@ -12,7 +12,7 @@
 const VERSION = 'night-owl-v1'
 const CACHE = `${VERSION}-shell`
 
-/** The app's own directory (…/radio-nepal/), resolved from this script's URL. */
+/** The app's own directory (…/real-radio/), resolved from this script's URL. */
 const ROOT = new URL('./', self.location).href
 
 /** Caches the app shell and the hashed JS/CSS it loads, so the first visit is enough for offline. */
