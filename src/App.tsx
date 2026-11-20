@@ -3,13 +3,14 @@ import { StageContext } from './ui/stage'
 import { useShortcut } from '@ui-sdk/react/shortcuts'
 import { BandSwitch } from './controls/BandSwitch'
 import { Knob } from './controls/Knob'
-import { stations } from './data/stations'
+import { getCountryMeta } from './data/countries'
 import { stationAtDial, useRadio } from './hooks/useRadio'
 import { RadioBody } from './radio/RadioBody'
 import { Scene } from './radio/Scene'
 import { BAND_RANGE } from './types'
 import { Credits } from './ui/Credits'
 import { InstallButton } from './ui/InstallButton'
+import { CountrySearchDialog } from './ui/CountrySearchDialog'
 import { StationList } from './ui/StationList'
 import { KeysHint } from './ui/KeysHint'
 import { OnAirCard } from './ui/OnAirCard'
@@ -30,11 +31,13 @@ export default function App() {
   const orientation = useOrientation()
   // Popups render into the stage so the stage CSS can reach (and rotate) them; see ui/stage.ts.
   const [stageEl, setStageEl] = useState<HTMLDivElement | null>(null)
-  const { band, freq, power, volume, tuning } = radio
+  const [countrySearchOpen, setCountrySearchOpen] = useState(false)
+  const { band, freq, power, volume, tuning, country, stations, setCountry } = radio
   const range = BAND_RANGE[band]
   const dial = freq[band]
   const signal = power ? tuning.signal : 0
   const tuned = stationAtDial(stations, band, dial)
+  const countryData = getCountryMeta(country)
 
   // Global keys; controls that handle a key themselves are left alone.
   useShortcut('space', radio.togglePower, { description: 'Power', when: notOnButton })
@@ -109,10 +112,23 @@ export default function App() {
             band={band}
             freq={dial}
             tuning={tuning}
+            country={countryData}
             actions={
               <>
                 <InstallButton />
-                <StationList stations={stations} tuned={tuned} onTune={radio.tuneTo} />
+                <CountrySearchDialog
+                  open={countrySearchOpen}
+                  onOpenChange={setCountrySearchOpen}
+                  currentCountry={country}
+                  onSelectCountry={setCountry}
+                />
+                <StationList
+                  currentCountry={country}
+                  onOpenCountrySearch={() => setCountrySearchOpen(true)}
+                  stations={stations}
+                  tuned={tuned}
+                  onTune={radio.tuneTo}
+                />
                 <KeysHint />
                 {orientation.relevant && <OrientationToggle rotated={orientation.rotated} onToggle={orientation.toggle} />}
               </>
@@ -122,7 +138,7 @@ export default function App() {
       </main>
     </Scene>
     <div className="app__info">
-      <Credits stations={stations} />
+      <Credits stations={stations} country={countryData} />
     </div>
     </div>
     </StageContext>

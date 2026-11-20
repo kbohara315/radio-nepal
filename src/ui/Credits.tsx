@@ -15,7 +15,7 @@ import './ui.css'
 const ext = { target: '_blank', rel: 'noopener noreferrer' } as const
 
 /** "About / Credits" button plus a dialog that credits the stream sources. */
-export function Credits({ stations }: { stations: readonly Station[] }) {
+export function Credits({ stations, country }: { stations: readonly Station[]; country?: { name: string; flag: string } }) {
   const container = useStageContainer()
   const simulated = stations.filter((s) => !s.analyser).map((s) => s.name)
   const list =
@@ -36,7 +36,7 @@ export function Credits({ stations }: { stations: readonly Station[] }) {
         <header className="credits__head">
           <DialogTitle className="credits__title">About / Credits</DialogTitle>
           <DialogDescription className="credits__desc">
-            A hobby radio for listening to Nepali stations.
+            A hobby radio for listening to live stations worldwide.
           </DialogDescription>
         </header>
         <div className="credits__scroll">
@@ -51,7 +51,7 @@ export function Credits({ stations }: { stations: readonly Station[] }) {
             offline, blocked, or not serve its stream to web pages.
           </p>
           <section className="credits__station">
-            <h3>Stations</h3>
+            <h3>Stations {country ? `(${country.flag} ${country.name})` : ''}</h3>
             <ul>
               {stations.map((s) => (
                 <li key={s.id}>

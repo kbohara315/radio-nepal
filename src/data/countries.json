@@ -1,0 +1,3224 @@
+[
+  {
+    "code": "NP",
+    "name": "Nepal",
+    "flag": "🇳🇵",
+    "region": "SAARC",
+    "stations": [
+      {
+        "id": "fm-napho-radio-fm",
+        "name": "Napho Radio FM",
+        "band": "FM",
+        "freq": 88.3,
+        "streamUrl": "https://radio11.plathong.net/7136/;stream.mp3",
+        "analyser": true,
+        "sourceUrl": "http://naphoradio.com/"
+      },
+      {
+        "id": "fm-ujyaalo-network",
+        "name": "Ujyaalo Network",
+        "band": "FM",
+        "freq": 90,
+        "genre": "Mixed",
+        "streamUrl": "https://stream.zenolive.com/wtuvp08xq1duv",
+        "analyser": true,
+        "sourceUrl": "https://ujyaaloonline.com/"
+      },
+      {
+        "id": "fm-hits-fm",
+        "name": "Hits FM",
+        "band": "FM",
+        "freq": 91.2,
+        "city": "New Baneshwar",
+        "genre": "Music",
+        "streamUrl": "https://usa15.fastcast4u.com/proxy/hitsfm912?mp=/1",
+        "analyser": true,
+        "sourceUrl": "http://www.hitsfm.com.np/"
+      },
+      {
+        "id": "fm-kalika-fm",
+        "name": "Kalika FM",
+        "band": "FM",
+        "freq": 95.2,
+        "streamUrl": "https://streaming.softnep.net:10828/stream",
+        "analyser": true,
+        "sourceUrl": "http://www.kalikafm.com.np/"
+      },
+      {
+        "id": "fm-radio-kantipur-fm",
+        "name": "Radio Kantipur FM",
+        "band": "FM",
+        "freq": 96.1,
+        "city": "Pulchowk",
+        "streamUrl": "https://radio-broadcast.ekantipur.com/stream",
+        "analyser": true,
+        "sourceUrl": "https://radiokantipur.com/"
+      },
+      {
+        "id": "fm-tinau-fm",
+        "name": "Tinau FM",
+        "band": "FM",
+        "freq": 98.2,
+        "city": "Rupendehi",
+        "streamUrl": "https://streaming.softnep.net:10854/;stream.nsv;type=mp3&volume=70",
+        "analyser": true,
+        "sourceUrl": "https://tinaufm.com.np/"
+      },
+      {
+        "id": "fm-radio-thaha-sanchar",
+        "name": "Radio Thaha Sanchar",
+        "band": "FM",
+        "freq": 99.4,
+        "streamUrl": "https://streaming.softnep.net:10988/;stream.nsv&type=mp3",
+        "analyser": true,
+        "sourceUrl": "https://thahasanchar.com/live"
+      },
+      {
+        "id": "fm-radio-nepal",
+        "name": "Radio Nepal",
+        "band": "FM",
+        "freq": 100,
+        "genre": "News",
+        "streamUrl": "https://stream1.radionepal.gov.np/live/",
+        "analyser": false,
+        "sourceUrl": "https://radionepal.gov.np/"
+      },
+      {
+        "id": "fm-bbc-nepali",
+        "name": "BBC Nepali",
+        "band": "FM",
+        "freq": 103,
+        "streamUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_nepali_radio",
+        "analyser": true,
+        "sourceUrl": "https://bbc.co.uk/nepali"
+      },
+      {
+        "id": "fm-radio-audio",
+        "name": "Radio Audio",
+        "band": "FM",
+        "freq": 106.3,
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/fvrx47wpg0quv",
+        "analyser": true,
+        "sourceUrl": "https://www.aradioaudio.com/"
+      },
+      {
+        "id": "am-radio-himalaya",
+        "name": "Radio Himalaya",
+        "band": "AM",
+        "freq": 560,
+        "city": "Bagbazar",
+        "genre": "Mixed",
+        "streamUrl": "https://live.itech.host/himalayaradio?1588276425741",
+        "analyser": true,
+        "sourceUrl": "http://www.radiohimalaya.com/"
+      },
+      {
+        "id": "am-cin-khabar",
+        "name": "CIN Khabar",
+        "band": "AM",
+        "freq": 810,
+        "genre": "Mixed",
+        "streamUrl": "https://streaming.softnep.net:10996/;stream.nsv&type=mp3&volume=60",
+        "analyser": true,
+        "sourceUrl": "https://www.cinkhabar.com/"
+      },
+      {
+        "id": "am-radiosagar",
+        "name": "RadioSagar",
+        "band": "AM",
+        "freq": 1060,
+        "genre": "Music",
+        "streamUrl": "https://eu1.fastcast4u.com/proxy/radiosag?mp=/stream/1/",
+        "analyser": true
+      },
+      {
+        "id": "am-bfbs-gurkha-radio",
+        "name": "BFBS Gurkha Radio",
+        "band": "AM",
+        "freq": 1310,
+        "streamUrl": "https://listen-ssvcbfbs.sharp-stream.com/ssvcbfbs3.aac",
+        "analyser": true,
+        "sourceUrl": "https://radio.bfbs.com/stations/bfbs-gurkha-network"
+      },
+      {
+        "id": "am-universal-health-radio",
+        "name": "Universal Health Radio (नेपाली)",
+        "band": "AM",
+        "freq": 1560,
+        "genre": "News",
+        "streamUrl": "https://radio.universalhealthradio.org/uhr-ne.mp3",
+        "analyser": false,
+        "sourceUrl": "https://universalhealthradio.org/"
+      }
+    ]
+  },
+  {
+    "code": "IN",
+    "name": "India",
+    "flag": "🇮🇳",
+    "region": "SAARC",
+    "stations": [
+      {
+        "id": "in-fm-bollywood-gaane-purane",
+        "name": "Bollywood Gaane Purane",
+        "band": "FM",
+        "freq": 88.5,
+        "streamUrl": "https://stream.zeno.fm/6n6ewddtad0uv",
+        "analyser": true,
+        "sourceUrl": "https://gaanepurane.my-free.website/"
+      },
+      {
+        "id": "in-fm-radio-retro-bollywood-s",
+        "name": "Radio Retro Bollywood s",
+        "band": "FM",
+        "freq": 90,
+        "streamUrl": "https://stream-143.zeno.fm/fdgs82xkzhhvv",
+        "analyser": true,
+        "sourceUrl": "https://radioretrobollywood.com/"
+      },
+      {
+        "id": "in-fm-goldy-evergreen",
+        "name": "Goldy Evergreen",
+        "band": "FM",
+        "freq": 91.8,
+        "streamUrl": "https://stream.zeno.fm/n2fd0edh9k8uv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/goldy-fm/"
+      },
+      {
+        "id": "in-fm-big",
+        "name": "BIG",
+        "band": "FM",
+        "freq": 92.7,
+        "city": "Jammu and Kashmir",
+        "streamUrl": "https://stream.zeno.fm/dbstwo3dvhhtv",
+        "analyser": true,
+        "sourceUrl": "https://bigfmindia.com/"
+      },
+      {
+        "id": "in-fm-goldy-cool",
+        "name": "Goldy Cool",
+        "band": "FM",
+        "freq": 93.5,
+        "streamUrl": "https://stream.zeno.fm/3k1fb86tfm8uv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/goldy-cool/"
+      },
+      {
+        "id": "in-fm-goldy-mukesh",
+        "name": "Goldy Mukesh",
+        "band": "FM",
+        "freq": 95.2,
+        "genre": "Religious",
+        "streamUrl": "https://stream.zeno.fm/t39watus1p8uv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/goldy-mukesh/"
+      },
+      {
+        "id": "in-fm-hindi-gold-radio",
+        "name": "Hindi Gold Radio",
+        "band": "FM",
+        "freq": 96.9,
+        "streamUrl": "https://azuracast.vibesounds.in:8010/radio.mp3",
+        "analyser": true
+      },
+      {
+        "id": "in-fm-bollywood-2010-s",
+        "name": "Bollywood 2010's",
+        "band": "FM",
+        "freq": 98.6,
+        "streamUrl": "https://drive.uber.radio/uber/bollywood2010s/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://drive.uber.radio/"
+      },
+      {
+        "id": "in-fm-kalai-fm-tamil",
+        "name": "Kalai Fm-TAMIL",
+        "band": "FM",
+        "freq": 100.3,
+        "city": "Tamil Nadu",
+        "streamUrl": "https://stream.zenolive.com/2vghnwshsqzuv.aac",
+        "analyser": true,
+        "sourceUrl": "http://kalaifm.in/"
+      },
+      {
+        "id": "in-fm-diverse-fm",
+        "name": "Diverse FM",
+        "band": "FM",
+        "freq": 102,
+        "streamUrl": "https://carol.epichosts.co.uk:8570/;",
+        "analyser": true
+      },
+      {
+        "id": "in-am-new-hits-of-bollywood",
+        "name": "New Hits Of Bollywood",
+        "band": "AM",
+        "freq": 580,
+        "city": "Mumbai",
+        "streamUrl": "https://stream-146.zeno.fm/rqqps6cbe3quv?zs=loHp_DNyRPiAxC52AL95hg",
+        "analyser": true,
+        "sourceUrl": "http://www.hitsofbollywood.com/"
+      },
+      {
+        "id": "in-am-radio-hungama-bollywood-dil-se",
+        "name": "Radio Hungama Bollywood Dil Se",
+        "band": "AM",
+        "freq": 900,
+        "streamUrl": "https://stream.zeno.fm/143d7gty24zuv",
+        "analyser": true
+      },
+      {
+        "id": "in-am-goldy-blast",
+        "name": "Goldy Blast",
+        "band": "AM",
+        "freq": 1220,
+        "streamUrl": "https://stream.zeno.fm/d0rwvvwa6p8uv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/goldy-bhal/"
+      },
+      {
+        "id": "in-am-kishorekumarradio",
+        "name": "kishorekumarradio",
+        "band": "AM",
+        "freq": 1540,
+        "streamUrl": "https://stream.zeno.fm/0ghtfp8ztm0uv",
+        "analyser": true
+      }
+    ]
+  },
+  {
+    "code": "PK",
+    "name": "Pakistan",
+    "flag": "🇵🇰",
+    "region": "SAARC",
+    "stations": [
+      {
+        "id": "pk-fm-radio-pakistan-islamabad",
+        "name": "Radio Pakistan Islamabad",
+        "band": "FM",
+        "freq": 88.5,
+        "streamUrl": "https://whmsonic.radio.gov.pk:7003/stream",
+        "analyser": true,
+        "sourceUrl": "https://radio.gov.pk/"
+      },
+      {
+        "id": "pk-fm-city-fm",
+        "name": "City FM",
+        "band": "FM",
+        "freq": 89,
+        "streamUrl": "https://radio.cityfm89.com/stream",
+        "analyser": true,
+        "sourceUrl": "https://cityfm89.com/"
+      },
+      {
+        "id": "pk-fm-radio-pakistan-lahore-news-and-current-affair-am-1332-khz",
+        "name": "Radio Pakistan Lahore News and Current Affair AM 1332 KHZ",
+        "band": "FM",
+        "freq": 90.1,
+        "streamUrl": "https://whmsonic.radio.gov.pk:7004/stream?type=http&nocache=12",
+        "analyser": true,
+        "sourceUrl": "https://radio.gov.pk/"
+      },
+      {
+        "id": "pk-fm-radio-one-fm",
+        "name": "Radio One FM",
+        "band": "FM",
+        "freq": 91,
+        "genre": "Religious",
+        "streamUrl": "https://cc.vmakerhost.com/proxy/karachi?mp=/stream",
+        "analyser": true,
+        "sourceUrl": "https://fm91.com.pk/"
+      },
+      {
+        "id": "pk-fm-fm-lahore",
+        "name": "FM Lahore",
+        "band": "FM",
+        "freq": 91.8,
+        "city": "Punjab",
+        "streamUrl": "https://whmsonic.radio.gov.pk:8088/stream",
+        "analyser": true,
+        "sourceUrl": "https://radio.gov.pk/"
+      },
+      {
+        "id": "pk-fm-fm-rawalpindi",
+        "name": "FM Rawalpindi",
+        "band": "FM",
+        "freq": 93,
+        "city": "Punjab",
+        "streamUrl": "https://whmsonic.radio.gov.pk:8036/relay",
+        "analyser": true,
+        "sourceUrl": "https://radio.gov.pk/"
+      },
+      {
+        "id": "pk-fm-radio-pakistan-hyderabad-mw-8-khz",
+        "name": "Radio Pakistan Hyderabad MW 8 KHz",
+        "band": "FM",
+        "freq": 100,
+        "city": "Sindh",
+        "streamUrl": "https://whmsonic.radio.gov.pk:8042/stream",
+        "analyser": true,
+        "sourceUrl": "https://radio.gov.pk/"
+      },
+      {
+        "id": "pk-fm-fm-karachi",
+        "name": "FM Karachi",
+        "band": "FM",
+        "freq": 101,
+        "city": "Sindh",
+        "streamUrl": "https://whmsonic.radio.gov.pk:8048/stream",
+        "analyser": true,
+        "sourceUrl": "https://radio.gov.pk/"
+      },
+      {
+        "id": "pk-fm-hum-fm",
+        "name": "Hum FM",
+        "band": "FM",
+        "freq": 106.2,
+        "city": "Sindh",
+        "streamUrl": "https://server.mediacast4u.stream/8002/stream",
+        "analyser": true,
+        "sourceUrl": "https://www.1062.fm/"
+      },
+      {
+        "id": "pk-fm-mera-fm",
+        "name": "Mera FM",
+        "band": "FM",
+        "freq": 107.4,
+        "streamUrl": "https://samaakhi107-itelservices.radioca.st/stream",
+        "analyser": true,
+        "sourceUrl": "https://www.merafm.com/"
+      },
+      {
+        "id": "pk-am-love-islam-radio",
+        "name": "Love-Islam-Radio",
+        "band": "AM",
+        "freq": 580,
+        "streamUrl": "https://stream-52.zeno.fm/f9h69cgbu68uv",
+        "analyser": true,
+        "sourceUrl": "https://stream-52.zeno.fm/"
+      },
+      {
+        "id": "pk-am-fm-multan",
+        "name": "FM Multan",
+        "band": "AM",
+        "freq": 900,
+        "city": "Punjab",
+        "streamUrl": "https://whmsonic.radio.gov.pk:8032/stream",
+        "analyser": true,
+        "sourceUrl": "https://radio.gov.pk/"
+      },
+      {
+        "id": "pk-am-fm-mianwali",
+        "name": "FM Mianwali",
+        "band": "AM",
+        "freq": 1220,
+        "city": "Punjab",
+        "streamUrl": "https://whmsonic.radio.gov.pk:8028/relay",
+        "analyser": true,
+        "sourceUrl": "https://radio.gov.pk/"
+      },
+      {
+        "id": "pk-am-fm-mithi",
+        "name": "FM Mithi",
+        "band": "AM",
+        "freq": 1540,
+        "city": "Sindh",
+        "streamUrl": "https://whmsonic.radio.gov.pk:8052/stream",
+        "analyser": true,
+        "sourceUrl": "https://radio.gov.pk/"
+      }
+    ]
+  },
+  {
+    "code": "BD",
+    "name": "Bangladesh",
+    "flag": "🇧🇩",
+    "region": "SAARC",
+    "stations": [
+      {
+        "id": "bd-fm-a2z-radio",
+        "name": "A2Z RADIO",
+        "band": "FM",
+        "freq": 88.5,
+        "streamUrl": "https://listen.radioking.com/radio/1743/stream/125",
+        "analyser": true,
+        "sourceUrl": "https://www.liveonlineradio.net/bangla/a2z-radio.htm"
+      },
+      {
+        "id": "bd-fm-radio-goongoon",
+        "name": "Radio GoonGoon",
+        "band": "FM",
+        "freq": 90.1,
+        "streamUrl": "https://audio.streamcast.xyz/listen/radiogoongoon/radio.mp3",
+        "analyser": true,
+        "sourceUrl": "https://radiogoongoon.com/"
+      },
+      {
+        "id": "bd-fm-peoples-radio",
+        "name": "Peoples Radio",
+        "band": "FM",
+        "freq": 91.6,
+        "streamUrl": "https://s3.myradiostream.com:14498/listen.mp3",
+        "analyser": true,
+        "sourceUrl": "https://peoplesradio.fm/"
+      },
+      {
+        "id": "bd-fm-radio-vivid-voice",
+        "name": "Radio Vivid Voice",
+        "band": "FM",
+        "freq": 93.5,
+        "city": "Mymensingh",
+        "genre": "Mixed",
+        "streamUrl": "https://stream.zeno.fm/xuin6ocdc2juv",
+        "analyser": true,
+        "sourceUrl": "https://radiovv.wapka.club/"
+      },
+      {
+        "id": "bd-fm-radio-bhumi",
+        "name": "Radio Bhumi",
+        "band": "FM",
+        "freq": 95.2,
+        "streamUrl": "https://stream-156.zeno.fm/be5bqmk1k18uv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJiZTVicW1rMWsxOHV2IiwiaG9zdCI6InN0cmVhbS0xNTYuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6IjB1c0x1ZURGVEhTR0EwSDE1N2VBVmciLCJpYXQiOjE3MzU0NTM5MjQsImV4cCI6MTczNTQ1Mzk4NH0.vjlgqsHzQRt-_2T0LIHscJkAVHXd8hYV8Z6NDvvEWYk",
+        "analyser": true,
+        "sourceUrl": "https://www.radiobhumi.fm/"
+      },
+      {
+        "id": "bd-fm-rajshahi-fm",
+        "name": "Rajshahi FM",
+        "band": "FM",
+        "freq": 96.9,
+        "city": "Rajshahi",
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/nxfshdayjrdvv",
+        "analyser": true,
+        "sourceUrl": "https://rajshahifm.netlify.app/"
+      },
+      {
+        "id": "bd-fm-s-radio",
+        "name": "S-Radio",
+        "band": "FM",
+        "freq": 98.6,
+        "streamUrl": "https://as1.digitalsynapsebd.com/proxy/zkpnarpg/stream",
+        "analyser": true,
+        "sourceUrl": "https://www.shibirradio.com/"
+      },
+      {
+        "id": "bd-fm-radio-shadhin",
+        "name": "Radio Shadhin",
+        "band": "FM",
+        "freq": 100.3,
+        "streamUrl": "https://stream-157.zeno.fm/eabgu655puquv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJlYWJndTY1NXB1cXV2IiwiaG9zdCI6InN0cmVhbS0xNTcuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6Ijh6NzR2TE5jUmJLV1pzMExqQWpYcmciLCJpYXQiOjE3Mjc1NDQwMjYsImV4cCI6MTcyNzU0NDA4Nn0.nm5A8Sbpg2aM811icSh5Au4Wigql4rOzRb0eKDW8Hz4",
+        "analyser": true,
+        "sourceUrl": "https://radioshadhin.fm/"
+      },
+      {
+        "id": "bd-fm-muhammad-siddiq-al-minshawi",
+        "name": "Muhammad Siddiq al-Minshawi",
+        "band": "FM",
+        "freq": 102,
+        "streamUrl": "https://qurango.net/radio/mohammed_siddiq_alminshawi",
+        "analyser": true,
+        "sourceUrl": "https://qurango.net/radio/mohammed_siddiq_alminshawi"
+      },
+      {
+        "id": "bd-fm-mellow-bangla",
+        "name": "Mellow Bangla",
+        "band": "FM",
+        "freq": 103.7,
+        "genre": "Folk",
+        "streamUrl": "https://radio.mellowbangla.com/stream",
+        "analyser": true,
+        "sourceUrl": "https://www.mellowbangla.com/"
+      },
+      {
+        "id": "bd-am-radio-foorti",
+        "name": "Radio Foorti",
+        "band": "AM",
+        "freq": 580,
+        "city": "Dhaka",
+        "genre": "Music",
+        "streamUrl": "https://radiofoorti.fm/api/stream",
+        "analyser": true,
+        "sourceUrl": "https://radiofoorti.fm/"
+      },
+      {
+        "id": "bd-am-radio-jkkniu",
+        "name": "Radio JKKNIU",
+        "band": "AM",
+        "freq": 900,
+        "city": "Dhaka",
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/risgdzpf1cxtv",
+        "analyser": true,
+        "sourceUrl": "https://radiojkkniu.vercel.app/"
+      },
+      {
+        "id": "bd-am-universal-health-radio",
+        "name": "Universal Health Radio (বাংলা)",
+        "band": "AM",
+        "freq": 1220,
+        "genre": "News",
+        "streamUrl": "https://radio.universalhealthradio.org/uhr-bn.mp3",
+        "analyser": false,
+        "sourceUrl": "https://universalhealthradio.org/"
+      },
+      {
+        "id": "bd-am-radio-today",
+        "name": "Radio Today",
+        "band": "AM",
+        "freq": 1540,
+        "streamUrl": "https://stream-285.surfernetwork.com/8wv4d8g4344tv",
+        "analyser": true,
+        "sourceUrl": "https://radiotodaybd.fm/"
+      }
+    ]
+  },
+  {
+    "code": "LK",
+    "name": "Sri Lanka",
+    "flag": "🇱🇰",
+    "region": "SAARC",
+    "stations": [
+      {
+        "id": "lk-fm-slbc-tamil-national-service",
+        "name": "SLBC Tamil National Service",
+        "band": "FM",
+        "freq": 88.5,
+        "city": "Sri lanka",
+        "streamUrl": "https://stream-32.zeno.fm/xekhrn4zetzuv?zs=KXT1gTNYSemcxyslV6-vdA",
+        "analyser": true,
+        "sourceUrl": "https://radiosindia.com/slbctamil.html"
+      },
+      {
+        "id": "lk-fm-hiru-fm",
+        "name": "Hiru FM",
+        "band": "FM",
+        "freq": 90.1,
+        "genre": "News",
+        "streamUrl": "https://radio.lotustechnologieslk.net:2020/stream/hirufmgarden/stream/1/",
+        "analyser": true,
+        "sourceUrl": "https://www.hirufm.lk/"
+      },
+      {
+        "id": "lk-fm-freefm-lk",
+        "name": "freefm.lk",
+        "band": "FM",
+        "freq": 91.8,
+        "streamUrl": "https://stream-49.zeno.fm/1tcs4fbw7rquv?zs=uMl9BSttRSuqxlf3fWqc8g",
+        "analyser": true,
+        "sourceUrl": "https://freefm.lk/"
+      },
+      {
+        "id": "lk-fm-rangiri-sri-lanka",
+        "name": "Rangiri Sri Lanka",
+        "band": "FM",
+        "freq": 93.5,
+        "streamUrl": "https://rangiri.radioca.st/stream",
+        "analyser": true,
+        "sourceUrl": "https://rangirisrilanka.lk/radio/"
+      },
+      {
+        "id": "lk-fm-classic-radio",
+        "name": "Classic Radio",
+        "band": "FM",
+        "freq": 95.2,
+        "streamUrl": "https://cp11.serverse.com/proxy/classic/stream",
+        "analyser": true,
+        "sourceUrl": "https://trn.lk/"
+      },
+      {
+        "id": "lk-fm-real-radio-sri-lanka",
+        "name": "Real Radio Sri Lanka",
+        "band": "FM",
+        "freq": 97.1,
+        "genre": "Music",
+        "streamUrl": "https://srv02.onlineradio.voaplus.com/realfm",
+        "analyser": true,
+        "sourceUrl": "http://www.realradio.lk/"
+      },
+      {
+        "id": "lk-fm-lakhanda",
+        "name": "Lakhanda",
+        "band": "FM",
+        "freq": 98.6,
+        "genre": "Mixed",
+        "streamUrl": "https://cp12.serverse.com/proxy/itnfm?mp=/stream",
+        "analyser": true,
+        "sourceUrl": "https://www.lakhandaradio.lk/"
+      },
+      {
+        "id": "lk-fm-neth-fm",
+        "name": "NETH FM",
+        "band": "FM",
+        "freq": 100.3,
+        "streamUrl": "https://cp11.serverse.com/proxy/nethfm/stream",
+        "analyser": true,
+        "sourceUrl": "http://www.nethfm.com/"
+      },
+      {
+        "id": "lk-fm-kothmale-fm",
+        "name": "Kothmale FM",
+        "band": "FM",
+        "freq": 102,
+        "genre": "Mixed",
+        "streamUrl": "https://s11.myradiostream.com:25116/listen.mp3",
+        "analyser": true,
+        "sourceUrl": "https://kothmalefm.lk/"
+      },
+      {
+        "id": "lk-fm-star-fm-srilanka",
+        "name": "Star FM Srilanka",
+        "band": "FM",
+        "freq": 103.7,
+        "streamUrl": "https://stream.starfm.lk:12025/stream",
+        "analyser": true,
+        "sourceUrl": "https://www.starfm.lk/"
+      },
+      {
+        "id": "lk-am-siyathafm-mine",
+        "name": "siyathafm mine",
+        "band": "AM",
+        "freq": 580,
+        "streamUrl": "https://srv01.onlineradio.voaplus.com/siyathafm",
+        "analyser": true,
+        "sourceUrl": "http://siyathafm.lk/"
+      },
+      {
+        "id": "lk-am-radio-plus-hitz",
+        "name": "Radio Plus Hitz",
+        "band": "AM",
+        "freq": 900,
+        "streamUrl": "https://altair.streamerr.co/stream/8054",
+        "analyser": true,
+        "sourceUrl": "https://radioplus.lk/"
+      },
+      {
+        "id": "lk-am-sun-fm",
+        "name": "Sun FM",
+        "band": "AM",
+        "freq": 1220,
+        "city": "Sri Lanka",
+        "streamUrl": "https://radio.lotustechnologieslk.net:2020/stream/sunfmgarden",
+        "analyser": true,
+        "sourceUrl": "https://www.sunfm.lk/"
+      },
+      {
+        "id": "lk-am-radio-plus-sri-lanka",
+        "name": "Radio Plus Sri Lanka",
+        "band": "AM",
+        "freq": 1540,
+        "streamUrl": "https://altair.streamerr.co/stream/8036",
+        "analyser": true,
+        "sourceUrl": "https://radioplus.lk/"
+      }
+    ]
+  },
+  {
+    "code": "TH",
+    "name": "Thailand",
+    "flag": "🇹🇭",
+    "region": "ASEAN",
+    "stations": [
+      {
+        "id": "th-fm-bkk-fm",
+        "name": "BKK.FM",
+        "band": "FM",
+        "freq": 88.5,
+        "city": "Bangkok",
+        "genre": "Music",
+        "streamUrl": "https://rsas.bkk.fm/radio",
+        "analyser": true,
+        "sourceUrl": "https://bkk.fm/"
+      },
+      {
+        "id": "th-fm-cool-fahrenheit",
+        "name": "Cool fahrenheit",
+        "band": "FM",
+        "freq": 90.1,
+        "streamUrl": "https://coolism-web3rd.cdn.byteark.com/stream/1/",
+        "analyser": true,
+        "sourceUrl": "http://www.coolism.net/"
+      },
+      {
+        "id": "th-fm-fm",
+        "name": "FM",
+        "band": "FM",
+        "freq": 91,
+        "streamUrl": "https://www.fm91bkk.com:8900/;stream.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.fm91bkk.com/"
+      },
+      {
+        "id": "th-fm-92",
+        "name": "บ้านธัมมะ",
+        "band": "FM",
+        "freq": 91.8,
+        "city": "กรุงเทพมหานคร",
+        "streamUrl": "https://radio10.plathong.net/7238/;stream.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.dhammahome.com/radio/direct"
+      },
+      {
+        "id": "th-fm-fm-2",
+        "name": "FM บ้านใหม่ เรดิโอ",
+        "band": "FM",
+        "freq": 93.5,
+        "streamUrl": "https://radio10.plathong.net/7590/;stream.mp3",
+        "analyser": true,
+        "sourceUrl": "https://banmairadio.com/"
+      },
+      {
+        "id": "th-fm-95",
+        "name": "สังฆทานธรรม",
+        "band": "FM",
+        "freq": 95.2,
+        "streamUrl": "https://cdn-th2.livestreaming.in.th/shoutcast/8615",
+        "analyser": true,
+        "sourceUrl": "https://www.watsanghathan.com/content/5406/%E0%B8%AA%E0%B8%96%E0%B8%B2%E0%B8%99%E0%B8%B5%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B8%E0%B8%AA%E0%B8%B1%E0%B8%87%E0%B8%86%E0%B8%97%E0%B8%B2%E0%B8%99%E0%"
+      },
+      {
+        "id": "th-fm-qfm",
+        "name": "qfm",
+        "band": "FM",
+        "freq": 97,
+        "genre": "News",
+        "streamUrl": "https://cdn-th2.livestreaming.in.th/shoutcast/8610",
+        "analyser": true,
+        "sourceUrl": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://radiothailand.prd.go.th"
+      },
+      {
+        "id": "th-fm-chili-radio-thailand",
+        "name": "Chili Radio Thailand",
+        "band": "FM",
+        "freq": 98.6,
+        "city": "Chiang Mai",
+        "genre": "Music",
+        "streamUrl": "https://stream.chiliradio.app/chiliclassics",
+        "analyser": false,
+        "sourceUrl": "https://chiliradio.asia/"
+      },
+      {
+        "id": "th-fm-fabulous",
+        "name": "Fabulous",
+        "band": "FM",
+        "freq": 103,
+        "city": "Pattaya",
+        "genre": "News",
+        "streamUrl": "https://fabulous.thailandstreaming.net/fabulous.mp3",
+        "analyser": true,
+        "sourceUrl": "https://alwayspattaya.com/"
+      },
+      {
+        "id": "th-fm-family-news-radio",
+        "name": "Family News Radio",
+        "band": "FM",
+        "freq": 106,
+        "streamUrl": "https://radio11.plathong.net/7138/;stream.mp3",
+        "analyser": true,
+        "sourceUrl": "https://onair.one/?page_id=405"
+      },
+      {
+        "id": "th-am-580",
+        "name": "วัดป่าไทรงาม",
+        "band": "AM",
+        "freq": 580,
+        "streamUrl": "https://radio10.plathong.net/7110/;stream.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.watpasaingam.com/"
+      },
+      {
+        "id": "th-am-900",
+        "name": "วิทยุเสียงอิสลาม",
+        "band": "AM",
+        "freq": 900,
+        "city": "Bangkok",
+        "streamUrl": "https://radio12.plathong.net/7234/;stream.mp3",
+        "analyser": true,
+        "sourceUrl": "https://muslim.fm/"
+      },
+      {
+        "id": "th-am-radio-samui-online",
+        "name": "Radio Samui Online",
+        "band": "AM",
+        "freq": 1220,
+        "city": "Samui",
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://stream.mixadance.fm/radiosamui",
+        "analyser": true,
+        "sourceUrl": "https://radiosamui.online/"
+      },
+      {
+        "id": "th-am-city-radio-pattaya",
+        "name": "City Radio Pattaya",
+        "band": "AM",
+        "freq": 1540,
+        "streamUrl": "https://media.onair.one:8200/stream/1/?v=1769497160087",
+        "analyser": true,
+        "sourceUrl": "https://www.cityradiopattaya.com/"
+      }
+    ]
+  },
+  {
+    "code": "SG",
+    "name": "Singapore",
+    "flag": "🇸🇬",
+    "region": "ASEAN",
+    "stations": [
+      {
+        "id": "sg-fm-jia-cantopop-best-of-all-time-cantonese-song",
+        "name": "JIA Cantopop - Best of All Time Cantonese Song",
+        "band": "FM",
+        "freq": 88.3,
+        "streamUrl": "https://22253.live.streamtheworld.com/HARRYS_S02.mp3",
+        "analyser": true,
+        "sourceUrl": "https://kakee.sg/"
+      },
+      {
+        "id": "sg-fm-money-fm",
+        "name": "Money FM",
+        "band": "FM",
+        "freq": 89.3,
+        "streamUrl": "https://22243.live.streamtheworld.com/MONEY_893AAC.aac?dist=sphradio-web&gdpr=0&tdsdk=js-2.9&swm=false&pname=TDSdk&pversion=2.9&banners=none&burst-time=15&sbmid=f94bbefc-acee-4c13-ed7b-9accdb44b7a2",
+        "analyser": true,
+        "sourceUrl": "https://www.moneyfm893.sg/"
+      },
+      {
+        "id": "sg-fm-987fm",
+        "name": "987FM",
+        "band": "FM",
+        "freq": 90.1,
+        "city": "Singapore",
+        "genre": "Mixed",
+        "streamUrl": "https://22393.live.streamtheworld.com/987FM_PREM.aac",
+        "analyser": true,
+        "sourceUrl": "https://www.melisten.sg/radio/987"
+      },
+      {
+        "id": "sg-fm-one-fm",
+        "name": "One FM",
+        "band": "FM",
+        "freq": 91.3,
+        "streamUrl": "https://22283.live.streamtheworld.com/ONE_FM_913AAC_SC",
+        "analyser": true,
+        "sourceUrl": "https://www.onefm.sg/"
+      },
+      {
+        "id": "sg-fm-kiss",
+        "name": "kiss",
+        "band": "FM",
+        "freq": 92,
+        "genre": "Music",
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/KISS_92_SC",
+        "analyser": true,
+        "sourceUrl": "https://www.kiss92.sg/"
+      },
+      {
+        "id": "sg-fm-love-972",
+        "name": "LOVE 972",
+        "band": "FM",
+        "freq": 93.5,
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOVE972FM_PREM.aac",
+        "analyser": true,
+        "sourceUrl": "https://www.melisten.sg/radio/love-972"
+      },
+      {
+        "id": "sg-fm-class",
+        "name": "CLASS",
+        "band": "FM",
+        "freq": 95,
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/CLASS95_PREM.aac",
+        "analyser": true,
+        "sourceUrl": "https://www.melisten.sg/radio/class-95"
+      },
+      {
+        "id": "sg-fm-capital-958",
+        "name": "CAPITAL 958",
+        "band": "FM",
+        "freq": 96.9,
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/CAPITAL958FM_PREM.aac",
+        "analyser": true,
+        "sourceUrl": "https://www.melisten.sg/radio/capital-958"
+      },
+      {
+        "id": "sg-fm-power-love-songs",
+        "name": "Power Love Songs",
+        "band": "FM",
+        "freq": 98,
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/POWER98_LOVESONGS.mp3",
+        "analyser": true,
+        "sourceUrl": "https://camokakis.sg/"
+      },
+      {
+        "id": "sg-fm-ufm-3-mp3",
+        "name": "UFM 3 (MP3)",
+        "band": "FM",
+        "freq": 100,
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/UFM_1003_SC",
+        "analyser": true,
+        "sourceUrl": "https://www.ufm1003.sg/"
+      },
+      {
+        "id": "sg-am-yes-933",
+        "name": "Yes 933",
+        "band": "AM",
+        "freq": 580,
+        "genre": "Music",
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/YES933AAC_SC",
+        "analyser": true
+      },
+      {
+        "id": "sg-am-cna-938",
+        "name": "CNA 938",
+        "band": "AM",
+        "freq": 900,
+        "genre": "News",
+        "streamUrl": "https://22893.live.streamtheworld.com/938NOW_SC",
+        "analyser": false,
+        "sourceUrl": "http://melisten.sg/cna938"
+      },
+      {
+        "id": "sg-am-987",
+        "name": "987",
+        "band": "AM",
+        "freq": 1220,
+        "genre": "Music",
+        "streamUrl": "https://14033.live.streamtheworld.com/987FM_SC",
+        "analyser": false,
+        "sourceUrl": "https://www.melisten.sg/radio/987"
+      },
+      {
+        "id": "sg-am-ria-897",
+        "name": "RIA 897",
+        "band": "AM",
+        "freq": 1540,
+        "genre": "Music",
+        "streamUrl": "https://22393.live.streamtheworld.com/RIA897FM_SC",
+        "analyser": false,
+        "sourceUrl": "https://www.melisten.sg/radio/ria-897"
+      }
+    ]
+  },
+  {
+    "code": "MY",
+    "name": "Malaysia",
+    "flag": "🇲🇾",
+    "region": "ASEAN",
+    "stations": [
+      {
+        "id": "my-fm-988-fm",
+        "name": "988 FM",
+        "band": "FM",
+        "freq": 88.5,
+        "city": "Kuala Lumpur",
+        "streamUrl": "https://28103.live.streamtheworld.com/988_FMAAC.aac",
+        "analyser": true,
+        "sourceUrl": "https://www.988.com.my/on-air/"
+      },
+      {
+        "id": "my-fm-slow-rock",
+        "name": "Slow Rock '",
+        "band": "FM",
+        "freq": 90,
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/hiut6cwfoneuv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/"
+      },
+      {
+        "id": "my-fm-all-fm",
+        "name": "ALL FM",
+        "band": "FM",
+        "freq": 91.9,
+        "streamUrl": "https://stream.zeno.fm/srrbpsu3tbdvv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/radio/all-fm-91-9-mhz/"
+      },
+      {
+        "id": "my-fm-ai-fm",
+        "name": "ai fm",
+        "band": "FM",
+        "freq": 93.5,
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/AI_FMAAC_SC",
+        "analyser": true,
+        "sourceUrl": "https://rtmklik.rtm.gov.my/radio/nasional/72171#!"
+      },
+      {
+        "id": "my-fm-kelantan-fm",
+        "name": "Kelantan FM",
+        "band": "FM",
+        "freq": 95.2,
+        "city": "Kelantan",
+        "genre": "Music",
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/KELANTAN_FMAAC.aac",
+        "analyser": true,
+        "sourceUrl": "https://kelantanfm.rtm.gov.my/"
+      },
+      {
+        "id": "my-fm-radio-rosak",
+        "name": "Radio Rosak",
+        "band": "FM",
+        "freq": 96.9,
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://radiorosak.radioca.st/stream",
+        "analyser": true,
+        "sourceUrl": "http://radiorosak.com/"
+      },
+      {
+        "id": "my-fm-dj-dugem",
+        "name": "DJ DUGEM",
+        "band": "FM",
+        "freq": 98.6,
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/ooaqxeogpfdvv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/"
+      },
+      {
+        "id": "my-fm-sabah-fm",
+        "name": "Sabah FM",
+        "band": "FM",
+        "freq": 100.3,
+        "city": "Sabah",
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/SABAH_FMAAC.aac",
+        "analyser": true,
+        "sourceUrl": "https://sabahfm.rtm.gov.my/"
+      },
+      {
+        "id": "my-fm-terengganu-fm",
+        "name": "Terengganu FM",
+        "band": "FM",
+        "freq": 102,
+        "city": "terengganu",
+        "genre": "Music",
+        "streamUrl": "https://22243.live.streamtheworld.com/TERENGGANU_FMAAC_SC",
+        "analyser": true,
+        "sourceUrl": "https://terengganufm.rtm.gov.my/"
+      },
+      {
+        "id": "my-fm-lite-fm-malaysia",
+        "name": "LITE FM Malaysia",
+        "band": "FM",
+        "freq": 103.7,
+        "genre": "Music",
+        "streamUrl": "https://stream.rcs.revma.com/bn4ex8sbv4uvv",
+        "analyser": true,
+        "sourceUrl": "https://lite.syok.my/"
+      },
+      {
+        "id": "my-am-goxuan",
+        "name": "GOXUAN",
+        "band": "AM",
+        "freq": 580,
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/RAKITAAAC.aac",
+        "analyser": true,
+        "sourceUrl": "https://goxuan.syok.my/"
+      },
+      {
+        "id": "my-am-eight-fm",
+        "name": "Eight无限 FM",
+        "band": "AM",
+        "freq": 900,
+        "streamUrl": "https://stream.rcs.revma.com/qp0xrd9mtd3vv",
+        "analyser": true,
+        "sourceUrl": "https://www.eight.audio/"
+      },
+      {
+        "id": "my-am-gold",
+        "name": "Gold",
+        "band": "AM",
+        "freq": 1220,
+        "streamUrl": "https://ss1.audiorama.com.mx:6584/https://radiomalaysia.net/gold-fm.html",
+        "analyser": true,
+        "sourceUrl": "https://radiomalaysia.net/gold-fm.html"
+      },
+      {
+        "id": "my-am-wadah-fm",
+        "name": "Wadah FM",
+        "band": "AM",
+        "freq": 1540,
+        "genre": "Mixed",
+        "streamUrl": "https://19183.live.streamtheworld.com/WARNA942FMAAC.aac",
+        "analyser": true,
+        "sourceUrl": "https://www.facebook.com/"
+      }
+    ]
+  },
+  {
+    "code": "ID",
+    "name": "Indonesia",
+    "flag": "🇮🇩",
+    "region": "ASEAN",
+    "stations": [
+      {
+        "id": "id-fm-rri-pro-3-kbrn",
+        "name": "RRI Pro 3 KBRN",
+        "band": "FM",
+        "freq": 88.5,
+        "genre": "Mixed",
+        "streamUrl": "https://stream-node0.rri.co.id/streaming/14/9014/kbrn.mp3",
+        "analyser": false,
+        "sourceUrl": "https://rri.co.id/"
+      },
+      {
+        "id": "id-fm-radio-losta-fm-blitar",
+        "name": "Radio Losta FM Blitar",
+        "band": "FM",
+        "freq": 89.2,
+        "city": "Blitar",
+        "genre": "Mixed",
+        "streamUrl": "https://stream.zeno.fm/ar3nv92ahfhvv",
+        "analyser": true,
+        "sourceUrl": "https://radiolostasetia.blogspot.com/"
+      },
+      {
+        "id": "id-fm-sb-fm-tembang-kenangan",
+        "name": "SB FM tembang kenangan",
+        "band": "FM",
+        "freq": 90.1,
+        "city": "parepare",
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/d16n50mkzhhvv",
+        "analyser": true,
+        "sourceUrl": "https://sbfmparepare.radio12345.com/"
+      },
+      {
+        "id": "id-fm-m-stream-indo",
+        "name": "M-Stream Indo",
+        "band": "FM",
+        "freq": 91.8,
+        "city": "Bandung",
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/iln4upodbvuuv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/"
+      },
+      {
+        "id": "id-fm-dangdut2",
+        "name": "Dangdut2",
+        "band": "FM",
+        "freq": 93.5,
+        "streamUrl": "https://stream.zeno.fm/vwhplynnpfjtv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/"
+      },
+      {
+        "id": "id-fm-suara-soneta",
+        "name": "Suara Soneta",
+        "band": "FM",
+        "freq": 95.2,
+        "city": "Banyuwangi",
+        "streamUrl": "https://a2.siar.us//listen//suarasoneta//radio.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.suarasoneta.com/"
+      },
+      {
+        "id": "id-fm-radio-sholawat",
+        "name": "Radio Sholawat",
+        "band": "FM",
+        "freq": 96.9,
+        "city": "Surabaya",
+        "genre": "Religious",
+        "streamUrl": "https://stream.zeno.fm/us5bsznu3rptv",
+        "analyser": true,
+        "sourceUrl": "http://temborocity.blogspot.com/2019/11/radio-sholawat.html?m=1"
+      },
+      {
+        "id": "id-fm-mettaswara-koplo",
+        "name": "Mettaswara Koplo",
+        "band": "FM",
+        "freq": 98.6,
+        "city": "Jakarta",
+        "streamUrl": "https://mettaswara.com:8700//koplo",
+        "analyser": true,
+        "sourceUrl": "https://mettaswara.com/"
+      },
+      {
+        "id": "id-fm-i-radio-jakarta",
+        "name": "I-Radio JAKARTA",
+        "band": "FM",
+        "freq": 101.4,
+        "streamUrl": "https://stream.radiojar.com/4ywdgup3bnzuv?1739561339",
+        "analyser": true,
+        "sourceUrl": "https://iradiofm.com/"
+      },
+      {
+        "id": "id-fm-rama-fm-bandung",
+        "name": "Rama FM Bandung",
+        "band": "FM",
+        "freq": 104.7,
+        "city": "Bandung",
+        "genre": "Music",
+        "streamUrl": "https://i.klikhost.com/8330/;",
+        "analyser": false,
+        "sourceUrl": "https://ramafm.com/"
+      },
+      {
+        "id": "id-am-dj-baru",
+        "name": "DJ BARU",
+        "band": "AM",
+        "freq": 580,
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/iwcyhq56nwiuv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/"
+      },
+      {
+        "id": "id-am-radio-rodja-756-am",
+        "name": "Radio Rodja 756 AM",
+        "band": "AM",
+        "freq": 900,
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://radioislamindonesia.com/rodja.mp3?_=2",
+        "analyser": true,
+        "sourceUrl": "https://www.radiorodja.com/"
+      },
+      {
+        "id": "id-am-tarbiyah-sunnah",
+        "name": "Tarbiyah Sunnah",
+        "band": "AM",
+        "freq": 1220,
+        "genre": "News",
+        "streamUrl": "https://radioislamindonesia.com/tarbiyah.mp3",
+        "analyser": true,
+        "sourceUrl": "https://radioislamindonesia.com/"
+      },
+      {
+        "id": "id-am-radio-campursari-yogyakarta",
+        "name": "Radio Campursari Yogyakarta",
+        "band": "AM",
+        "freq": 1540,
+        "city": "Yogyakarta",
+        "streamUrl": "https://a8.siar.us/listen/campursari/stream",
+        "analyser": true,
+        "sourceUrl": "https://radiomaya.blogspot.com/2018/08/streaming-radio-campursari-jogjakarta.html?m=1"
+      }
+    ]
+  },
+  {
+    "code": "PH",
+    "name": "Philippines",
+    "flag": "🇵🇭",
+    "region": "ASEAN",
+    "stations": [
+      {
+        "id": "ph-fm-christmas-radio-philippines-powered-by-www-amfmph-net",
+        "name": "Christmas Radio Philippines - Powered By www.amfmph.net",
+        "band": "FM",
+        "freq": 88.5,
+        "genre": "Religious",
+        "streamUrl": "https://us1.amfmph.com/ssl/christmasradio?mp=/stream&1641738050672",
+        "analyser": true,
+        "sourceUrl": "https://www.amfmph.com/"
+      },
+      {
+        "id": "ph-fm-s-pinoy-alternative",
+        "name": "s Pinoy Alternative",
+        "band": "FM",
+        "freq": 90,
+        "streamUrl": "https://cast3.my-control-panel.com/proxy/ronald/stream",
+        "analyser": false,
+        "sourceUrl": "https://9paradio.com/"
+      },
+      {
+        "id": "ph-fm-pinoy-rap-radio",
+        "name": "Pinoy Rap Radio",
+        "band": "FM",
+        "freq": 91.8,
+        "streamUrl": "https://stream.zeno.fm/0cdp55nqam0uv",
+        "analyser": true,
+        "sourceUrl": "https://theonestopradio.com/"
+      },
+      {
+        "id": "ph-fm-heart-fm-cdo-city",
+        "name": "Heart FM CDO City",
+        "band": "FM",
+        "freq": 92.7,
+        "streamUrl": "https://us1.amfmph.com/ssl/heartfmcdo?mp=/stream&1679730513324",
+        "analyser": true,
+        "sourceUrl": "https://www.amfmph.com/"
+      },
+      {
+        "id": "ph-fm-clubmix",
+        "name": "Clubmix",
+        "band": "FM",
+        "freq": 93.5,
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/vztn8ux96zhvv",
+        "analyser": true,
+        "sourceUrl": "https://play.google.com/store/apps/details?id=com.lacolinares.ragemusicph"
+      },
+      {
+        "id": "ph-fm-rmn-dyri-iloilo",
+        "name": "RMN DYRI Iloilo",
+        "band": "FM",
+        "freq": 95.2,
+        "genre": "News",
+        "streamUrl": "https://us1.amfmph.com/ssl/rmniloilo?mp=/stream",
+        "analyser": true,
+        "sourceUrl": "https://rmn.ph/dyri774iloilo"
+      },
+      {
+        "id": "ph-fm-rage-music-philippines",
+        "name": "Rage Music Philippines",
+        "band": "FM",
+        "freq": 96.9,
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/yu9dryfs7x8uv.mp3",
+        "analyser": true,
+        "sourceUrl": "https://facebook.com/ragemusicph"
+      },
+      {
+        "id": "ph-fm-fmr-camiguin",
+        "name": "FMR Camiguin",
+        "band": "FM",
+        "freq": 98.3,
+        "streamUrl": "https://de3.amfmph.com/ssl/fmrcamiguin?mp=/live",
+        "analyser": true,
+        "sourceUrl": "https://www.amfmph.com/"
+      },
+      {
+        "id": "ph-fm-budots-fm",
+        "name": "Budots FM",
+        "band": "FM",
+        "freq": 98.9,
+        "streamUrl": "https://stream-171.zeno.fm/2uhuu5hvzqzuv?zs=oGfN_quRRSyJUGCfzxagdw",
+        "analyser": true,
+        "sourceUrl": "https://www.radio-philippines.com/budots-fm-989"
+      },
+      {
+        "id": "ph-fm-dzrh",
+        "name": "DZRH",
+        "band": "FM",
+        "freq": 100.3,
+        "streamUrl": "https://azura.dzrh.com.ph/listen/dzrh_manila/radio.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.dzrh.com.ph/"
+      },
+      {
+        "id": "ph-am-bible-radio",
+        "name": "BIBLE RADIO",
+        "band": "AM",
+        "freq": 580,
+        "genre": "Religious",
+        "streamUrl": "https://stream.radio.co/se9de95c10/listen",
+        "analyser": true,
+        "sourceUrl": "https://bible.radio/"
+      },
+      {
+        "id": "ph-am-hot-hiphop-n-rnb",
+        "name": "Hot Hiphop N RnB",
+        "band": "AM",
+        "freq": 900,
+        "streamUrl": "https://stream.zeno.fm/snqnkbnm208uv",
+        "analyser": true,
+        "sourceUrl": "https://play.google.com/store/apps/details?id=com.lacolinares.ragemusicph"
+      },
+      {
+        "id": "ph-am-win-radio-davao",
+        "name": "Win Radio Davao",
+        "band": "AM",
+        "freq": 1220,
+        "genre": "Music",
+        "streamUrl": "https://stream-42.zeno.fm/1noxhem5qpkuv",
+        "analyser": true,
+        "sourceUrl": "https://winradioph.net/win-stations/davao/"
+      },
+      {
+        "id": "ph-am-imix-radio",
+        "name": "iMix Radio",
+        "band": "AM",
+        "freq": 1540,
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/sbmi7cx5z8buv",
+        "analyser": true,
+        "sourceUrl": "https://play.google.com/store/apps/details?id=com.lacolinares.ragemusicph"
+      }
+    ]
+  },
+  {
+    "code": "AE",
+    "name": "United Arab Emirates",
+    "flag": "🇦🇪",
+    "region": "Gulf",
+    "stations": [
+      {
+        "id": "ae-fm-exclusively-iron-maiden",
+        "name": "Exclusively Iron Maiden",
+        "band": "FM",
+        "freq": 88.5,
+        "streamUrl": "https://streaming.exclusive.radio/er/ironmaiden/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://exclusive.radio/"
+      },
+      {
+        "id": "ae-fm-exclusively-abba",
+        "name": "Exclusively ABBA",
+        "band": "FM",
+        "freq": 90.1,
+        "genre": "Music",
+        "streamUrl": "https://streaming.exclusive.radio/er/abba/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://exclusive.radio/"
+      },
+      {
+        "id": "ae-fm-exclusive-radio-bob-marley",
+        "name": "Exclusive Radio – Bob Marley",
+        "band": "FM",
+        "freq": 91.8,
+        "streamUrl": "https://streaming.exclusive.radio/er/bobmarley/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://play.exclusive.radio/station/51/163"
+      },
+      {
+        "id": "ae-fm-exclusive-radio-black-sabbath",
+        "name": "Exclusive Radio – Black Sabbath",
+        "band": "FM",
+        "freq": 93.5,
+        "streamUrl": "https://streaming.exclusive.radio/er/blacksabbath/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://play.exclusive.radio/station/51/318"
+      },
+      {
+        "id": "ae-fm-exclusively-guns-n-roses",
+        "name": "Exclusively Guns N’ Roses",
+        "band": "FM",
+        "freq": 95.2,
+        "genre": "Music",
+        "streamUrl": "https://streaming.exclusive.radio/er/gunsnroses/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://exclusive.radio/"
+      },
+      {
+        "id": "ae-fm-radio-relax",
+        "name": "Radio Relax",
+        "band": "FM",
+        "freq": 96.9,
+        "streamUrl": "https://online.radiorelax.ua/RadioRelax_Int_HD",
+        "analyser": false,
+        "sourceUrl": "https://online.radiorelax.ua/"
+      },
+      {
+        "id": "ae-fm-rolling-stones",
+        "name": "Rolling Stones",
+        "band": "FM",
+        "freq": 98.6,
+        "streamUrl": "https://streaming.exclusive.radio/er/rollingstones/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://exclusive.radio/"
+      },
+      {
+        "id": "ae-fm-exclusively-coldplay",
+        "name": "Exclusively Coldplay",
+        "band": "FM",
+        "freq": 100.3,
+        "genre": "Music",
+        "streamUrl": "https://streaming.exclusive.radio/er/coldplay/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://exclusive.radio/"
+      },
+      {
+        "id": "ae-fm-exclusively-foo-fighters",
+        "name": "Exclusively Foo Fighters",
+        "band": "FM",
+        "freq": 102,
+        "genre": "Music",
+        "streamUrl": "https://streaming.exclusive.radio/er/foofighters/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://exclusive.radio/"
+      },
+      {
+        "id": "ae-fm-big-fm-uae",
+        "name": "Big FM UAE",
+        "band": "FM",
+        "freq": 106.2,
+        "city": "Dubai",
+        "streamUrl": "https://funasia.streamguys1.com/live4",
+        "analyser": true,
+        "sourceUrl": "https://big1062.com/"
+      },
+      {
+        "id": "ae-am-exclusively-bts",
+        "name": "Exclusively BTS",
+        "band": "AM",
+        "freq": 580,
+        "genre": "Music",
+        "streamUrl": "https://streaming.exclusive.radio/er/bts/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://play.exclusive.radio/"
+      },
+      {
+        "id": "ae-am-exclusively-led-zeppelin-only-hits",
+        "name": "Exclusively Led Zeppelin - Only Hits",
+        "band": "AM",
+        "freq": 900,
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://streaming.exclusive.radio/er-app/ledzeppelinhits/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://play.exclusive.radio/"
+      },
+      {
+        "id": "ae-am-exclusively-nirvana",
+        "name": "Exclusively Nirvana",
+        "band": "AM",
+        "freq": 1220,
+        "genre": "Music",
+        "streamUrl": "https://streaming.exclusive.radio/er/nirvana/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://play.exclusive.radio/"
+      },
+      {
+        "id": "ae-am-exclusively-pet-shop-boys",
+        "name": "Exclusively Pet Shop Boys",
+        "band": "AM",
+        "freq": 1540,
+        "streamUrl": "https://streaming.exclusive.radio/er/petshopboys/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://exclusive.radio/"
+      }
+    ]
+  },
+  {
+    "code": "SA",
+    "name": "Saudi Arabia",
+    "flag": "🇸🇦",
+    "region": "Gulf",
+    "stations": [
+      {
+        "id": "sa-fm-alifalif-fm",
+        "name": "AlifAlif FM",
+        "band": "FM",
+        "freq": 88.5,
+        "streamUrl": "https://alifalifjobs.com/radio/8000/AlifAlifLive.mp3",
+        "analyser": false,
+        "sourceUrl": "https://www.alifaliffm.com/"
+      },
+      {
+        "id": "sa-fm-sba-riyadh-radio",
+        "name": "SBA Riyadh Radio",
+        "band": "FM",
+        "freq": 91.5,
+        "city": "Mecca",
+        "streamUrl": "https://stream-154.zeno.fm/pdeizhgrtrstv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJwZGVpemhncnRyc3R2IiwiaG9zdCI6InN0cmVhbS0xNTQuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6Im9vbng2V1J3UXJ5Q0k5TVV0N01heEEiLCJpYXQiOjE3MjgyMjQ1MTYsImV4cCI6MTcyODIyNDU3Nn0.gpUIWkDBFNNFjqCg2R-xQN4LXT4z8_Ivs7d2UkeFE_8",
+        "analyser": true,
+        "sourceUrl": "https://www.aloula.sa/en/live/riyadhradio"
+      },
+      {
+        "id": "sa-fm-dreamstar-radio-ksa",
+        "name": "Dreamstar Radio KSA",
+        "band": "FM",
+        "freq": 94.3,
+        "city": "Mecca",
+        "genre": "Mixed",
+        "streamUrl": "https://stream-173.zeno.fm/h0y9yu8hzk8uv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJoMHk5eXU4aHprOHV2IiwiaG9zdCI6InN0cmVhbS0xNzMuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6IlZidVlINUhnVDZTMk82N0NndEY5cnciLCJpYXQiOjE3MzAxMDA3NTcsImV4cCI6MTczMDEwMDgxN30.nEG8Ng_RkLh72La19iYQBK9312NlFrKm1V4X7371hkU",
+        "analyser": true,
+        "sourceUrl": "https://dreamstarteleradio.online/"
+      },
+      {
+        "id": "sa-fm-ufm",
+        "name": "UFM",
+        "band": "FM",
+        "freq": 95.5,
+        "streamUrl": "https://stream.ufmradio.com:8003/;",
+        "analyser": true,
+        "sourceUrl": "https://ufmradio.com/"
+      },
+      {
+        "id": "sa-fm-saudia-radio",
+        "name": "Saudia Radio",
+        "band": "FM",
+        "freq": 96.2,
+        "city": "Jeddah",
+        "streamUrl": "https://stream-154.zeno.fm/t4ww4awfps8uv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJ0NHd3NGF3ZnBzOHV2IiwiaG9zdCI6InN0cmVhbS0xNTQuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6IlNBdnJYelp3U1lpQXFTVFhUQnl5cFEiLCJpYXQiOjE3MzAwNzg1MjIsImV4cCI6MTczMDA3ODU4Mn0.LEUzajNGq4k3Pg9DNiLJxBJMX6rUnMsSQpB12mhw4IQ",
+        "analyser": true,
+        "sourceUrl": "https://www.aloula.sa/en/live/saudiaradio"
+      },
+      {
+        "id": "sa-fm-star-ksa",
+        "name": "Star KSA",
+        "band": "FM",
+        "freq": 99.9,
+        "city": "Riyadh",
+        "genre": "Music",
+        "streamUrl": "https://eu10.fastcast4u.com:6300/;?type=http&fbclid=IwY2xjawFqDntleHRuA2FlbQIxMQABHTTxwatDLaI3zkRXdSFYydXbOIRIvpABKZ_UJtqR3_vuCOvdsqzoeP80-Q_aem_slP_LtUYWwu6xNl3wmsesA",
+        "analyser": true,
+        "sourceUrl": "https://tuneyou.com/radio/Star-KSA-99-FM-sn14249/"
+      },
+      {
+        "id": "sa-fm-ofw-tambayan-fm",
+        "name": "OFW Tambayan FM",
+        "band": "FM",
+        "freq": 100.7,
+        "city": "Mecca",
+        "streamUrl": "https://stream-170.zeno.fm/82bb4d2uz68uv?zs=CnZDUKriSmSeaRAwyMpGoQ&zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiI4MmJiNGQydXo2OHV2IiwiaG9zdCI6InN0cmVhbS0xNzAuemVuby5mbSIsImp0aSI6IkNuWkRVS3JpU21TZWFSQXd5TXBHb1EiLCJpYXQiOjE3MTI4MzUxMDgsImV4cCI6MTcxMjgzNTE2OH0.eNzYZ6jQPY5RL2uohAGhp8G7cFwGXB9BjFUeX7mysXo&zttl=5",
+        "analyser": true,
+        "sourceUrl": "https://www.101-7ofwtambayanfm.com/"
+      },
+      {
+        "id": "sa-fm-phr-precious-hearts-radio",
+        "name": "PHR Precious Hearts Radio",
+        "band": "FM",
+        "freq": 105.3,
+        "city": "Riyadh",
+        "streamUrl": "https://stream-172.zeno.fm/yyzp7bv9qchvv?zs=FS8fstfMQw-0L-XNabOKtg&zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJ5eXpwN2J2OXFjaHZ2IiwiaG9zdCI6InN0cmVhbS0xNzIuemVuby5mbSIsImp0aSI6IkZTOGZzdGZNUXctMEwtWE5hYk9LdGciLCJpYXQiOjE3MTI5Mjg1MDQsImV4cCI6MTcxMjkyODU2NH0.lfZDEwX6ZNFFGIqdubaoRgrWWlEpvGJp4jIbELmANmg&zttl=5",
+        "analyser": true,
+        "sourceUrl": "https://www.wix.com/website/"
+      },
+      {
+        "id": "sa-fm-united-heart-fm",
+        "name": "United Heart FM",
+        "band": "FM",
+        "freq": 105.9,
+        "city": "Mecca",
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://radio.905heartfm.com:8000/radio.mp3",
+        "analyser": true,
+        "sourceUrl": "https://1095unitedheartfm.blogspot.com/?m=0"
+      },
+      {
+        "id": "sa-fm-bestfriend-fm",
+        "name": "Bestfriend FM",
+        "band": "FM",
+        "freq": 107.1,
+        "city": "Mecca",
+        "streamUrl": "https://stream-47.zeno.fm/ewvmpjn7kultv",
+        "analyser": true,
+        "sourceUrl": "https://www.bestfriendfm.com/"
+      },
+      {
+        "id": "sa-am-580",
+        "name": "القارئ علي الحذيفي رواية قالون",
+        "band": "AM",
+        "freq": 580,
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://qurango.net/radio/ali_alhuthaifi_qalon",
+        "analyser": true
+      },
+      {
+        "id": "sa-am-fred-film-radio",
+        "name": "Fred Film Radio(لغة عربية)",
+        "band": "AM",
+        "freq": 900,
+        "streamUrl": "https://s10.webradio-hosting.com/proxy/fredradioar/stream",
+        "analyser": true,
+        "sourceUrl": "http://www.fred.fm/"
+      },
+      {
+        "id": "sa-am-5-replay-news",
+        "name": "إذاعة الأخبار كل 5 دقائق REPLAY NEWS - العربية",
+        "band": "AM",
+        "freq": 1220,
+        "city": "Riyadh",
+        "genre": "News",
+        "streamUrl": "https://replaynewsar.ice.infomaniak.ch/replaynewsar-128.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.replaynews.net/"
+      },
+      {
+        "id": "sa-am-1",
+        "name": "مقدمة رسالة ابن أبي زيد القيرواني1",
+        "band": "AM",
+        "freq": 1540,
+        "streamUrl": "https://www.al-badr.net/download/esound/choroohat/abuzaid_alkirawani/001.mp3",
+        "analyser": false,
+        "sourceUrl": "https://www.al-badr.net/"
+      }
+    ]
+  },
+  {
+    "code": "US",
+    "name": "United States",
+    "flag": "🇺🇸",
+    "region": "Americas",
+    "stations": [
+      {
+        "id": "us-fm-classic-vinyl-hd",
+        "name": "Classic Vinyl HD",
+        "band": "FM",
+        "freq": 88.5,
+        "city": "New York",
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://icecast.walmradio.com:8443/classic",
+        "analyser": false,
+        "sourceUrl": "https://walmradio.com/classic"
+      },
+      {
+        "id": "us-fm-181-fm-s-country",
+        "name": "181.FM - 's Country",
+        "band": "FM",
+        "freq": 90,
+        "city": "Virginia",
+        "genre": "Folk",
+        "streamUrl": "https://listen.181fm.com/181-90scountry_128k.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.181.fm/"
+      },
+      {
+        "id": "us-fm-walm-2-hd",
+        "name": "WALM 2 HD",
+        "band": "FM",
+        "freq": 91.8,
+        "city": "New York",
+        "genre": "Religious",
+        "streamUrl": "https://icecast.walmradio.com:8443/walm2",
+        "analyser": true,
+        "sourceUrl": "https://walmradio.com/walm2"
+      },
+      {
+        "id": "us-fm-classic-vinyl-hd-opus",
+        "name": "Classic Vinyl HD Opus",
+        "band": "FM",
+        "freq": 93.5,
+        "city": "New York",
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://icecast.walmradio.com:8443/classic_opus",
+        "analyser": false,
+        "sourceUrl": "https://walmradio.com/classic"
+      },
+      {
+        "id": "us-fm-somafm-groove-salad-128k-mp3",
+        "name": "SomaFM Groove Salad (128k MP3)",
+        "band": "FM",
+        "freq": 95.2,
+        "city": "California",
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://ice5.somafm.com/groovesalad-128-mp3",
+        "analyser": true,
+        "sourceUrl": "https://somafm.com/groovesalad/"
+      },
+      {
+        "id": "us-fm-somafm-secret-agent-128k-mp3",
+        "name": "SomaFM Secret Agent (128k MP3)",
+        "band": "FM",
+        "freq": 96.9,
+        "city": "California",
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://ice6.somafm.com/secretagent-128-mp3",
+        "analyser": true,
+        "sourceUrl": "https://somafm.com/secretagent/"
+      },
+      {
+        "id": "us-fm-somafm-underground-80s-128k-mp3",
+        "name": "SomaFM Underground 80s (128k MP3)",
+        "band": "FM",
+        "freq": 98.6,
+        "city": "California",
+        "genre": "Music",
+        "streamUrl": "https://ice6.somafm.com/u80s-128-mp3",
+        "analyser": true,
+        "sourceUrl": "https://somafm.com/u80s/"
+      },
+      {
+        "id": "us-fm-somafm-space-station-soma-128k-aac",
+        "name": "SomaFM Space Station Soma (128k AAC)",
+        "band": "FM",
+        "freq": 100.3,
+        "city": "California",
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://ice4.somafm.com/spacestation-128-aac",
+        "analyser": true,
+        "sourceUrl": "https://somafm.com/spacestation/"
+      },
+      {
+        "id": "us-fm-somafm-poptron-128k-mp3",
+        "name": "SomaFM PopTron (128k MP3)",
+        "band": "FM",
+        "freq": 102,
+        "city": "California",
+        "genre": "Music",
+        "streamUrl": "https://ice6.somafm.com/poptron-128-mp3",
+        "analyser": true,
+        "sourceUrl": "https://somafm.com/poptron/"
+      },
+      {
+        "id": "us-fm-somafm-indie-pop-rocks-128k-aac",
+        "name": "SomaFM Indie Pop Rocks! (128k AAC)",
+        "band": "FM",
+        "freq": 103.7,
+        "city": "California",
+        "genre": "Music",
+        "streamUrl": "https://ice5.somafm.com/indiepop-128-aac",
+        "analyser": true,
+        "sourceUrl": "https://somafm.com/indiepop/"
+      },
+      {
+        "id": "us-am-181-fm-highway-181",
+        "name": "181.FM - Highway 181",
+        "band": "AM",
+        "freq": 580,
+        "city": "Virginia",
+        "genre": "Folk",
+        "streamUrl": "https://listen.181fm.com/181-highway_128k.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.181.fm/"
+      },
+      {
+        "id": "us-am-somafm-left-coast-70s-320k-mp3",
+        "name": "SomaFM Left Coast 70s (320k MP3)",
+        "band": "AM",
+        "freq": 900,
+        "city": "California",
+        "genre": "Music",
+        "streamUrl": "https://ice4.somafm.com/seventies-320-mp3",
+        "analyser": true,
+        "sourceUrl": "https://somafm.com/seventies/"
+      },
+      {
+        "id": "us-am-miami-beach-radio",
+        "name": "Miami Beach Radio",
+        "band": "AM",
+        "freq": 1220,
+        "city": "Florida",
+        "genre": "Music",
+        "streamUrl": "https://streaming.radiostreamlive.com/miamibeachradio_devices",
+        "analyser": true,
+        "sourceUrl": "https://www.miamibeachradio.com/"
+      },
+      {
+        "id": "us-am-somafm-lush-128k-mp3",
+        "name": "SomaFM Lush (128k MP3)",
+        "band": "AM",
+        "freq": 1540,
+        "city": "California",
+        "genre": "Music",
+        "streamUrl": "https://ice4.somafm.com/lush-128-mp3",
+        "analyser": true,
+        "sourceUrl": "https://somafm.com/lush/"
+      }
+    ]
+  },
+  {
+    "code": "GB",
+    "name": "United Kingdom",
+    "flag": "🇬🇧",
+    "region": "Europe",
+    "stations": [
+      {
+        "id": "gb-fm-heart-80s",
+        "name": "Heart 80s",
+        "band": "FM",
+        "freq": 88.5,
+        "genre": "Music",
+        "streamUrl": "https://media-ssl.musicradio.com/Heart80sMP3",
+        "analyser": true,
+        "sourceUrl": "https://www.heart.co.uk/80s"
+      },
+      {
+        "id": "gb-fm-love-radio-only-love-songs-70s80s-s",
+        "name": "LOVE.radio Only Love Songs 70s80s s",
+        "band": "FM",
+        "freq": 90,
+        "streamUrl": "https://loveradio.streamingmedia.it/england",
+        "analyser": false,
+        "sourceUrl": "https://love.radio/"
+      },
+      {
+        "id": "gb-fm-tmm-1",
+        "name": "TMM 1",
+        "band": "FM",
+        "freq": 91.8,
+        "city": "Camden",
+        "genre": "Music",
+        "streamUrl": "https://listen-msmn.sharp-stream.com/nme1.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.themusicmachine.co.uk/"
+      },
+      {
+        "id": "gb-fm-gold",
+        "name": "Gold",
+        "band": "FM",
+        "freq": 93.5,
+        "genre": "Music",
+        "streamUrl": "https://media-ssl.musicradio.com/GoldMP3",
+        "analyser": true,
+        "sourceUrl": "https://www.mygoldmusic.co.uk/"
+      },
+      {
+        "id": "gb-fm-bbc-world-service",
+        "name": "BBC World Service",
+        "band": "FM",
+        "freq": 95.2,
+        "streamUrl": "https://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
+        "analyser": true,
+        "sourceUrl": "https://www.bbc.co.uk/sounds/play/live:bbc_world_service"
+      },
+      {
+        "id": "gb-fm-smooth-chill",
+        "name": "Smooth Chill",
+        "band": "FM",
+        "freq": 96.9,
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://media-ssl.musicradio.com/ChillMP3",
+        "analyser": true,
+        "sourceUrl": "https://www.smoothradio.com/chill/"
+      },
+      {
+        "id": "gb-fm-heart-dance",
+        "name": "Heart Dance",
+        "band": "FM",
+        "freq": 98.6,
+        "genre": "Music",
+        "streamUrl": "https://media-ssl.musicradio.com/HeartDanceMP3",
+        "analyser": true,
+        "sourceUrl": "https://www.heart.co.uk/dance"
+      },
+      {
+        "id": "gb-fm-exclusively-dire-straits",
+        "name": "Exclusively Dire Straits",
+        "band": "FM",
+        "freq": 100.3,
+        "genre": "Music",
+        "streamUrl": "https://streaming.exclusive.radio/er/direstraits/icecast.audio",
+        "analyser": true,
+        "sourceUrl": "https://exclusive.radio/"
+      },
+      {
+        "id": "gb-fm-tmm-2-hq",
+        "name": "TMM 2 (HQ)",
+        "band": "FM",
+        "freq": 102,
+        "city": "Camden",
+        "genre": "Music",
+        "streamUrl": "https://listen-msmn.sharp-stream.com/nme2high.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.themusicmachine.co.uk/"
+      },
+      {
+        "id": "gb-fm-lbc-news",
+        "name": "LBC News",
+        "band": "FM",
+        "freq": 103.7,
+        "genre": "News",
+        "streamUrl": "https://media-ssl.musicradio.com/LBCNewsUK",
+        "analyser": true,
+        "sourceUrl": "https://www.globalplayer.com/live/lbcnews/uk/"
+      },
+      {
+        "id": "gb-am-magic-radio-uk",
+        "name": "Magic Radio UK",
+        "band": "AM",
+        "freq": 580,
+        "genre": "Music",
+        "streamUrl": "https://stream-mz.hellorayo.co.uk/magicnational.mp3?direct=true&aw_0_1st.playerid=BMUK_TuneIn&aw_0_1st.skey=7374499933&stationCode=mag",
+        "analyser": true,
+        "sourceUrl": "https://hellorayo.co.uk/magic/play/"
+      },
+      {
+        "id": "gb-am-soul-radio-only-classic-soul",
+        "name": "SOUL RADIO Only Classic Soul",
+        "band": "AM",
+        "freq": 900,
+        "city": "Bristol",
+        "streamUrl": "https://listen.soulradio.uk/uk",
+        "analyser": false,
+        "sourceUrl": "https://soulradio.uk/"
+      },
+      {
+        "id": "gb-am-strange-radio-pumpkin-fm",
+        "name": "Strange Radio - Pumpkin FM",
+        "band": "AM",
+        "freq": 1220,
+        "city": "London, England",
+        "streamUrl": "https://cast2.asurahosting.com/proxy/strangeradio/stream",
+        "analyser": true,
+        "sourceUrl": "https://pumpkinfm.com/"
+      },
+      {
+        "id": "gb-am-house-nation-uk",
+        "name": "House Nation UK",
+        "band": "AM",
+        "freq": 1540,
+        "streamUrl": "https://streaming.radio.co/s06bd9d805/listen",
+        "analyser": true,
+        "sourceUrl": "https://housenationuk.com/"
+      }
+    ]
+  },
+  {
+    "code": "DE",
+    "name": "Germany",
+    "flag": "🇩🇪",
+    "region": "Europe",
+    "stations": [
+      {
+        "id": "de-fm-mangoradio",
+        "name": "MANGORADIO",
+        "band": "FM",
+        "freq": 88.5,
+        "city": "Rheinland-Pfalz",
+        "streamUrl": "https://mangoradio.stream.laut.fm/mangoradio",
+        "analyser": true,
+        "sourceUrl": "https://mangoradio.de/"
+      },
+      {
+        "id": "de-fm-swr3",
+        "name": "SWR3",
+        "band": "FM",
+        "freq": 90.1,
+        "city": "Baden-Württemberg",
+        "genre": "Mixed",
+        "streamUrl": "https://liveradio.swr.de/sw282p3/swr3/play.mp3",
+        "analyser": true,
+        "sourceUrl": "https://swr3.de/"
+      },
+      {
+        "id": "de-fm-deutschlandfunk-dlf-mp3-128k",
+        "name": "Deutschlandfunk | DLF | MP3 128k",
+        "band": "FM",
+        "freq": 91.8,
+        "city": "Berlin",
+        "genre": "News",
+        "streamUrl": "https://st01.sslstream.dlf.de/dlf/01/128/mp3/stream.mp3?aggregator=web",
+        "analyser": true,
+        "sourceUrl": "https://www.deutschlandfunk.de/"
+      },
+      {
+        "id": "de-fm-0-n-70s-on-radio",
+        "name": "- 0 N - 70s on Radio",
+        "band": "FM",
+        "freq": 93.5,
+        "city": "Bayern",
+        "genre": "Music",
+        "streamUrl": "https://0n-70s.radionetz.de/0n-70s.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.0nradio.com/"
+      },
+      {
+        "id": "de-fm-0-n-indie-on-radio",
+        "name": "- 0 N - Indie on Radio",
+        "band": "FM",
+        "freq": 95.2,
+        "city": "Bayern",
+        "genre": "Music",
+        "streamUrl": "https://0n-indie.radionetz.de/0n-indie.mp3",
+        "analyser": false,
+        "sourceUrl": "http://www.0nradio.com/"
+      },
+      {
+        "id": "de-fm-bayern-3",
+        "name": "Bayern 3",
+        "band": "FM",
+        "freq": 96.9,
+        "city": "Bayern",
+        "genre": "Music",
+        "streamUrl": "https://dispatcher.rndfnk.com/br/br3/live/mp3/mid",
+        "analyser": true,
+        "sourceUrl": "https://www.bayern3.de/"
+      },
+      {
+        "id": "de-fm-0-n-smooth-jazz-on-radio",
+        "name": "- 0 N - Smooth Jazz on Radio",
+        "band": "FM",
+        "freq": 98.6,
+        "city": "Bayern",
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://0n-smoothjazz.radionetz.de/0n-smoothjazz.aac",
+        "analyser": true,
+        "sourceUrl": "http://www.0nradio.com/"
+      },
+      {
+        "id": "de-fm-0-goldschlager",
+        "name": "0 Goldschlager",
+        "band": "FM",
+        "freq": 100,
+        "streamUrl": "https://1000goldschlager.stream.laut.fm/1000goldschlager",
+        "analyser": true,
+        "sourceUrl": "https://1000goldschlager.de/"
+      },
+      {
+        "id": "de-fm-0-n-chillout-on-radio",
+        "name": "- 0 N - Chillout on Radio",
+        "band": "FM",
+        "freq": 102,
+        "city": "Bayern",
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://0n-chillout.radionetz.de/0n-chillout.aac",
+        "analyser": true,
+        "sourceUrl": "http://www.0nradio.com/"
+      },
+      {
+        "id": "de-fm-ndr-2",
+        "name": "NDR 2",
+        "band": "FM",
+        "freq": 103.7,
+        "city": "Hamburg",
+        "genre": "Music",
+        "streamUrl": "https://icecast.ndr.de/ndr/ndr2/niedersachsen/mp3/128/stream.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.ndr.de/ndr2/index.html"
+      },
+      {
+        "id": "de-am-technobase-fm",
+        "name": "TechnoBase.FM",
+        "band": "AM",
+        "freq": 580,
+        "genre": "Music",
+        "streamUrl": "https://listener3.mp3.tb-group.fm/tb.mp3",
+        "analyser": true
+      },
+      {
+        "id": "de-am-deutschlandfunk-kultur-dlf-mp3-128k",
+        "name": "Deutschlandfunk Kultur | DLF | MP3 128k",
+        "band": "AM",
+        "freq": 900,
+        "city": "Berlin",
+        "genre": "News",
+        "streamUrl": "https://st02.sslstream.dlf.de/dlf/02/128/mp3/stream.mp3?aggregator=web",
+        "analyser": true,
+        "sourceUrl": "https://www.deutschlandfunkkultur.de/"
+      },
+      {
+        "id": "de-am-radio-bollerwagen",
+        "name": "Radio Bollerwagen",
+        "band": "AM",
+        "freq": 1220,
+        "streamUrl": "https://ffn-stream19.radiohost.de/radiobollerwagen_mp3-192?ref=radioplayer&listenerid=31363233323633323031-323030333a64653a343731363a3730313a623731343a346664383a313761363a39386165-3537373636-4d6f7a696c6c612f352e3020285831313b205562",
+        "analyser": true,
+        "sourceUrl": "https://player.ffn.de/radioplayer/radio-bollerwagen/"
+      },
+      {
+        "id": "de-am-absolut-relax",
+        "name": "Absolut Relax",
+        "band": "AM",
+        "freq": 1540,
+        "city": "Bayern",
+        "streamUrl": "https://absolut-relax.live-sm.absolutradio.de/absolut-relax/stream/aacp?maxvbr=3",
+        "analyser": true,
+        "sourceUrl": "https://absolutradio.de/sender/relax"
+      }
+    ]
+  },
+  {
+    "code": "IT",
+    "name": "Italy",
+    "flag": "🇮🇹",
+    "region": "Europe",
+    "stations": [
+      {
+        "id": "it-fm-radio-armisa",
+        "name": "Radio Armisa",
+        "band": "FM",
+        "freq": 88.5,
+        "city": "Lombardia",
+        "genre": "Music",
+        "streamUrl": "https://onair.armisa.it/listen/armisa/radio.mp3",
+        "analyser": true,
+        "sourceUrl": "https://armisa.it/"
+      },
+      {
+        "id": "it-fm-radio-70-80-marche",
+        "name": "Radio 70 80 Marche",
+        "band": "FM",
+        "freq": 90,
+        "city": "Marche",
+        "streamUrl": "https://rblive.it:8020/radio.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.radio708090.it/"
+      },
+      {
+        "id": "it-fm-italia-italia-70",
+        "name": "ITALIA Italia 70",
+        "band": "FM",
+        "freq": 91.8,
+        "city": "Lombardia",
+        "streamUrl": "https://icy.unitedradio.it/um020.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.unitedmusic.it/"
+      },
+      {
+        "id": "it-fm-retesport-italia",
+        "name": "Retesport (Italia)",
+        "band": "FM",
+        "freq": 93.5,
+        "genre": "News",
+        "streamUrl": "https://icecast.ithost.it/retesport.ogg",
+        "analyser": true,
+        "sourceUrl": "https://www.retesport.it/"
+      },
+      {
+        "id": "it-fm-rai-2",
+        "name": "RAI 2",
+        "band": "FM",
+        "freq": 95.2,
+        "streamUrl": "https://icestreaming.rai.it/2.mp3",
+        "analyser": false,
+        "sourceUrl": "https://www.rai.it/rai2/"
+      },
+      {
+        "id": "it-fm-virgin-radio-rockstar-rolling-stones",
+        "name": "Virgin Radio Rockstar: Rolling Stones",
+        "band": "FM",
+        "freq": 96.9,
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://icy.unitedradio.it/VirginSpecialEvent.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.virginradio.it/sezioni/1855/Music-Star-Rolling-Stones"
+      },
+      {
+        "id": "it-fm-rtr-canale-pooh",
+        "name": "RTR Canale Pooh",
+        "band": "FM",
+        "freq": 99,
+        "city": "Lazio",
+        "genre": "Music",
+        "streamUrl": "https://rtr99.fluidstream.eu/rtr99_pooh.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.rtr99.it/"
+      },
+      {
+        "id": "it-fm-lattemiele",
+        "name": "Lattemiele",
+        "band": "FM",
+        "freq": 100.3,
+        "streamUrl": "https://sr15.inmystream.it:8000/stream",
+        "analyser": true,
+        "sourceUrl": "https://lattemiele.com/"
+      },
+      {
+        "id": "it-fm-70-80-disco-funk-modernsoul-e-boogie",
+        "name": "70 80 Disco Funk ModernSoul e Boogie",
+        "band": "FM",
+        "freq": 102,
+        "streamUrl": "https://discofunk.streamingmedia.it/play",
+        "analyser": false,
+        "sourceUrl": "https://funky.radio/disco/"
+      },
+      {
+        "id": "it-fm-radio-sportiva",
+        "name": "Radio Sportiva",
+        "band": "FM",
+        "freq": 103.7,
+        "streamUrl": "https://sportiva.inmystream.it/stream/sportiva",
+        "analyser": true,
+        "sourceUrl": "https://www.radiosportiva.com/"
+      },
+      {
+        "id": "it-am-romantica-radio",
+        "name": "ROMANTICA-RADIO",
+        "band": "AM",
+        "freq": 580,
+        "streamUrl": "https://vetrina.multi-radio.com/romanticaradio",
+        "analyser": true,
+        "sourceUrl": "https://www.romanticaradio.it/"
+      },
+      {
+        "id": "it-am-rai-1-friuli-venezia-giulia",
+        "name": "Rai 1 Friuli Venezia Giulia",
+        "band": "AM",
+        "freq": 900,
+        "streamUrl": "https://icestreaming.rai.it/1.mp3",
+        "analyser": false,
+        "sourceUrl": "http://www.sedefvg.rai.it/dl/portali/site/page/Page-2331f91a-cc95-4c68-87d7-67c9afd83529.html"
+      },
+      {
+        "id": "it-am-70-80-hits-hq",
+        "name": "70 80 Hits HQ",
+        "band": "AM",
+        "freq": 1220,
+        "city": "Milano",
+        "genre": "Music",
+        "streamUrl": "https://nr8.newradio.it:19574/stream",
+        "analyser": false,
+        "sourceUrl": "https://www.70-80.it/"
+      },
+      {
+        "id": "it-am-radio-bianconera",
+        "name": "Radio Bianconera",
+        "band": "AM",
+        "freq": 1540,
+        "city": "Piemonte",
+        "genre": "News",
+        "streamUrl": "https://stream.tmwradio.com/bianconera.aac",
+        "analyser": true,
+        "sourceUrl": "http://www.radiobianconera.com/"
+      }
+    ]
+  },
+  {
+    "code": "ES",
+    "name": "Spain",
+    "flag": "🇪🇸",
+    "region": "Europe",
+    "stations": [
+      {
+        "id": "es-fm-los40-classic",
+        "name": "LOS40 Classic",
+        "band": "FM",
+        "freq": 88.5,
+        "genre": "Music",
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_CLASSIC.mp3",
+        "analyser": true,
+        "sourceUrl": "https://play.los40.com/emisora/los40_classic/"
+      },
+      {
+        "id": "es-fm-1-splash-s-dance",
+        "name": "#1 Splash s Dance",
+        "band": "FM",
+        "freq": 90,
+        "city": "Madrid",
+        "genre": "Music",
+        "streamUrl": "https://c6.auracast.net/radio/8090/radio.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.splashradio.eu/"
+      },
+      {
+        "id": "es-fm-radio-marca-madrid",
+        "name": "Radio Marca Madrid",
+        "band": "FM",
+        "freq": 91.8,
+        "city": "Madrid",
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIOMARCA_NACIONAL_SC",
+        "analyser": true,
+        "sourceUrl": "https://www.marca.com/radio.html"
+      },
+      {
+        "id": "es-fm-rne-r1-madrid",
+        "name": "RNE - R1 --> Madrid",
+        "band": "FM",
+        "freq": 93.5,
+        "streamUrl": "https://d121.rndfnk.com/star/crtve/rne1/mad/mp3/128/stream.mp3?cid=01GEM7S23A9B744SKFN04XA893&sid=2HgEg5aD71G8EuEf67MKTba5AnL&token=n_qXJorii6EVsZ_IP-RSzQP8sRamUc8gqb1nDnqiNT8&tvf=HHgasgd8KBdkMTIxLnJuZGZuay5jb20",
+        "analyser": true,
+        "sourceUrl": "https://www.rtve.es/play/audios/programa/rne_mad-live/3893534/"
+      },
+      {
+        "id": "es-fm-catalunya-informaci-catinfo",
+        "name": "Catalunya Informació (Catinfo)",
+        "band": "FM",
+        "freq": 95.2,
+        "city": "Catalunya",
+        "genre": "News",
+        "streamUrl": "https://shoutcast.ccma.cat/ccma/catalunyainformacioHD.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.catradio.cat/catinfo"
+      },
+      {
+        "id": "es-fm-remember-the-music-fm",
+        "name": "Remember the music FM",
+        "band": "FM",
+        "freq": 96.6,
+        "city": "Valencia",
+        "genre": "Music",
+        "streamUrl": "https://eu1.lhdserver.es:9041/stream",
+        "analyser": false,
+        "sourceUrl": "https://rememberthemusicfm.com/"
+      },
+      {
+        "id": "es-fm-radio-espa-a",
+        "name": "Radio España",
+        "band": "FM",
+        "freq": 98.6,
+        "city": "Madrid",
+        "genre": "News",
+        "streamUrl": "https://stream-280.surfernetwork.com/7ywx2u45vv8uv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiI3eXd4MnU0NXZ2OHV2IiwiaG9zdCI6InN0cmVhbS0yODAuc3VyZmVybmV0d29yay5jb20iLCJ0bSI6ZmFsc2UsInJ0dGwiOjUsImp0aSI6Im5lV0ktREoyUk5LT2Rpa3hXRG1CLXciLCJpYXQiOjE3OTQ4OTA4MzQsImV4cCI6MTc5NDg5MDg5NH0.maTiy00TtY1KkpyR9QVFdLZ7F3JLTxX96fmI_8XG5kY",
+        "analyser": true,
+        "sourceUrl": "https://www.xn--radioespaa-19a.es/"
+      },
+      {
+        "id": "es-fm-radio-nacional-de-espa-a-radio-5-todo-noticias",
+        "name": "Radio Nacional de España - Radio 5 Todo noticias",
+        "band": "FM",
+        "freq": 100.3,
+        "genre": "News",
+        "streamUrl": "https://d131.rndfnk.com/star/crtve/rne5/main/mp3/128/stream.mp3?aggregator=tunein&cid=01GEP4MW5CAHPYP1EXHVKWFJ8W&sid=2OeE42hivuba6dTGvjnMGjKByQe&token=cdczXcnimVx4AY4iamqYbTMdu3cK7oBxmS2UQN9cWc0&tvf=pdPcDBxuVxdkMTMxLnJuZGZuay5jb20",
+        "analyser": true,
+        "sourceUrl": "https://www.rtve.es/play/radio/radio-5/"
+      },
+      {
+        "id": "es-fm-radio-marca",
+        "name": "Radio Marca",
+        "band": "FM",
+        "freq": 102,
+        "streamUrl": "https://www.marca.com/radio/geoblock/getSrcApp.php?dial=Nacional&dist=radiomarcaweb",
+        "analyser": false,
+        "sourceUrl": "https://www.marca.com/radio.html?intcmp=BOTONPORTADA01&s_kw=radiomarca"
+      },
+      {
+        "id": "es-fm-marca-valladolid",
+        "name": "Marca Valladolid",
+        "band": "FM",
+        "freq": 103.7,
+        "city": "Valladolid ",
+        "streamUrl": "https://radiomarcavalladolid.streaming-pro.com:6106/radiomarca.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.radiomarcavalladolid.com/"
+      },
+      {
+        "id": "es-am-costa-del-mar-smooth-jazz",
+        "name": "Costa Del Mar Smooth Jazz",
+        "band": "AM",
+        "freq": 580,
+        "city": "Madrid",
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://radio4.cdm-radio.com:18024/stream-mp3-Smooth",
+        "analyser": true,
+        "sourceUrl": "http://www.cdm-smoothsax.com/"
+      },
+      {
+        "id": "es-am-flaix-fm",
+        "name": "Flaix FM",
+        "band": "AM",
+        "freq": 900,
+        "genre": "Music",
+        "streamUrl": "https://stream.flaixfm.cat/icecast",
+        "analyser": true,
+        "sourceUrl": "https://flaixfm.cat/"
+      },
+      {
+        "id": "es-am-80-exitos",
+        "name": "__80 EXITOS",
+        "band": "AM",
+        "freq": 1220,
+        "city": "Madrid",
+        "genre": "Music",
+        "streamUrl": "https://80sexitos.stream.laut.fm/80sexitos",
+        "analyser": true,
+        "sourceUrl": "https://musica80.radioclub.es/"
+      },
+      {
+        "id": "es-am-cope-albacete",
+        "name": "COPE Albacete",
+        "band": "AM",
+        "freq": 1540,
+        "streamUrl": "https://wecast06-o-cloud.flumotion.com/copesedes/albacete.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.cope.es/directos/albacete"
+      }
+    ]
+  },
+  {
+    "code": "CZ",
+    "name": "Czech Republic",
+    "flag": "🇨🇿",
+    "region": "Europe",
+    "stations": [
+      {
+        "id": "cz-fm-pov-dka",
+        "name": "povídka",
+        "band": "FM",
+        "freq": 88.5,
+        "streamUrl": "https://ice3.abradio.cz/povidka128.mp3",
+        "analyser": true,
+        "sourceUrl": "https://ice3.abradio.cz/povidka128.mp3"
+      },
+      {
+        "id": "cz-fm-r-dio-beat-128-aac",
+        "name": "Rádio Beat (128 AAC)",
+        "band": "FM",
+        "freq": 90.1,
+        "genre": "Music",
+        "streamUrl": "https://icecast2.play.cz/beat128aac",
+        "analyser": true,
+        "sourceUrl": "https://www.radiobeat.cz/"
+      },
+      {
+        "id": "cz-fm-rock-radio",
+        "name": "Rock Radio",
+        "band": "FM",
+        "freq": 91.8,
+        "genre": "Music",
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/ROCK_RADIO_128.mp3",
+        "analyser": true,
+        "sourceUrl": "https://rockovyradio.cz/"
+      },
+      {
+        "id": "cz-fm-radio-blan-k-morava-a-slezsko",
+        "name": "Radio Blaník Morava a Slezsko",
+        "band": "FM",
+        "freq": 93.5,
+        "genre": "Music",
+        "streamUrl": "https://ice.abradio.cz/blanikmorava128.mp3?gdpr=1&gdpr_consent=Q084aEUyaE84aEUyaEFjQUJCRU5BX0NnQVBfQUFIX0FBQVlnRjVvQmhEeEVCU0ZDQUdKb1lOa2dBQUFXeHdBQUFDQUNBQUFBb0FBQUFCb0FBQVFBQUFBQUFBQWdCQUFBQUJJQUlBSUFBQUJBR0VBQUFBQUFBQUFBQUFBQUFFQUFBQUFBSVFBQUFBQUFBQ0JBQUFBQUFBQUFBQUFBQUFBQVFBQUFnWG5BZUFBV0FCVUFDNEFIQUFRQUFxQUJvQURrQUlnQVRBQW5nQlZBQzRBRjhBTVFBaElCRUFFVUFLVUFXSUF5d0Jtd0R1QU84QWhBQkZnQzBnRjFBTUNBYXdCTm9DOHdBQUFBLllBQUFBQUFBQUFBQQ==",
+        "analyser": true
+      },
+      {
+        "id": "cz-fm-radio-svoboda-ru-official-stream",
+        "name": "Radio Svoboda (ru) (official stream)",
+        "band": "FM",
+        "freq": 95.2,
+        "city": "Prague",
+        "streamUrl": "https://stream.radiojar.com/hcrb063nn3quv",
+        "analyser": true,
+        "sourceUrl": "https://svoboda.org/"
+      },
+      {
+        "id": "cz-fm-kiss-radio-128mp3",
+        "name": "Kiss Radio - 128MP3",
+        "band": "FM",
+        "freq": 96.9,
+        "streamUrl": "https://icecast1.play.cz/kissdelta128.mp3",
+        "analyser": true,
+        "sourceUrl": "https://kiss.cz/"
+      },
+      {
+        "id": "cz-fm-r-dio-blan-k",
+        "name": "Rádio Blaník",
+        "band": "FM",
+        "freq": 98.6,
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_BLANIK_128.mp3",
+        "analyser": true,
+        "sourceUrl": "https://radioblanik.cz/"
+      },
+      {
+        "id": "cz-fm-netro-life-radio-8-fm",
+        "name": "Netro Life Radio ,8 FM",
+        "band": "FM",
+        "freq": 100,
+        "genre": "Music",
+        "streamUrl": "https://icecast9.play.cz/netro-life-radio.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.netroliferadio.cz/"
+      },
+      {
+        "id": "cz-fm-dance-club-radio",
+        "name": "Dance Club Radio",
+        "band": "FM",
+        "freq": 102,
+        "genre": "Music",
+        "streamUrl": "https://ice4.abradio.cz/dance128.mp3",
+        "analyser": true,
+        "sourceUrl": "https://radia.cz/radio-dance-radio-info"
+      },
+      {
+        "id": "cz-fm-comedy-club-r-dio-diana",
+        "name": "Comedy Club R@dio DIANA",
+        "band": "FM",
+        "freq": 103.7,
+        "genre": "News",
+        "streamUrl": "https://westradio.cz/radio/8010/radio.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.radiodiana.cz/"
+      },
+      {
+        "id": "cz-am-r-dio-humor-2",
+        "name": "Rádio humor 2",
+        "band": "AM",
+        "freq": 580,
+        "city": "Prague",
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_HUMOR.aac",
+        "analyser": true,
+        "sourceUrl": "https://www.abradio.cz/"
+      },
+      {
+        "id": "cz-am-cro-radiozurnal",
+        "name": "CRo Radiozurnal",
+        "band": "AM",
+        "freq": 900,
+        "streamUrl": "https://rozhlas.stream/radiozurnal_aac_128.aac",
+        "analyser": true,
+        "sourceUrl": "https://radiozurnal.rozhlas.cz/"
+      },
+      {
+        "id": "cz-am-phonk-radio",
+        "name": "PHONK RADIO",
+        "band": "AM",
+        "freq": 1220,
+        "streamUrl": "https://stream-43.zeno.fm/90fvpb27u18uv?zs=vRvgZYxuSUWsgBGCbKMLnA",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/radio/phonk-radio/"
+      },
+      {
+        "id": "cz-am-evropa-2-actve",
+        "name": "Evropa 2 - Actve",
+        "band": "AM",
+        "freq": 1540,
+        "city": "Czech Republic",
+        "genre": "Music",
+        "streamUrl": "https://ice.actve.net/fm-evropa2-128",
+        "analyser": true,
+        "sourceUrl": "https://www.evropa2.cz/"
+      }
+    ]
+  },
+  {
+    "code": "JP",
+    "name": "Japan",
+    "flag": "🇯🇵",
+    "region": "East Asia",
+    "stations": [
+      {
+        "id": "jp-fm-gensokyo-radio",
+        "name": "Gensokyo Radio",
+        "band": "FM",
+        "freq": 88.5,
+        "streamUrl": "https://stream.gensokyoradio.net/3",
+        "analyser": false,
+        "sourceUrl": "https://gensokyoradio.net/"
+      },
+      {
+        "id": "jp-fm-s-per-tokio-radio",
+        "name": "Súper Tokio Radio",
+        "band": "FM",
+        "freq": 90.1,
+        "streamUrl": "https://streamer.radio.co/s83eb8ff39/listen",
+        "analyser": true,
+        "sourceUrl": "https://supertokio.com/"
+      },
+      {
+        "id": "jp-fm-fred-film-radio",
+        "name": "Fred Film Radio(日本語)",
+        "band": "FM",
+        "freq": 91.8,
+        "city": "Tokyo",
+        "streamUrl": "https://s10.webradio-hosting.com/proxy/fredradiojp/stream",
+        "analyser": true,
+        "sourceUrl": "http://www.fred.fm/"
+      },
+      {
+        "id": "jp-fm-j1-hits",
+        "name": "J1 HITS",
+        "band": "FM",
+        "freq": 93.5,
+        "city": "tokyo",
+        "streamUrl": "https://jenny.torontocast.com:2000/stream/J1HITS?_=184325",
+        "analyser": true,
+        "sourceUrl": "https://www.j1fm.tokyo/"
+      },
+      {
+        "id": "jp-fm-j-pop-powerplay-kawaii-asia-dream-radio",
+        "name": "J-Pop Powerplay Kawaii(asia dream radio)",
+        "band": "FM",
+        "freq": 95.2,
+        "genre": "Music",
+        "streamUrl": "https://kathy.torontocast.com:3060/;?shoutcast",
+        "analyser": true,
+        "sourceUrl": "http://asiadreamradio.torontocast.stream/stations/en/index.html"
+      },
+      {
+        "id": "jp-fm-jazz-sakura",
+        "name": "Jazz Sakura",
+        "band": "FM",
+        "freq": 96.9,
+        "streamUrl": "https://kathy.torontocast.com:3330/;",
+        "analyser": true,
+        "sourceUrl": "https://asiadreamradio.torontocast.stream/stations/en/index.html"
+      },
+      {
+        "id": "jp-fm-ashiyaradio",
+        "name": "AshiyaRadio〜アシヤ・ラヂヲ〜",
+        "band": "FM",
+        "freq": 98.6,
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://s3.radio.co/sc8d895604/listen",
+        "analyser": true,
+        "sourceUrl": "https://ashiya.radio/"
+      },
+      {
+        "id": "jp-fm-tilderadio",
+        "name": "tilderadio",
+        "band": "FM",
+        "freq": 100.3,
+        "streamUrl": "https://tilderadio.org/listen",
+        "analyser": true,
+        "sourceUrl": "https://tilderadio.org/"
+      },
+      {
+        "id": "jp-fm-102",
+        "name": "大富ラジオ",
+        "band": "FM",
+        "freq": 102,
+        "streamUrl": "https://stream.zeno.fm/oaxp6mswcqltv",
+        "analyser": true,
+        "sourceUrl": "http://www.daifutv.com/j/"
+      },
+      {
+        "id": "jp-fm-j-club-powerplay-hiphop-asia-dream-radio",
+        "name": "J-Club Powerplay HipHop(Asia DREAM Radio)",
+        "band": "FM",
+        "freq": 103.7,
+        "genre": "Music",
+        "streamUrl": "https://kathy.torontocast.com:3350/;?shoutcast",
+        "analyser": true,
+        "sourceUrl": "http://asiadreamradio.torontocast.stream/stations/en/index.html"
+      },
+      {
+        "id": "jp-am-real-love-music-radio-future-funk",
+        "name": "Real Love Music - Radio Future Funk",
+        "band": "AM",
+        "freq": 580,
+        "streamUrl": "https://stream-152.zeno.fm/48533y95cnruv?zs=doyTUcjfTvCVtBOS3nlI8g",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/radio/future-fnk/"
+      },
+      {
+        "id": "jp-am-miku-radio",
+        "name": "Miku Radio",
+        "band": "AM",
+        "freq": 900,
+        "streamUrl": "https://miku.fm/listen/miku/mp3-128",
+        "analyser": true,
+        "sourceUrl": "https://miku.fm/public/miku"
+      },
+      {
+        "id": "jp-am-replay-news-5",
+        "name": "REPLAY NEWS - 日本語 5分ごとのニュースラジオ",
+        "band": "AM",
+        "freq": 1220,
+        "city": "Osaka",
+        "genre": "News",
+        "streamUrl": "https://replaynewsja.ice.infomaniak.ch/replaynewsja-128.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.replaynews.net/"
+      },
+      {
+        "id": "jp-am-rainwave-all",
+        "name": "Rainwave All",
+        "band": "AM",
+        "freq": 1540,
+        "city": "tokyo",
+        "streamUrl": "https://relay.rainwave.cc/all.mp3?1:MF0d8GHw2d",
+        "analyser": false,
+        "sourceUrl": "https://rainwave.cc/all/"
+      }
+    ]
+  },
+  {
+    "code": "KR",
+    "name": "South Korea",
+    "flag": "🇰🇷",
+    "region": "East Asia",
+    "stations": [
+      {
+        "id": "kr-fm-big-b-radio-kpop",
+        "name": "Big B Radio - Kpop",
+        "band": "FM",
+        "freq": 88.5,
+        "genre": "Music",
+        "streamUrl": "https://antares.dribbcast.com/proxy/kpop?mp=/s",
+        "analyser": true,
+        "sourceUrl": "https://bigbradio.net/kpop"
+      },
+      {
+        "id": "kr-fm-cbs-music-fm",
+        "name": "CBS 파워라디오 [Music FM]",
+        "band": "FM",
+        "freq": 90.1,
+        "streamUrl": "https://lhttp-hw.qtfm.cn/live/15318233/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "https://cbsfm.modoo.at/"
+      },
+      {
+        "id": "kr-fm-listen-moe-kpop-vorbis",
+        "name": "Listen.Moe KPop Vorbis",
+        "band": "FM",
+        "freq": 91.8,
+        "streamUrl": "https://listen.moe/kpop/stream",
+        "analyser": false,
+        "sourceUrl": "https://listen.moe/"
+      },
+      {
+        "id": "kr-fm-fred-film-radio",
+        "name": "Fred Film Radio(한국어)",
+        "band": "FM",
+        "freq": 93.5,
+        "city": "Seoul",
+        "streamUrl": "https://s10.webradio-hosting.com/proxy/fredradiokr/stream",
+        "analyser": true,
+        "sourceUrl": "http://www.fred.fm/"
+      },
+      {
+        "id": "kr-fm-listen-moe-kpop-mp3",
+        "name": "Listen.moe Kpop (MP3)",
+        "band": "FM",
+        "freq": 95.2,
+        "genre": "Music",
+        "streamUrl": "https://listen.moe/kpop/fallback",
+        "analyser": false,
+        "sourceUrl": "https://listen.moe/"
+      },
+      {
+        "id": "kr-fm-k-radio",
+        "name": "K-RADIO",
+        "band": "FM",
+        "freq": 96.9,
+        "streamUrl": "https://s5.radio.co/s0a9796fe3/listen",
+        "analyser": true,
+        "sourceUrl": "https://www.am1660.com/"
+      },
+      {
+        "id": "kr-fm-replay-news-5",
+        "name": "REPLAY NEWS - 한국어 5분마다 뉴스 라디오",
+        "band": "FM",
+        "freq": 98.6,
+        "city": "incheon",
+        "genre": "News",
+        "streamUrl": "https://replaynewskr.ice.infomaniak.ch/replaynewskr-128.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.replaynews.net/"
+      }
+    ]
+  },
+  {
+    "code": "CN",
+    "name": "China",
+    "flag": "🇨🇳",
+    "region": "East Asia",
+    "stations": [
+      {
+        "id": "cn-fm-89",
+        "name": "怀集音乐之声",
+        "band": "FM",
+        "freq": 88.5,
+        "city": "Kwangtung",
+        "streamUrl": "https://lhttp.qingting.fm/live/4804/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.hj0758.cn/"
+      },
+      {
+        "id": "cn-fm-cnr-1",
+        "name": "CNR-1 中国之声",
+        "band": "FM",
+        "freq": 90.1,
+        "genre": "News",
+        "streamUrl": "https://lhttp.qtfm.cn/live/15318317/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.cnr.cn/"
+      },
+      {
+        "id": "cn-fm-mixfm",
+        "name": "mixfm",
+        "band": "FM",
+        "freq": 90.7,
+        "streamUrl": "https://lhttp.qingting.fm/live/15318146/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "https://tingfm.com/radio/976"
+      },
+      {
+        "id": "cn-fm-92",
+        "name": "雨声轻音乐",
+        "band": "FM",
+        "freq": 91.8,
+        "genre": "Classical/Jazz",
+        "streamUrl": "https://stream.zeno.fm/689zc32y4x8uv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/radio/rain-songs/"
+      },
+      {
+        "id": "cn-fm-94",
+        "name": "德云社相声合集",
+        "band": "FM",
+        "freq": 93.5,
+        "genre": "News",
+        "streamUrl": "https://stream.zeno.fm/yqawwmweq8mtv",
+        "analyser": true,
+        "sourceUrl": "https://zeno.fm/radio/de-yun-she-xiang-sheng-he-ji/"
+      },
+      {
+        "id": "cn-fm-95",
+        "name": "安徽小说评书广播",
+        "band": "FM",
+        "freq": 95.2,
+        "city": "Anhwei",
+        "streamUrl": "https://lhttp.qtfm.cn/live/1951/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.ahrtv.cn/"
+      },
+      {
+        "id": "cn-fm-97",
+        "name": "广东音乐之声",
+        "band": "FM",
+        "freq": 96.9,
+        "city": "Kwangtung",
+        "streamUrl": "https://lhttp.qtfm.cn/live/1260/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "https://m.gdtv.cn/"
+      },
+      {
+        "id": "cn-fm-99",
+        "name": "北京新闻广播",
+        "band": "FM",
+        "freq": 98.6,
+        "city": "Beijing",
+        "genre": "News",
+        "streamUrl": "https://lhttp.qtfm.cn/live/339/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "https://www.rbc.cn/"
+      },
+      {
+        "id": "cn-fm-100",
+        "name": "故事广播-阿基米德故事会",
+        "band": "FM",
+        "freq": 100.3,
+        "streamUrl": "https://lhttp.qtfm.cn/live/20500182/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.ajmide.com/"
+      },
+      {
+        "id": "cn-fm-shanghai-fm-101",
+        "name": "Shanghai FM 上海动感101",
+        "band": "FM",
+        "freq": 101,
+        "city": "Shanghai",
+        "streamUrl": "https://lhttp.qingting.fm/live/274/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.fm101.cn/"
+      },
+      {
+        "id": "cn-am-580",
+        "name": "广东交通之声",
+        "band": "AM",
+        "freq": 580,
+        "city": "Kwangtung",
+        "streamUrl": "https://lhttp.qtfm.cn/live/1262/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "https://m.gdtv.cn/"
+      },
+      {
+        "id": "cn-am-900",
+        "name": "广东股市广播",
+        "band": "AM",
+        "freq": 900,
+        "city": "Kwangtung",
+        "streamUrl": "https://lhttp.qtfm.cn/live/4847/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "https://m.gdtv.cn/"
+      },
+      {
+        "id": "cn-am-asiafm",
+        "name": "AsiaFM亚洲经典台",
+        "band": "AM",
+        "freq": 1220,
+        "city": "Hong Kong",
+        "streamUrl": "https://lhttp.qingting.fm/live/5021912/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "http://www.asiafm.cn/"
+      },
+      {
+        "id": "cn-am-1540",
+        "name": "济南故事广播",
+        "band": "AM",
+        "freq": 1540,
+        "city": "Shantung",
+        "genre": "News",
+        "streamUrl": "https://lhttp.qtfm.cn/live/1672/64k.mp3",
+        "analyser": true,
+        "sourceUrl": "http://jnradio.ijntv.cn/fm1043/"
+      }
+    ]
+  },
+  {
+    "code": "AU",
+    "name": "Australia",
+    "flag": "🇦🇺",
+    "region": "Oceania",
+    "stations": [
+      {
+        "id": "au-fm-the-prog-rock-machine",
+        "name": "The Prog Rock Machine",
+        "band": "FM",
+        "freq": 88.5,
+        "genre": "Music",
+        "streamUrl": "https://theproganrockmachine.out.airtime.pro/theproganrockmachine_b",
+        "analyser": true,
+        "sourceUrl": "https://progrockmachine.com/"
+      },
+      {
+        "id": "au-fm-80s-s-super-pop-hits",
+        "name": "80s s Super Pop Hits",
+        "band": "FM",
+        "freq": 90,
+        "city": "New South Wales",
+        "genre": "Music",
+        "streamUrl": "https://s4.myradiostream.com:7344/listen.mp3?",
+        "analyser": true,
+        "sourceUrl": "https://www.radio-australia.org/"
+      },
+      {
+        "id": "au-fm-nova",
+        "name": "Nova",
+        "band": "FM",
+        "freq": 91.9,
+        "city": "South Australia",
+        "genre": "Music",
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/NOVA_919_AAC48.aac",
+        "analyser": true,
+        "sourceUrl": "http://www.nova919.com.au/"
+      },
+      {
+        "id": "au-fm-fresh",
+        "name": "Fresh",
+        "band": "FM",
+        "freq": 92.7,
+        "city": "South Australia",
+        "genre": "Music",
+        "streamUrl": "https://live.fresh927.com.au/freshaac",
+        "analyser": true,
+        "sourceUrl": "https://fresh927.com.au/"
+      },
+      {
+        "id": "au-fm-sky-news-australia-radio",
+        "name": "Sky News Australia Radio",
+        "band": "FM",
+        "freq": 93.5,
+        "city": "Sydney NSW",
+        "genre": "News",
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/NOVA_SKYNEWSAAC.aac",
+        "analyser": true,
+        "sourceUrl": "https://www.skynews.com.au/sky-news-radio"
+      },
+      {
+        "id": "au-fm-sbs-popasia",
+        "name": "SBS PopAsia",
+        "band": "FM",
+        "freq": 95.2,
+        "city": "New South Wales",
+        "genre": "Music",
+        "streamUrl": "https://sbs-ice.streamguys1.com/sbs-popasia-sbs-web",
+        "analyser": true,
+        "sourceUrl": "https://www.sbs.com.au/popasia/"
+      }
+    ]
+  },
+  {
+    "code": "NZ",
+    "name": "New Zealand",
+    "flag": "🇳🇿",
+    "region": "Oceania",
+    "stations": [
+      {
+        "id": "nz-fm-ski-fm",
+        "name": "Ski FM",
+        "band": "FM",
+        "freq": 88.5,
+        "city": "Central Plateau, Desert Road",
+        "genre": "Music",
+        "streamUrl": "https://s2.radio.co/s6436891bc/listen",
+        "analyser": true,
+        "sourceUrl": "https://skifmnetwork.co.nz/"
+      },
+      {
+        "id": "nz-fm-https-badradio-nz-24-7-phonk",
+        "name": "https://badradio.nz/ - 24/7 PHONK",
+        "band": "FM",
+        "freq": 90.1,
+        "streamUrl": "https://s2.radio.co/s2b2b68744/listen",
+        "analyser": true,
+        "sourceUrl": "https://badradio.nz/"
+      },
+      {
+        "id": "nz-fm-fm-radio-chinese",
+        "name": "新西兰中文广播电台 FM Radio Chinese",
+        "band": "FM",
+        "freq": 90.6,
+        "city": "Auckland",
+        "genre": "News",
+        "streamUrl": "https://s26.myradiostream.com:20274/listen.mp3",
+        "analyser": true,
+        "sourceUrl": "https://fm906.co.nz/"
+      },
+      {
+        "id": "nz-fm-retro-hit-radio",
+        "name": "Retro Hit Radio",
+        "band": "FM",
+        "freq": 91.8,
+        "city": "Auckland",
+        "streamUrl": "https://riphel02.radioca.st/stream",
+        "analyser": true,
+        "sourceUrl": "http://retrohitradio.co.nz/"
+      },
+      {
+        "id": "nz-fm-the-breeze",
+        "name": "The Breeze",
+        "band": "FM",
+        "freq": 93.4,
+        "city": "Auckland",
+        "streamUrl": "https://mediaworks.streamguys1.com/breeze-akl-high_icy",
+        "analyser": true,
+        "sourceUrl": "http://www.thebreeze.co.nz/"
+      },
+      {
+        "id": "nz-fm-bfm-flac",
+        "name": "bFM - FLAC",
+        "band": "FM",
+        "freq": 95,
+        "city": "Auckland",
+        "streamUrl": "https://streams.95bfm.com/stream112",
+        "analyser": true,
+        "sourceUrl": "https://95bfm.com/"
+      },
+      {
+        "id": "nz-fm-newstalk-zb",
+        "name": "Newstalk ZB",
+        "band": "FM",
+        "freq": 96.9,
+        "city": "Auckland ",
+        "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/NZME_41AAC.aac",
+        "analyser": true,
+        "sourceUrl": "https://www.newstalkzb.co.nz/"
+      },
+      {
+        "id": "nz-fm-the-rock-nz-s-1-rock-radio-station",
+        "name": "The Rock - NZ's #1 rock radio station",
+        "band": "FM",
+        "freq": 98.6,
+        "city": "Auckland",
+        "genre": "Music",
+        "streamUrl": "https://digitalstreams.mediaworks.nz/rock_net_icy",
+        "analyser": false,
+        "sourceUrl": "https://www.therock.net.nz/"
+      },
+      {
+        "id": "nz-fm-magic-fm",
+        "name": "Magic FM",
+        "band": "FM",
+        "freq": 100.3,
+        "city": "Auckland",
+        "streamUrl": "https://mediaworks.streamguys1.com/magic_net_icy",
+        "analyser": true,
+        "sourceUrl": "https://rova.nz/"
+      },
+      {
+        "id": "nz-fm-mad-fm-auckland",
+        "name": "MAD FM Auckland",
+        "band": "FM",
+        "freq": 106.7,
+        "city": "Auckland",
+        "genre": "Music",
+        "streamUrl": "https://madfm-gecko.radioca.st/stream",
+        "analyser": true,
+        "sourceUrl": "https://www.madfm.net/index.html"
+      },
+      {
+        "id": "nz-am-radio-robotic",
+        "name": "Radio Robotic",
+        "band": "AM",
+        "freq": 580,
+        "city": "Hamilton",
+        "genre": "Music",
+        "streamUrl": "https://stream.zeno.fm/rhscse2a41zuv",
+        "analyser": true,
+        "sourceUrl": "https://www.radiorobotic.com/"
+      },
+      {
+        "id": "nz-am-humm-radio",
+        "name": "Humm Radio",
+        "band": "AM",
+        "freq": 900,
+        "city": "Auckland",
+        "genre": "Music",
+        "streamUrl": "https://mediaworks.streamguys1.com/humm_net_icy",
+        "analyser": true,
+        "sourceUrl": "https://rova.nz/"
+      },
+      {
+        "id": "nz-am-the-generator",
+        "name": "The Generator",
+        "band": "AM",
+        "freq": 1220,
+        "genre": "Music",
+        "streamUrl": "https://s1.myradiostream.com/:14268/;?type=http&nocache=1608640718?0.7458407789862892",
+        "analyser": true,
+        "sourceUrl": "https://thegenerator.co.nz/"
+      },
+      {
+        "id": "nz-am-rhema-mp3",
+        "name": "Rhema - MP3",
+        "band": "AM",
+        "freq": 1540,
+        "city": "Auckland",
+        "genre": "Religious",
+        "streamUrl": "https://rhema-radio.streamguys1.com/rhema.mp3",
+        "analyser": true,
+        "sourceUrl": "https://rhema.co.nz/"
+      }
+    ]
+  }
+]

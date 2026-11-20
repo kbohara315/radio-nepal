@@ -7,6 +7,7 @@ interface OnAirCardProps {
   band: Band
   freq: number
   tuning: Tuning
+  country?: { name: string; flag: string }
   /** Buttons engraved at the right end of the strip (Stations, help). */
   actions?: ReactNode
 }
@@ -26,7 +27,7 @@ const STATUS: Record<Tuning['state'], string> = {
 }
 
 /** One slim engraved info strip under the radio: status lamp, station, and the buttons. */
-export function OnAirCard({ power, band, freq, tuning, actions }: OnAirCardProps) {
+export function OnAirCard({ power, band, freq, tuning, country, actions }: OnAirCardProps) {
   const station = tuning.station
   const locked = power && station !== null && tuning.signal >= 0.5
   const view = !power ? 'off' : locked ? 'locked' : 'static'
@@ -34,17 +35,18 @@ export function OnAirCard({ power, band, freq, tuning, actions }: OnAirCardProps
 
   let name = 'Radio off'
   let status: string | null = 'Turn the volume up to switch on'
-  let meta = `Dial reads ${formatFreq(band, freq)}`
+  let meta = `Dial reads ${formatFreq(band, freq)}${country ? ` · ${country.flag} ${country.name}` : ''}`
   if (view === 'static') {
     name = 'Between stations'
     status = null
-    meta = `Dial reads ${formatFreq(band, freq)} · keep turning`
+    meta = `Dial reads ${formatFreq(band, freq)}${country ? ` · ${country.flag} ${country.name}` : ''} · keep turning`
   } else if (view === 'locked' && station) {
     name = station.name
     status = STATUS[state]
     meta = [
       isInternetOnly(station) ? `Internet · AM dial ${formatFreq('AM', station.freq)}` : `FM ${formatFreq('FM', station.freq)}`,
       station.city,
+      country ? `${country.flag} ${country.name}` : undefined,
       station.genre,
     ]
       .filter(Boolean)

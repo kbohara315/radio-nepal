@@ -1,7 +1,21 @@
 import * as React from 'react'
 import { createRadioEngine } from '../audio/engine'
-import { stations } from '../data/stations'
-import { BAND_RANGE, type Band, type Station, type RadioEngine, type Tuning, type Levels, type VisualSource } from '../types'
+import {
+  DEFAULT_COUNTRY,
+  WORLD_COUNTRIES,
+  fetchCountryStations,
+  getCountry,
+} from '../data/countries'
+import { detectTimezoneCountry, fetchGeoIpCountry } from '../data/geo'
+import {
+  BAND_RANGE,
+  type Band,
+  type Station,
+  type RadioEngine,
+  type Tuning,
+  type Levels,
+  type VisualSource,
+} from '../types'
 
 const STORAGE_KEY = 'vintage-radio:v1'
 const NO_TUNING: Tuning = { station: null, signal: 0, state: 'idle' }
@@ -28,6 +42,7 @@ export interface RadioState {
   band: Band
   freq: Record<Band, number>
   volume: number
+  country: string
 }
 
 const DEFAULTS: RadioState = {
@@ -35,6 +50,7 @@ const DEFAULTS: RadioState = {
   band: 'FM',
   freq: { FM: 90.2, AM: 760 },
   volume: 0.6,
+  country: DEFAULT_COUNTRY,
 }
 // The radio is on exactly while the volume is above zero, so it always starts off, at zero.
 const START_VOLUME = 0
@@ -53,7 +69,8 @@ export function clampFreq(band: Band, f: number) {
 let lastVolume = DEFAULTS.volume
 
 function load(): RadioState {
-  const state: RadioState = { ...DEFAULTS, freq: { ...DEFAULTS.freq }, volume: START_VOLUME }
+  const detected = detectTimezoneCountry()
+  const state: RadioState = { ...DEFAULTS, country: detected, freq: { ...DEFAULTS.freq }, volume: START_VOLUME }
   try {
     const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null') as unknown
     if (!raw || typeof raw !== 'object') return state
@@ -66,6 +83,9 @@ function load(): RadioState {
       }
     }
     if (typeof r.volume === 'number' && Number.isFinite(r.volume)) lastVolume = clamp(r.volume, 0, 1) || DEFAULTS.volume
+    if (typeof r.country === 'string' && WORLD_COUNTRIES.some((c) => c.code === r.country)) {
+      state.country = r.country
+    }
   } catch {
     // unreadable storage or bad JSON: fall back to defaults
   }
@@ -75,12 +95,15 @@ function load(): RadioState {
 export function useRadio() {
   const [state, setState] = React.useState<RadioState>(load)
   const [tuning, setTuning] = React.useState<Tuning>(NO_TUNING)
+  const initialStations = getCountry(state.country).stations
+  const [stationsList, setStationsList] = React.useState<Station[]>(initialStations)
   const stateRef = React.useRef(state)
   const engineRef = React.useRef<RadioEngine | null>(null)
+  const activeStationsRef = React.useRef<Station[]>([...initialStations])
 
-  // One engine per mount. Effect-created, so StrictMode's mount/unmount/mount is safe.
+  // One engine per mount. StrictMode safe.
   React.useEffect(() => {
-    const engine = createRadioEngine(stations)
+    const engine = createRadioEngine(activeStationsRef.current)
     engineRef.current = engine
     const s = stateRef.current
     engine.setBand(s.band)
@@ -100,12 +123,17 @@ export function useRadio() {
     try {
       localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify({ band: state.band, freq: state.freq, volume: state.volume > 0 ? state.volume : lastVolume }),
+        JSON.stringify({
+          band: state.band,
+          freq: state.freq,
+          volume: state.volume > 0 ? state.volume : lastVolume,
+          country: state.country,
+        }),
       )
     } catch {
       // storage unavailable (private mode, quota): not worth failing for
     }
-  }, [state.band, state.freq, state.volume])
+  }, [state.band, state.freq, state.volume, state.country])
 
   const update = React.useCallback((patch: Partial<RadioState>) => {
     stateRef.current = { ...stateRef.current, ...patch }
@@ -172,6 +200,76 @@ export function useRadio() {
     [update, setPower],
   )
 
+  /** Switch active country and update the stations dial. */
+  const setCountry = React.useCallback(
+    async (countryCode: string) => {
+      const s = stateRef.current
+      if (countryCode === s.country && activeStationsRef.current.length > 0) return
+
+      // Update country state immediately
+      update({ country: countryCode })
+
+      // Fetch or retrieve stations
+      const newStations = await fetchCountryStations(countryCode)
+      activeStationsRef.current.length = 0
+      activeStationsRef.current.push(...newStations)
+      setStationsList([...newStations])
+
+      let targetBand = s.band
+      let bandStations = byBand(newStations, targetBand)
+      if (bandStations.length === 0) {
+        targetBand = targetBand === 'FM' ? 'AM' : 'FM'
+        bandStations = byBand(newStations, targetBand)
+      }
+
+      const targetStation = bandStations[0]
+      const nextFreq = targetStation ? targetStation.freq : s.freq[targetBand]
+
+      update({
+        country: countryCode,
+        band: targetBand,
+        freq: { ...s.freq, [targetBand]: nextFreq },
+      })
+
+      const e = engineRef.current
+      e?.sfx('knobTick')
+      if (targetBand !== s.band) e?.setBand(targetBand)
+      e?.setFrequency(nextFreq)
+    },
+    [update],
+  )
+
+  // On mount: ensure initial country has loaded stations if not bundled
+  React.useEffect(() => {
+    if (activeStationsRef.current.length === 0) {
+      fetchCountryStations(state.country).then((st) => {
+        if (st.length > 0) {
+          activeStationsRef.current.length = 0
+          activeStationsRef.current.push(...st)
+          setStationsList([...st])
+          engineRef.current?.setFrequency(stateRef.current.freq[stateRef.current.band])
+        }
+      })
+    }
+  }, [state.country])
+
+  // Optional GeoIP refinement if no country was explicitly stored by user
+  React.useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY)
+      const hasSavedCountry = raw && typeof JSON.parse(raw)?.country === 'string'
+      if (!hasSavedCountry) {
+        fetchGeoIpCountry().then((geoCode) => {
+          if (geoCode && geoCode !== stateRef.current.country) {
+            setCountry(geoCode)
+          }
+        })
+      }
+    } catch {
+      // ignore
+    }
+  }, [setCountry])
+
   /** Space / P: mute to zero, or bring the volume back to where it was. */
   const togglePower = React.useCallback(
     () => setVolume(stateRef.current.volume > 0 ? 0 : lastVolume),
@@ -225,7 +323,8 @@ export function useRadio() {
   const stepStation = React.useCallback(
     (dir: 1 | -1) => {
       const s = stateRef.current
-      const list = byBand(stations, s.band)
+      const currentStations = activeStationsRef.current
+      const list = byBand(currentStations, s.band)
       if (list.length === 0) return
       const f = s.freq[s.band]
       const eps = BAND_RANGE[s.band].step / 2
@@ -243,6 +342,9 @@ export function useRadio() {
   return {
     ...state,
     tuning,
+    country: state.country,
+    stations: stationsList,
+    setCountry,
     setPower,
     togglePower,
     setBand,

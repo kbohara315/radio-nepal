@@ -352,7 +352,7 @@
 /* Stations popover: a small cream paper slip in a bakelite frame */
 .stations,
 .keys {
-  width: min(19rem, calc(var(--vw, 100vw) - 1rem));
+  width: min(22rem, calc(var(--vw, 100vw) - 1rem));
   padding: 0.3rem;
   border-radius: 0.6rem;
   color: #2a2118;
@@ -367,16 +367,416 @@
   opacity: 0;
   scale: 0.96;
 }
-.stations__title {
-  margin: 0;
-  padding: 0.45rem 0.7rem 0.35rem;
+.stations__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
   border-radius: 0.3rem 0.3rem 0 0;
   background: #efe4c6;
   border-bottom: 2px dotted rgb(42 33 24 / 0.5);
+}
+.stations__title {
+  margin: 0;
+  padding: 0;
   font: 700 0.7rem/1 var(--font-label);
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  color: #2a2118;
 }
+.stations__country-wrap {
+  display: flex;
+  align-items: center;
+}
+.stations__country-select {
+  appearance: none;
+  background: #e3d5b3;
+  color: #2a2118;
+  border: 1px solid rgb(42 33 24 / 0.35);
+  border-radius: 0.3rem;
+  padding: 0.22rem 1.4rem 0.22rem 0.45rem;
+  font: 600 0.74rem/1.2 var(--font-label);
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='%232a2118'%3E%3Cpath d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.45rem center;
+  outline: none;
+  max-width: 13rem;
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.1);
+}
+.country-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.4rem 0.65rem;
+}
+.country-btn__flag {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.country-btn__code {
+  font: 700 0.72rem/1 var(--font-label);
+  letter-spacing: 0.12em;
+}
+.country-btn__icon {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.stations__country-badge {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 0.3rem;
+  border: 1px solid rgb(42 33 24 / 0.35);
+  background: #ded2b2;
+  color: #2a2118;
+  font: 700 0.68rem/1.2 var(--font-label);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 100ms;
+  max-width: 13rem;
+}
+.stations__country-badge:hover {
+  background: #d4c6a0;
+}
+.stations__country-badge:focus-visible {
+  outline: 2px solid #1e5f6b;
+  outline-offset: 1px;
+}
+.stations__country-flag {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+.stations__country-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.stations__country-search-icon {
+  font-size: 0.65rem;
+  opacity: 0.8;
+}
+
+.stations__switch-bar {
+  padding: 0.35rem 0.5rem;
+  background: #e3d5b3;
+  border-bottom: 1px solid rgb(42 33 24 / 0.18);
+}
+.stations__switch-btn {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.32rem 0.6rem;
+  border-radius: 0.3rem;
+  border: 1px solid rgb(42 33 24 / 0.25);
+  background: #efe4c6;
+  color: #1f1812;
+  font: 700 0.68rem/1.2 var(--font-label);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 100ms;
+}
+.stations__switch-btn:hover {
+  background: #1e5f6b;
+  color: #fff;
+  border-color: #16464f;
+}
+.stations__switch-btn:focus-visible {
+  outline: 2px solid #1e5f6b;
+}
+
+.stations__search-bar {
+  padding: 0.35rem 0.5rem;
+  background: #ded0ad;
+  border-bottom: 1px solid rgb(42 33 24 / 0.15);
+}
+.stations__search-input {
+  width: 100%;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgb(42 33 24 / 0.3);
+  background: #fbf7ee;
+  color: #1f1812;
+  font: 600 0.72rem/1.2 var(--font-label);
+  outline: none;
+}
+.stations__search-input:focus {
+  border-color: #1e5f6b;
+}
+
+.stations__loading {
+  padding: 1.2rem 1rem;
+  text-align: center;
+  font: italic 0.8rem/1.4 var(--font-type);
+  color: #6b5a3c;
+  background: #efe4c6;
+  border-radius: 0 0 0.3rem 0.3rem;
+}
+
+/* Worldwide Country Search Dialog */
+.country-modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(40rem, calc(var(--vw, 100vw) - 1.2rem));
+  height: fit-content;
+  max-height: min(44rem, calc(var(--vh, 100dvh) - 1.5rem));
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem;
+  border: 0;
+  border-radius: 1rem;
+  color: #2a2118;
+  background: linear-gradient(160deg, #23272d, #0c0e11);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.12),
+    inset 0 0 0 1px #000,
+    0 1.5rem 4rem rgb(0 0 0 / 0.7);
+  transition: opacity 0.2s, translate 0.25s cubic-bezier(0.22, 1, 0.36, 1), scale 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.country-modal:is([data-starting-style], [data-ending-style]) {
+  opacity: 0;
+  scale: 0.97;
+  translate: 0 0.5rem;
+}
+.country-modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem 0.6rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  background: #efe4c6;
+  border-bottom: 2px dotted rgb(42 33 24 / 0.4);
+}
+.country-modal__title {
+  margin: 0;
+  font: 700 1.05rem/1.2 var(--font-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1f1812;
+}
+.country-modal__desc {
+  margin: 0.2rem 0 0;
+  font: 0.74rem/1.35 var(--font-type);
+  color: #5a4933;
+}
+.country-modal__close-top {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  font-size: 1.15rem;
+  line-height: 1;
+  color: #735d40;
+  cursor: pointer;
+  padding: 0.2rem 0.3rem;
+  border-radius: 0.2rem;
+}
+.country-modal__close-top:hover {
+  color: #1f1812;
+  background: rgb(42 33 24 / 0.1);
+}
+.country-modal__close-top:focus-visible {
+  outline: 2px solid #1e5f6b;
+}
+
+.country-modal__search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.9rem;
+  background: #e8dcc0;
+  border-bottom: 1px solid rgb(42 33 24 / 0.2);
+}
+.country-modal__search-icon {
+  position: absolute;
+  left: 1.45rem;
+  color: #735d40;
+  pointer-events: none;
+}
+.country-modal__input {
+  width: 100%;
+  padding: 0.45rem 2rem 0.45rem 2.2rem;
+  border: 1px solid rgb(42 33 24 / 0.35);
+  border-radius: 0.35rem;
+  background: #fbf7ee;
+  color: #1f1812;
+  font: 600 0.84rem/1.3 var(--font-label);
+  outline: none;
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.1);
+}
+.country-modal__input:focus {
+  border-color: #1e5f6b;
+  box-shadow: 0 0 0 2px rgb(30 95 107 / 0.3);
+}
+.country-modal__clear {
+  position: absolute;
+  right: 1.4rem;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: #735d40;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.2rem;
+}
+
+.country-modal__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  padding: 0.45rem 0.9rem;
+  background: #e2d4b1;
+  border-bottom: 1px solid rgb(42 33 24 / 0.2);
+}
+.country-modal__tab {
+  appearance: none;
+  border: 1px solid rgb(42 33 24 / 0.3);
+  border-radius: 1rem;
+  padding: 0.22rem 0.6rem;
+  background: #ded0ad;
+  color: #443422;
+  font: 700 0.66rem/1 var(--font-label);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 100ms;
+}
+.country-modal__tab:hover {
+  background: #d4c49d;
+}
+.country-modal__tab[data-active] {
+  background: #1e5f6b;
+  color: #efe6cf;
+  border-color: #16464f;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.2);
+}
+.country-modal__tab:focus-visible {
+  outline: 2px solid #1e5f6b;
+}
+
+.country-modal__scroll {
+  flex: 1 1 auto;
+  min-height: 12rem;
+  max-height: min(22rem, calc(var(--vh, 100dvh) * 0.45));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.8rem 0.9rem;
+  background:
+    repeating-linear-gradient(0deg, rgb(120 90 40 / 0.035) 0 1px, transparent 1px 3px), #efe4c6;
+}
+.country-modal__group {
+  margin-bottom: 1rem;
+}
+.country-modal__group:last-child {
+  margin-bottom: 0.2rem;
+}
+.country-modal__group-title {
+  margin: 0 0 0.45rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px dashed rgb(42 33 24 / 0.3);
+  font: 700 0.7rem/1 var(--font-label);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #735d40;
+}
+.country-modal__group-count {
+  font-weight: 500;
+  opacity: 0.75;
+}
+.country-modal__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+  gap: 0.38rem;
+}
+.country-card {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.35rem;
+  border: 1px solid rgb(42 33 24 / 0.2);
+  background: #fbf7ee;
+  color: #2a2118;
+  cursor: pointer;
+  text-align: left;
+  transition: all 100ms;
+}
+.country-card:hover {
+  background: #fff;
+  border-color: #1e5f6b;
+  translate: 0 -1px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.12);
+}
+.country-card[data-selected] {
+  background: #f0e4ca;
+  border-color: #9a3224;
+  box-shadow: inset 0 0 0 1px #9a3224;
+  font-weight: 700;
+}
+.country-card:focus-visible {
+  outline: 2px solid #1e5f6b;
+  outline-offset: 1px;
+}
+.country-card__flag {
+  font-size: 1.25rem;
+  line-height: 1;
+  flex: none;
+}
+.country-card__info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.country-card__name {
+  font: 700 0.74rem/1.2 var(--font-label);
+  color: #1f1812;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.country-card__stations {
+  font: 0.64rem/1.2 var(--font-type);
+  color: #7a664e;
+}
+.country-card__badge {
+  color: #9a3224;
+  font-size: 0.6rem;
+  flex: none;
+}
+
+.country-modal__empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  font: italic 0.85rem/1.4 var(--font-type);
+  color: #6b5a3c;
+}
+
+.country-modal__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  background: #efe4c6;
+  border-top: 1px solid rgb(42 33 24 / 0.2);
+}
+.country-modal__hint {
+  font: italic 0.68rem/1.3 var(--font-type);
+  color: #7a664e;
+}
+
 .stations__list {
   max-height: min(14rem, var(--available-height, 14rem), calc(var(--vh, 100dvh) * 0.4));
   overflow-y: auto;
